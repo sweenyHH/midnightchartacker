@@ -1,11 +1,10 @@
-Requirements: 
+########################### Requirements: ###########################
 
+pytest
 PySide6
 watchdog
 
-
-
-On Widnows WSL - Ubunto I needed to do the following: 
+########################### On Widnows WSL - Ubunto I needed to do the following: ###########################
 
 python3 -m venv venv
 
@@ -24,14 +23,6 @@ chmod +x run_tests.sh
 To allow execution of run_parse_debug.sh:
 
 chmod +x run_parse_debug.sh
-
-
-
-
-
-
-
-
 
 
 ###########################  Start  ########################### 15.06.2026
@@ -89,3 +80,50 @@ midnightchartracker/
 The project root folder should only hold the main.py, a requirements.txt, the README.md file and test scripts. Further, it should hold folders to help me structure my additional files. First, there is the import folder, which will be used to drop the character export .txt files I want to parse. The major part of my app will be located in the app folder, which will contain several subfolders. The names I picked are pretty straight forward, so my data models can be found in "model", the parser folder contains the parser to extract data from the source .txt files and utils will contain a watchdog to update data when I drop new character export files into the import folder. Additional utilities will go there too. Last but not least, we have a folder holding my tests.
 
 What is not yet included in the architecture tree above are folders related to the PySide6 frontend, as I'm not yet at the point where I understood what I all need. But certainly, whatever I will need will go to the app folder too.
+
+###########################  Update 2  ########################### 17.06.2026
+
+I transfered the initial draft versions from the "mct_dev" project folder to the "midnightchartracker" folder and updated git and github. I'm not used to git... and as usual, I screwed up the .gitignore thing so that I now have pycache things on github. Great... Anyway, I guess I need to use it more often. That's why I stop my "dev environment" in mct_dev at this point and from now on, will stick to my "official" project folder. 
+
+So where do we stand? I have the first version of the app running. It is bright as hell as I not yet took care of a dark theme. That will be one of my next steps for sure. 
+Further the detail view is kind of raw data import with the first version of progress bars. All ugly, information that one is looking for hard to find. Getting the details view sorted is another planned next step. 
+
+Another important step: I need to split my readme file from the dev diary, which I actually only use to keep track of what I'm doing here... guess not many people want to read this, so I should have a clean readme with brief explanations and important stuff and move the other information to a readme_if_you_are_super_bored file.
+
+For met to not forget where the PySide6 and watchdog input comes from:
+
+
+Tutorials and sources used for PySide6:
+
+Vids:
+
+Great crash course PySide6  https://www.youtube.com/watch?v=9_NGCpM2r7s
+Long tutorial but at least jump points. https://www.youtube.com/watch?v=Z1N9JzNax2k
+Playlist with chapters for different parts https://www.youtube.com/playlist?list=PLWLXh53hYMX4JPf860DiZh2DNsn3vbstl
+Qt Designer tutorial (maybe later) https://www.youtube.com/watch?v=uzqDnB44qf4
+
+Text / Code:
+
+Well structured PySide6 tutorial https://www.pythonguis.com/pyside6-tutorial/
+Documentation https://doc.qt.io/qtforpython-6/tutorials/basictutorial/tablewidget.html
+
+Tutorials and sources used for watchdog:
+
+Vids:
+
+Realtime file and folder monitoring https://www.youtube.com/watch?v=T4xLPnR7W6s
+Harder to listen to but useful code examples https://www.youtube.com/watch?v=N1GAFxemtZU
+Timestamps, useful code https://www.youtube.com/watch?v=M9CT6MMry0U
+
+Text / Code:
+
+https://www.geeksforgeeks.org/python/create-a-watchdog-in-python-to-look-for-filesystem-changes/
+Good step by step tutorial (annoying add popups) https://www.geeksforgeeks.org/python/create-a-watchdog-in-python-to-look-for-filesystem-changes/
+Minimal quickstart with code https://python-watchdog.readthedocs.io/en/stable/quickstart.html
+
+
+
+
+
+
+
