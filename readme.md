@@ -17,6 +17,11 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 
+To allow execution ot run_tests.sh:
+
+chmod +x run_tests.sh
+
+
 
 
 
