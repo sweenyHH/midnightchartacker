@@ -5,6 +5,17 @@ watchdog
 
 
 
+On Widnows WSL - Ubunto I needed to do the following: 
+
+python3 -m venv venv
+
+source venv/bin/activate
+
+
+...before I was able to:
+
+pip install -r requirements.txt
+
 
 
 
