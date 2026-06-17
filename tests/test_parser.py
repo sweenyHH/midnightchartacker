@@ -51,7 +51,7 @@ Unknown: 123
 
     character = parse_txt(str(file_path))
 
-    # Nur Character sollte übernommen werden
+# Only Characters should be used
     assert character.name == "Testy"
     assert "RandomStuff" not in character.location
     assert "Unknown" not in character.location
