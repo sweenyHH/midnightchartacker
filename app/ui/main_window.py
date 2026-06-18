@@ -6,6 +6,8 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import QTimer, Signal, Qt
 
+import re
+
 from app.services.data_service import DataService
 from app.ui.detail_view import DetailView
 from app.utils.watcher import FolderWatcher
@@ -171,18 +173,44 @@ class MainWindow(QMainWindow):
     def update_reputation_box(self):
 
         reputation = self.data_service.get_reputation()
+        
+        
+        reputation = self.data_service.get_reputation()
 
         if not reputation:
                 self.box2.setText("No reputation data available")
                 return
 
-        text = "Reputation\n\n"
+# Build HTML string (centered title, left-aligned content)
+
+        text = "<h3 style='text-align:center;'>Reputation</h3>"
+        text += "<div style='text-align:left;'>"
 
         for key, value in reputation.items():
-                text += f"{key}: {value}\n"
+
+# Case 1: Renown reputations
+
+            if "Renown" in value:
+                renown_part = value.split("-")[0].strip()
+                text += f"<b>{key}</b>: {renown_part}<br>"
+
+# Case 2: Normal reputations
+
+            else:
+                parts = value.split("-")
+                level = parts[0].strip()
+
+                progress_match = re.search(r"\((.*?)\)", value)
+
+                if progress_match:
+                    numbers = progress_match.group(1)
+                    text += f"<b>{key}</b>: {level} ({numbers})<br>"
+                else:
+                    text += f"<b>{key}</b>: {level}<br>"
+
+        text += "</div>"
 
         self.box2.setText(text)
-
 
 
 # --------------------------------------------------
