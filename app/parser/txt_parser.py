@@ -67,6 +67,23 @@ ALLOWED_PREFIXES = [
     "Valeera Sanguinar", 
 ]
 
+# Dedicated list for reputation prefixes
+
+REPUTATION_PREFIXES = [
+    "Amani Tribe", 
+    "Hara'ti",
+    "Prey: Season 1",
+    "Ritual Sites",
+    "Silvermoon Court",
+    "The Singularity",
+    "Blood Knights",
+    "Farstriders",
+    "Magisters",
+    "Shades of the Row",
+    "Slayer's Duellum",
+    "Valeera Sanguinar",
+]
+
 
 def is_allowed_line(line: str) -> bool:
     """
@@ -87,6 +104,13 @@ def parse_txt(file_path):
     character = Character(character_name)
     character.source_file = file_path
 
+
+    # Store reputation globally (latest parsed file wins)
+
+    reputation_data = {}
+
+
+
     with open(file_path, encoding="utf-8") as file:
         for line in file:
             line = line.strip()
@@ -97,6 +121,16 @@ def parse_txt(file_path):
 # Apply filter: skip everything not explicitly allowed
             if not is_allowed_line(line):
                 continue
+
+
+# Reputation parsing (shared data)
+
+            if any(line.startswith(prefix) for prefix in REPUTATION_PREFIXES):
+                if ":" in line:
+                    key, value = line.split(":", 1)
+                    reputation_data[key.strip()] = value.strip()
+                continue
+
             
 # Generic key-value parsing. Example: "Class: Paladin"
             
@@ -140,4 +174,4 @@ def parse_txt(file_path):
 
                 character.add_currency(currency)
 
-    return character
+    return character, reputation_data

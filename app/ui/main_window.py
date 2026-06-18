@@ -166,6 +166,25 @@ class MainWindow(QMainWindow):
         self.container.setLayout(self.layout)
         self.setCentralWidget(self.container)
 
+# Updates Box 2 with latest reputation data
+
+    def update_reputation_box(self):
+
+        reputation = self.data_service.get_reputation()
+
+        if not reputation:
+                self.box2.setText("No reputation data available")
+                return
+
+        text = "Reputation\n\n"
+
+        for key, value in reputation.items():
+                text += f"{key}: {value}\n"
+
+        self.box2.setText(text)
+
+
+
 # --------------------------------------------------
 # Folder selection
 # --------------------------------------------------
@@ -179,7 +198,9 @@ class MainWindow(QMainWindow):
         if folder:
             self.data_service.set_folder(folder)
             self.reload_list()
+            self.update_reputation_box()
             self.start_watcher(folder)
+
 
 # --------------------------------------------------
 # Table handling
@@ -293,6 +314,7 @@ class MainWindow(QMainWindow):
 
         self.data_service.load_data()
         self.reload_list()
+        self.update_reputation_box()
 
 # --------------------------------------------------
 # Clean shutdown 
