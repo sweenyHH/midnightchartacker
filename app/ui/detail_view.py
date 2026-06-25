@@ -224,8 +224,8 @@ class DetailView(QWidget):
         combat_layout.addWidget(QLabel("<b>Combat Ratings</b>"))
 
         combat_table = QTableWidget()
-        combat_table.setColumnCount(2)
-        combat_table.setHorizontalHeaderLabels(["Stat", "Value"])
+        combat_table.setColumnCount(3)
+        combat_table.setHorizontalHeaderLabels(["Stat", "Rating", "%"])
 
         combat = getattr(c, "combat_ratings", {})
         combat_table.setRowCount(len(combat))
