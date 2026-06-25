@@ -242,9 +242,7 @@ class DetailView(QWidget):
             combat_table.setItem(row, 0, QTableWidgetItem(k))
             combat_table.setItem(row, 1, QTableWidgetItem(str(rating)))
             combat_table.setItem(row, 2, QTableWidgetItem(str(percent)))
-
-
-        
+      
         combat_table.resizeColumnsToContents()  
         combat_layout.addWidget(combat_table)
 
