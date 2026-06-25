@@ -1,7 +1,8 @@
 # Displays detailed information for a single character.
 
 from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QLabel, QScrollArea, QTabWidget
+    QWidget, QVBoxLayout, QLabel, QTabWidget,
+    QTableWidget, QTableWidgetItem
 )
 from PySide6.QtCore import Qt
 
@@ -27,120 +28,139 @@ class DetailView(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.layout = QVBoxLayout()
-        self.setLayout(self.layout)
+        self.setObjectName("detailView")
+
+        self.layout = QVBoxLayout(self)
 
         self.tabs = QTabWidget()
+        self.tabs.setObjectName("detailTabs")
+
         self.layout.addWidget(self.tabs)
 
-# --------------------------------------------------
-# MAIN ENTRY
-# --------------------------------------------------
+        self._create_tabs()
+
+    # --------------------------------------------------
+    # TAB SETUP
+    # --------------------------------------------------
+
+    def _create_tabs(self):
+        self.overview_tab = QWidget()
+        self.currencies_tab = QWidget()
+        self.vault_tab = QWidget()
+        self.stats_tab = QWidget()
+        self.reputation_tab = QWidget()
+        self.debug_tab = QWidget()
+
+        self.tabs.addTab(self.overview_tab, "Overview")
+        self.tabs.addTab(self.currencies_tab, "Currencies")
+        self.tabs.addTab(self.vault_tab, "Vault")
+        self.tabs.addTab(self.stats_tab, "Stats")
+        self.tabs.addTab(self.reputation_tab, "Reputation")
+        self.tabs.addTab(self.debug_tab, "Debug")
+
+    # --------------------------------------------------
+    # MAIN ENTRY
+    # --------------------------------------------------
 
     def set_character(self, character):
+        self.character = character
 
-# Clear old tabs
+        self._update_overview()
+        self._update_currencies()
+        self._update_vault()
+        self._update_stats()
+        self._update_reputation()
+        self._update_debug()
 
-        while self.tabs.count():
-            widget = self.tabs.widget(0)
-            self.tabs.removeTab(0)
-            widget.deleteLater()
+    # --------------------------------------------------
+    # HELPERS
+    # --------------------------------------------------
 
-# -------------------------------
-# TAB 1 — OVERVIEW
-# -------------------------------
+    def _clear_layout(self, widget):
+        if widget.layout():
+            while widget.layout().count():
+                item = widget.layout().takeAt(0)
+                if item.widget():
+                    item.widget().deleteLater()
 
-        overview = QWidget()
-        layout = QVBoxLayout()
+        
+    def _get_layout(self, widget):
+        layout = widget.layout()
 
-        layout.addWidget(QLabel(f"<h2>{character.name}</h2>"))
+        if layout is None:
+            layout = QVBoxLayout()
+            widget.setLayout(layout)
+        else:
+            self._clear_layout(widget)
+
+        return layout
+
+
+    # --------------------------------------------------
+    # OVERVIEW
+    # --------------------------------------------------
+
+    def _update_overview(self):
+        layout = self._get_layout(self.overview_tab)
+
+        c = self.character
+
+        layout.addWidget(QLabel(f"<h2>{c.name}</h2>"))
 
         info = (
-            f"Level {getattr(character, 'level', '-')}, "
-            f"{getattr(character, 'race', '-')}, "
-            f"{getattr(character, 'character_class', '-')} "
-            f"({getattr(character, 'specialization', '-')})"
+            f"Level {getattr(c, 'level', '-')}, "
+            f"{getattr(c, 'race', '-')}, "
+            f"{getattr(c, 'character_class', '-')} "
+            f"({getattr(c, 'specialization', '-')})"
         )
         layout.addWidget(QLabel(info))
 
-# Gold
-
-        gold = next((c for c in character.currencies if c.name == "Gold"), None)
+        # Gold (special handling)
+        gold = next((x for x in c.currencies if x.name == "Gold"), None)
         if gold:
             layout.addWidget(QLabel(f"<b>Gold:</b> {format_gold(gold.quantity)}"))
 
-# Ascendant currencies
-
-        for c in character.currencies:
-            print(c.name, "GROUPS:", c.groups)
-            if "Ascendant" in c.name:
-                layout.addWidget(QLabel(self._format_currency(c)))
-
         layout.addStretch()
-        overview.setLayout(layout)
-        self.tabs.addTab(overview, "Overview")
 
-# -------------------------------
-# TAB 2 — CURRENCIES
-# -------------------------------
-        
-        currencies_tab = QWidget()
-        currencies_layout = QVBoxLayout()
+    # --------------------------------------------------
+    # CURRENCIES (FLAT TABLE)
+    # --------------------------------------------------
 
-        scroll = QScrollArea()
-        scroll.setWidgetResizable(True)
+    def _update_currencies(self):
+        layout = self._get_layout(self.currencies_tab)
 
-        content = QWidget()
-        content_layout = QVBoxLayout()
+        table = QTableWidget()
+        table.setObjectName("currencyTable")
 
-        grouped = {}
+        currencies = [
+            c for c in self.character.currencies if c.name != "Gold"
+        ]
 
-# Build grouping
+        table.setColumnCount(4)
+        table.setHorizontalHeaderLabels(["Name", "Amount", "Max", "Group"])
+        table.setRowCount(len(currencies))
 
-        for c in character.currencies:
-            groups = getattr(c, "groups", [])
+        for row, c in enumerate(currencies):
+            table.setItem(row, 0, QTableWidgetItem(c.name))
+            table.setItem(row, 1, QTableWidgetItem(str(c.quantity)))
 
-            if not groups:
-                grouped.setdefault("Other", []).append(c)
-            else:
-                for g in groups:
-                    grouped.setdefault(g, []).append(c)
+            max_val = getattr(c, "max_total", "")
+            table.setItem(row, 2, QTableWidgetItem(str(max_val)))
 
-# DEBUG - to be removed or deactivated later
+            groups = ", ".join(getattr(c, "groups", [])) or "Other"
+            table.setItem(row, 3, QTableWidgetItem(groups))
 
-        print("DEBUG grouped keys:", list(grouped.keys()))
-        print("DEBUG total currencies:", len(character.currencies))
+        table.resizeColumnsToContents()
+        layout.addWidget(table)
 
-# Render groups
+    # --------------------------------------------------
+    # VAULT
+    # --------------------------------------------------
 
-        for group_name in sorted(grouped.keys()):
+    def _update_vault(self):
+        layout = self._get_layout(self.vault_tab)
 
-            title = QLabel(f"<b>{group_name}</b>")   
-            title.setTextFormat(Qt.RichText)
-            content_layout.addWidget(title)
-
-            for c in sorted(grouped[group_name], key=lambda x: x.name):
-                lbl = QLabel(self._format_currency(c))
-                content_layout.addWidget(lbl)
-
-        content_layout.addStretch()
-        content.setLayout(content_layout)
-
-        scroll.setWidget(content)
-        currencies_layout.addWidget(scroll)
-        currencies_tab.setLayout(currencies_layout)
-
-        self.tabs.addTab(currencies_tab, "Currencies")
-
-
-# -------------------------------
-# TAB 3 — VAULT
-# -------------------------------
-
-        vault_tab = QWidget()
-        layout = QVBoxLayout()
-
-        vault = getattr(character, "vault", {
+        vault = getattr(self.character, "vault", {
             "row1": [],
             "row2": [],
             "row3": []
@@ -154,37 +174,73 @@ class DetailView(QWidget):
         layout.addWidget(QLabel(f"<b>Delves:</b> {fmt(vault.get('row3', []))}"))
 
         layout.addStretch()
-        vault_tab.setLayout(layout)
-        self.tabs.addTab(vault_tab, "Vault")
 
-# -------------------------------
-# TAB 4 — STATS
-# -------------------------------
+    # --------------------------------------------------
+    # STATS (TABLES)
+    # --------------------------------------------------
 
-        stats_tab = QWidget()
-        layout = QVBoxLayout()
+    def _update_stats(self):
+        layout = self._get_layout(self.stats_tab)
 
+        c = self.character
+
+        # Attributes
         layout.addWidget(QLabel("<b>Primary Attributes</b>"))
 
-        for k, v in getattr(character, "attributes", {}).items():
-            layout.addWidget(QLabel(f"{k}: {v}"))
+        attr_table = QTableWidget()
+        attr_table.setColumnCount(2)
+        attr_table.setHorizontalHeaderLabels(["Attribute", "Value"])
 
+        attrs = getattr(c, "attributes", {})
+        attr_table.setRowCount(len(attrs))
+
+        for row, (k, v) in enumerate(attrs.items()):
+            attr_table.setItem(row, 0, QTableWidgetItem(k))
+            attr_table.setItem(row, 1, QTableWidgetItem(str(v)))
+
+        layout.addWidget(attr_table)
+
+        # Combat Ratings
         layout.addWidget(QLabel("<b>Combat Ratings</b>"))
 
-        for k, v in getattr(character, "combat_ratings", {}).items():
-            layout.addWidget(QLabel(f"{k}: {v}"))
+        combat_table = QTableWidget()
+        combat_table.setColumnCount(2)
+        combat_table.setHorizontalHeaderLabels(["Stat", "Value"])
+
+        combat = getattr(c, "combat_ratings", {})
+        combat_table.setRowCount(len(combat))
+
+        for row, (k, v) in enumerate(combat.items()):
+            combat_table.setItem(row, 0, QTableWidgetItem(k))
+            combat_table.setItem(row, 1, QTableWidgetItem(str(v)))
+
+        layout.addWidget(combat_table)
+
+    # --------------------------------------------------
+    # REPUTATION (INTENTIONALLY EMPTY)
+    # --------------------------------------------------
+
+    def _update_reputation(self):
+        layout = self._get_layout(self.reputation_tab)
+
+        layout.addWidget(QLabel(
+            "Character-specific reputation will appear here in a future update."
+        ))
 
         layout.addStretch()
-        stats_tab.setLayout(layout)
-        self.tabs.addTab(stats_tab, "Stats")
 
-# --------------------------------------------------
-# HELPERS
-# --------------------------------------------------
+    # --------------------------------------------------
+    # DEBUG
+    # --------------------------------------------------
 
-    def _format_currency(self, currency):
-        return (
-            f"{currency.name}: {currency.quantity}/{currency.max_total}"
-            if getattr(currency, "max_total", None)
-            else f"{currency.name}: {currency.quantity}"
-        )
+    def _update_debug(self):
+        layout = self._get_layout(self.debug_tab)
+
+        c = self.character
+
+        layout.addWidget(QLabel(f"Source file: {getattr(c, 'source_file', '-')}"))
+        layout.addWidget(QLabel(f"Currencies: {len(c.currencies)}"))
+        layout.addWidget(QLabel(f"Attributes: {len(getattr(c, 'attributes', {}))}"))
+        layout.addWidget(QLabel(f"Combat stats: {len(getattr(c, 'combat_ratings', {}))}"))
+
+        layout.addStretch()
