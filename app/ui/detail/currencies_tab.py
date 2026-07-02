@@ -73,11 +73,24 @@ class CurrencyGroupWidget(QWidget):
 
         table.verticalHeader().setVisible(False)
 
+        
         for row, c in enumerate(self.currencies):
-            table.setItem(row, 0, QTableWidgetItem(c.name))
+
+# NAME (BOLD)
+            name_item = QTableWidgetItem(c.name)
+            font = name_item.font()
+            font.setBold(True)
+            name_item.setFont(font)
+            name_item.setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+            table.setItem(row, 0, name_item)
+
+# Amount
             table.setItem(row, 1, QTableWidgetItem(str(c.quantity)))
+
+# Max
             max_val = getattr(c, "max_total", "")
             table.setItem(row, 2, QTableWidgetItem(str(max_val)))
+
 
         table.resizeColumnsToContents()
         table.horizontalHeader().setStretchLastSection(True)

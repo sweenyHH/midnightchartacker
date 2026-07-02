@@ -50,10 +50,17 @@ class StatsTab(QWidget):
         attr_table.setRowCount(len(attrs))
 
         for row, (k, v) in enumerate(attrs.items()):
-            attr_table.setItem(row, 0, QTableWidgetItem(k))
-            attr_table.setItem(row, 1, QTableWidgetItem(str(v)))
+            
+# Attribute (BOLD)
+            attr_item = QTableWidgetItem(k)
+            font = attr_item.font()
+            font.setBold(True)
+            attr_item.setFont(font)
+            attr_table.setItem(row, 0, attr_item)
 
-        attr_table.resizeColumnsToContents()
+# Value
+            attr_table.setItem(row, 1, QTableWidgetItem(str(v)))
+        
         attr_table.verticalHeader().setDefaultSectionSize(30)
 
         attr_table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
@@ -61,6 +68,12 @@ class StatsTab(QWidget):
         
         self._set_table_height(attr_table, extra_padding=12)
         attr_table.setMaximumHeight(attr_table.minimumHeight())
+
+        
+        header = attr_table.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.Stretch)   
+        header.setSectionResizeMode(1, QHeaderView.ResizeToContents)
+
 
 
         attr_box = QVBoxLayout()
@@ -87,11 +100,15 @@ class StatsTab(QWidget):
             percent = v.get("percent", "-")
             percent = f"{percent}%" if percent != "-" else "-"
 
-            combat_table.setItem(row, 0, QTableWidgetItem(k))
+            stat_item = QTableWidgetItem(k)
+            font = stat_item.font()
+            font.setBold(True)
+            stat_item.setFont(font)
+            combat_table.setItem(row, 0, stat_item)
+
             combat_table.setItem(row, 1, QTableWidgetItem(str(rating)))
             combat_table.setItem(row, 2, QTableWidgetItem(str(percent)))
 
-        combat_table.resizeColumnsToContents()
         combat_table.verticalHeader().setDefaultSectionSize(30)
 
         combat_table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
@@ -99,6 +116,13 @@ class StatsTab(QWidget):
         
         self._set_table_height(combat_table, extra_padding=12)
         combat_table.setMaximumHeight(combat_table.minimumHeight())
+
+        
+        header = combat_table.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.Stretch) 
+        header.setSectionResizeMode(1, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(2, QHeaderView.ResizeToContents)
+
 
 
         combat_box = QVBoxLayout()
@@ -137,7 +161,14 @@ class StatsTab(QWidget):
         for row, item in enumerate(equipment):
 
 # Slot
+           
             slot_item = QTableWidgetItem(item.slot)
+
+# make bold
+            font = slot_item.font()
+            font.setBold(True)
+            slot_item.setFont(font)
+
             slot_item.setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
             table.setItem(row, 0, slot_item)
 

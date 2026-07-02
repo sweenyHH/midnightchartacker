@@ -1,8 +1,11 @@
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QPushButton, QLabel,
-    QHBoxLayout, QGridLayout
+    QHBoxLayout, QGridLayout, QComboBox, QApplication
 )
 from PySide6.QtCore import Qt
+
+from app.ui.theme_manager import ThemeManager
+
 
 
 class TopPanel(QWidget):
@@ -30,6 +33,26 @@ class TopPanel(QWidget):
         button_row.addWidget(self.select_btn)
         button_row.addWidget(self.paste_btn)
         button_row.addWidget(self.back_btn)
+
+
+# -------------------------------
+# THEME SWITCH
+# -------------------------------
+        self.theme_selector = QComboBox()
+        self.theme_selector.addItems(["dark", "light", "wow", "modern"])
+
+# nicer display names
+        self.theme_selector.setCurrentText(ThemeManager.current_theme)
+
+
+        self.theme_selector.currentTextChanged.connect(
+            self._handle_theme_change
+        )
+
+        button_row.addWidget(QLabel("Theme:"))
+        button_row.addWidget(self.theme_selector)
+
+
         button_row.addStretch()
 
         main_layout.addLayout(button_row)
@@ -41,6 +64,23 @@ class TopPanel(QWidget):
         self.rep_layout = QVBoxLayout(self.rep_container)
 
         main_layout.addWidget(self.rep_container)
+
+# --------------------------------------------------
+# THEME CHANGE HANDLER
+# --------------------------------------------------
+    def _handle_theme_change(self, theme):
+        from PySide6.QtWidgets import QApplication
+
+        # apply theme globally
+        ThemeManager.load_theme(QApplication.instance(), theme)
+
+        # force full UI refresh (important!)
+        window = self.window()
+
+        if hasattr(window, "reload_all"):
+            window.reload_all()
+
+
 
 # --------------------------------------------------
 # UPDATE METHOD
@@ -77,16 +117,24 @@ class TopPanel(QWidget):
 # -------------------------------
         renown_widget = QWidget()
         renown_layout = QVBoxLayout(renown_widget)
-
-        renown_title = QLabel("Renown:")
+      
+        renown_title = QLabel("<b>Renown</b>")
+        renown_title.setAlignment(Qt.AlignCenter)
         renown_layout.addWidget(renown_title)
+
 
         renown_grid = QGridLayout()
 
+
+        
         def add_group(grid, group, col_offset):
             for row, rep in enumerate(group):
-                grid.addWidget(QLabel(rep.name), row, col_offset)
+
+                name = QLabel(f"<b>{rep.name}</b>")
+
+                grid.addWidget(name, row, col_offset)
                 grid.addWidget(QLabel(str(rep.level)), row, col_offset + 1)
+
 
         for i, group in enumerate(renown_chunks[:2]):
             add_group(renown_grid, group, i * 2)
@@ -99,14 +147,17 @@ class TopPanel(QWidget):
         normal_widget = QWidget()
         normal_layout = QVBoxLayout(normal_widget)
 
-        normal_title = QLabel("Standard:")
+        normal_title = QLabel("<b>Standard</b>")
+        normal_title.setAlignment(Qt.AlignCenter)
         normal_layout.addWidget(normal_title)
+
 
         normal_grid = QGridLayout()
 
         def add_standard(grid, group, col_offset):
             for row, rep in enumerate(group):
-                name = QLabel(rep.name)
+
+                name = QLabel(f"<b>{rep.name}</b>")
 
                 if rep.current and rep.maximum:
                     value = QLabel(f"{rep.level} ({rep.current}/{rep.maximum})")

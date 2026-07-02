@@ -2,14 +2,16 @@ from PySide6.QtWidgets import (
     QWidget, QLabel, QTableWidget, QTableWidgetItem,
     QHBoxLayout, QVBoxLayout, QHeaderView
 )
+from PySide6.QtGui import QColor
 from PySide6.QtCore import Qt
 
 from .utils import format_gold
 from app.ui.detail.notes_widget import NotesWidget
-from app.ui.detail.weekly_duties_widget import WeeklyDutiesWidget
+from app.weekly_duties.widget import WeeklyDutiesWidget
 from app.ui.detail.vault_progress import VaultProgressWidget
 
 from app.ui.colors import CLASS_COLORS
+from app.ui.theme_manager import ThemeManager
 
 
 class OverviewTab(QWidget):
@@ -27,6 +29,15 @@ class OverviewTab(QWidget):
 
 # --------------------------------------------------
     def set_character(self, character):
+
+
+        
+        print(
+            "OverviewTab rebuild:",
+            character.name,
+            ThemeManager.current_theme
+        )
+
 
 # FULL LAYOUT CLEAR
         while self.layout.count():
@@ -56,8 +67,39 @@ class OverviewTab(QWidget):
             f"({getattr(character, 'specialization', '-')})"
         )
 
+# APPLY CLASS COLOR
+
+        def _adjust_class_color(color_hex):
+            theme = (ThemeManager.current_theme or "").lower()
+
+            # Only adjust for light-style themes
+            if theme in ("light", "modern"):
+
+                # Handle pure white directly
+                if color_hex.lower() == "#ffffff":
+                    return "#333333"
+
+                color = QColor(color_hex)
+                r, g, b = color.red(), color.green(), color.blue()
+
+                brightness = 0.299 * r + 0.587 * g + 0.114 * b
+
+                # Handle "almost white"
+                if brightness > 220:
+                    return "#333333"
+
+            
+            print("DEBUG theme:", ThemeManager.current_theme)
+            print("DEBUG color:", color_hex)
+
+
+# otherwise keep original color
+            return color_hex
+
         if class_name in CLASS_COLORS:
-            info_label.setStyleSheet(f"color: {CLASS_COLORS[class_name]};")
+            adjusted = _adjust_class_color(CLASS_COLORS[class_name])
+            info_label.setStyleSheet(f"color: {adjusted};")
+
 
         general_layout.addWidget(info_label)
 
@@ -120,6 +162,8 @@ class OverviewTab(QWidget):
         header.setSectionResizeMode(2, QHeaderView.ResizeToContents)
         header.setSectionResizeMode(3, QHeaderView.ResizeToContents)
         header.setSectionResizeMode(4, QHeaderView.ResizeToContents)
+
+        table.verticalHeader().setVisible(False)
 
         left_layout.addWidget(table)
 

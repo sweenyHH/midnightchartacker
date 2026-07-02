@@ -30,6 +30,8 @@ class MainWindow(QMainWindow):
         self.detail_view = DetailView()
         self.detail_view.hide()
 
+        self.current_character = None
+
         self.top_panel = TopPanel(
             self.select_folder,
             self.open_paste_dialog,
@@ -61,16 +63,25 @@ class MainWindow(QMainWindow):
 
         characters = self.data_service.get_characters()
         print("DEBUG characters count:", len(characters))
-
+        
         self.table.load_characters(characters)
-        self.top_panel.update_reputation(self.data_service.get_top_reputations())
+        self.top_panel.update_reputation(
+            self.data_service.get_top_reputations()
+        )
+
+        # Refresh currently open detail view
+        if self.current_character is not None:
+            self.detail_view.set_character(self.current_character)
+
 
 # --------------------------------------------------
 
     def open_character(self, row, _):
-        char = self.table.item(row, 0).data(0x0100)
 
+        char = self.table.item(row, 0).data(0x0100)
+        self.current_character = char
         self.detail_view.set_character(char)
+
 
         self.table.hide()
         self.detail_view.show()

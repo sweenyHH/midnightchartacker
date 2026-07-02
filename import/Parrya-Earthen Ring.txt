@@ -813,3 +813,10 @@ Wrathion (Exalted) - Value: 42000 (42000-42000) - Progress: 0/0
 [Debug] Major faction entries: 26
 [Debug] Total reputation entries: 119
 
+
+
+
+
+
+
+

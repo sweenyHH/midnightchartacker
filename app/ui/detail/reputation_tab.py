@@ -1,6 +1,10 @@
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QLineEdit, QTableWidget, QTableWidgetItem, QHeaderView
 )
+
+from PySide6.QtGui import QBrush, QColor
+from app.ui.colors import STATUS_COLORS
+
 from PySide6.QtCore import Qt
 
 
@@ -34,6 +38,7 @@ class ReputationTab(QWidget):
         ])
 
         self.table.setSortingEnabled(True)
+        self.table.verticalHeader().setVisible(False)
 
 # COLUMN RESIZE CONFIG 
         header = self.table.horizontalHeader()
@@ -67,9 +72,32 @@ class ReputationTab(QWidget):
 # -------------------------------
 # FACTION (LEFT)
 # -------------------------------
+
             name_item = QTableWidgetItem(rep.name)
             name_item.setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+
+# Bold for all factions
+            font = name_item.font()
+            font.setBold(True)
+            name_item.setFont(font)
+
+# Apply color ONLY for standard reputations
+            if rep.rep_type == "standard" and isinstance(rep.level, str):
+
+                level = rep.level.lower()
+
+                if level == "exalted":
+                    name_item.setForeground(QColor(STATUS_COLORS["success"]))
+
+                elif level in ("hated", "unfriendly"):
+                    name_item.setForeground(QColor(STATUS_COLORS["error"]))
+
+# renown → no special coloring
+
             self.table.setItem(row, 0, name_item)
+
+
+
 
 # -------------------------------
 # LEVEL (CENTER)
