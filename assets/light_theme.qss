@@ -350,3 +350,12 @@ QLabel#warbandTaskTitle {
 QListWidget#warbandTaskList {
     border-radius: 6px;
 }
+
+/* =====================
+   Settings
+===================== */
+
+QLabel#settingsTitle {
+    font-size: 18px;
+    font-weight: bold;
+}

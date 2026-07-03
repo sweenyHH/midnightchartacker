@@ -1,12 +1,14 @@
 from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QPushButton, QLabel,
-    QHBoxLayout, QGridLayout, QComboBox, QApplication
+    QWidget,
+    QVBoxLayout,
+    QPushButton,
+    QLabel,
+    QHBoxLayout,
+    QGridLayout,
 )
 from PySide6.QtCore import Qt
 
-from app.ui.theme_manager import ThemeManager
-from app.ui.warband_task_dialog import WarbandTaskDialog
-
+from app.ui.settings_dialog import SettingsDialog
 
 
 class TopPanel(QWidget):
@@ -24,39 +26,22 @@ class TopPanel(QWidget):
         self.paste_btn = QPushButton("Paste Character Data")
         self.paste_btn.clicked.connect(paste_cb)
 
-        
         self.warband_btn = QPushButton("Warband Tasks")
         self.warband_btn.clicked.connect(warband_cb)
 
+        self.settings_btn = QPushButton("Settings")
+        self.settings_btn.clicked.connect(
+            self.open_settings
+        )
 
         self.back_btn = QPushButton("Back")
         self.back_btn.clicked.connect(back_cb)
         self.back_btn.hide()
 
-
         button_row.addWidget(self.paste_btn)
         button_row.addWidget(self.warband_btn)
+        button_row.addWidget(self.settings_btn)
         button_row.addWidget(self.back_btn)
-
-
-
-# -------------------------------
-# THEME SWITCH
-# -------------------------------
-        self.theme_selector = QComboBox()
-        self.theme_selector.addItems(["dark", "light", "wow", "modern"])
-
-# nicer display names
-        self.theme_selector.setCurrentText(ThemeManager.current_theme)
-
-
-        self.theme_selector.currentTextChanged.connect(
-            self._handle_theme_change
-        )
-
-        button_row.addWidget(QLabel("Theme:"))
-        button_row.addWidget(self.theme_selector)
-
 
         button_row.addStretch()
 
@@ -71,21 +56,12 @@ class TopPanel(QWidget):
         main_layout.addWidget(self.rep_container)
 
 # --------------------------------------------------
-# THEME CHANGE HANDLER
+# SETTINGS
 # --------------------------------------------------
-    def _handle_theme_change(self, theme):
-        from PySide6.QtWidgets import QApplication
+    def open_settings(self):
 
-        # apply theme globally
-        ThemeManager.load_theme(QApplication.instance(), theme)
-
-        # force full UI refresh (important!)
-        window = self.window()
-
-        if hasattr(window, "reload_all"):
-            window.reload_all()
-
-
+        dialog = SettingsDialog(self)
+        dialog.exec()
 
 # --------------------------------------------------
 # UPDATE METHOD
@@ -95,22 +71,35 @@ class TopPanel(QWidget):
 # Clear previous content
         while self.rep_layout.count():
             item = self.rep_layout.takeAt(0)
+
             if item.widget():
                 item.widget().deleteLater()
 
         if not reputation_list:
-            self.rep_layout.addWidget(QLabel("No reputation data available"))
+            self.rep_layout.addWidget(
+                QLabel("No reputation data available")
+            )
             return
 
-# Split 
-        renown = [r for r in reputation_list if r.rep_type == "renown"]
-        normal = [r for r in reputation_list if r.rep_type != "renown"]
+# Split
+        renown = [
+            r for r in reputation_list
+            if r.rep_type == "renown"
+        ]
+
+        normal = [
+            r for r in reputation_list
+            if r.rep_type != "renown"
+        ]
 
         renown.sort(key=lambda r: r.name)
         normal.sort(key=lambda r: r.name)
 
         def chunk(lst, size=3):
-            return [lst[i:i + size] for i in range(0, len(lst), size)]
+            return [
+                lst[i:i + size]
+                for i in range(0, len(lst), size)
+            ]
 
         renown_chunks = chunk(renown)
         normal_chunks = chunk(normal)
@@ -122,67 +111,133 @@ class TopPanel(QWidget):
 # -------------------------------
         renown_widget = QWidget()
         renown_layout = QVBoxLayout(renown_widget)
-      
+
         renown_title = QLabel("<b>Renown</b>")
         renown_title.setAlignment(Qt.AlignCenter)
-        renown_layout.addWidget(renown_title)
 
+        renown_layout.addWidget(renown_title)
 
         renown_grid = QGridLayout()
 
-
-        
         def add_group(grid, group, col_offset):
+
             for row, rep in enumerate(group):
 
-                name = QLabel(f"<b>{rep.name}</b>")
+                name = QLabel(
+                    f"<b>{rep.name}</b>"
+                )
 
-                grid.addWidget(name, row, col_offset)
-                grid.addWidget(QLabel(str(rep.level)), row, col_offset + 1)
+                grid.addWidget(
+                    name,
+                    row,
+                    col_offset
+                )
 
+                grid.addWidget(
+                    QLabel(str(rep.level)),
+                    row,
+                    col_offset + 1
+                )
 
-        for i, group in enumerate(renown_chunks[:2]):
-            add_group(renown_grid, group, i * 2)
+        for i, group in enumerate(
+            renown_chunks[:2]
+        ):
+            add_group(
+                renown_grid,
+                group,
+                i * 2
+            )
 
-        renown_layout.addLayout(renown_grid)
+        renown_layout.addLayout(
+            renown_grid
+        )
 
 # -------------------------------
 # STANDARD BLOCK
 # -------------------------------
         normal_widget = QWidget()
-        normal_layout = QVBoxLayout(normal_widget)
+        normal_layout = QVBoxLayout(
+            normal_widget
+        )
 
-        normal_title = QLabel("<b>Standard</b>")
-        normal_title.setAlignment(Qt.AlignCenter)
-        normal_layout.addWidget(normal_title)
+        normal_title = QLabel(
+            "<b>Standard</b>"
+        )
 
+        normal_title.setAlignment(
+            Qt.AlignCenter
+        )
+
+        normal_layout.addWidget(
+            normal_title
+        )
 
         normal_grid = QGridLayout()
 
-        def add_standard(grid, group, col_offset):
+        def add_standard(
+            grid,
+            group,
+            col_offset
+        ):
+
             for row, rep in enumerate(group):
 
-                name = QLabel(f"<b>{rep.name}</b>")
+                name = QLabel(
+                    f"<b>{rep.name}</b>"
+                )
 
-                if rep.current and rep.maximum:
-                    value = QLabel(f"{rep.level} ({rep.current}/{rep.maximum})")
+                if (
+                    rep.current
+                    and rep.maximum
+                ):
+                    value = QLabel(
+                        f"{rep.level} "
+                        f"({rep.current}/{rep.maximum})"
+                    )
                 else:
-                    value = QLabel(str(rep.level))
+                    value = QLabel(
+                        str(rep.level)
+                    )
 
-                grid.addWidget(name, row, col_offset)
-                grid.addWidget(value, row, col_offset + 1)
+                grid.addWidget(
+                    name,
+                    row,
+                    col_offset
+                )
 
-        for i, group in enumerate(normal_chunks[:2]):
-            add_standard(normal_grid, group, i * 2)
+                grid.addWidget(
+                    value,
+                    row,
+                    col_offset + 1
+                )
 
-        normal_layout.addLayout(normal_grid)
+        for i, group in enumerate(
+            normal_chunks[:2]
+        ):
+            add_standard(
+                normal_grid,
+                group,
+                i * 2
+            )
+
+        normal_layout.addLayout(
+            normal_grid
+        )
 
 # -------------------------------
 # FINAL LAYOUT
 # -------------------------------
-        main_row.addWidget(renown_widget)
-        main_row.addWidget(normal_widget)
+        main_row.addWidget(
+            renown_widget
+        )
+
+        main_row.addWidget(
+            normal_widget
+        )
+
         main_row.setStretch(0, 1)
         main_row.setStretch(1, 1)
 
-        self.rep_layout.addLayout(main_row)
+        self.rep_layout.addLayout(
+            main_row
+        )

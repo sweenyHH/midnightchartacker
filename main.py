@@ -6,6 +6,7 @@ import sys
 from PySide6.QtWidgets import QApplication
 from app.ui.main_window import MainWindow
 from app.ui.theme_manager import ThemeManager
+from app.storage.settings_storage import load_setting
 
 
 def main():
@@ -14,9 +15,19 @@ def main():
 
     app = QApplication(sys.argv)
 
-# Load dark theme stylesheet
 
-    ThemeManager.load_theme(app, "dark")
+# Load saved theme
+
+    theme = load_setting(
+        "theme",
+        "dark"
+    )
+
+    ThemeManager.load_theme(
+        app,
+        theme
+    )
+
 
 # Create and show main window
 

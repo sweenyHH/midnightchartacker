@@ -95,38 +95,6 @@ class NotesWidget(QWidget):
             note_lines
         )
 
-# -------------------------------
-# BUILD NEW USER BLOCK
-# -------------------------------
-        user_block = []
-
-        if text or existing_duties:
-
-            user_block.append("### USER_DATA_START ###\n")
-
-            if text:
-                user_block.append("Notes:\n")
-                user_block.append(text + "\n")
-
-            if existing_duties:
-                user_block.append("WeeklyDuties:\n")
-
-                for line in existing_duties:
-                    if "=" in line:
-                        user_block.append(line)
-
-            user_block.append("### USER_DATA_END ###\n")
-
-# -------------------------------
-# WRITE FILE
-# -------------------------------
-        with open(self.current_file, "w", encoding="utf-8") as f:
-            f.writelines(new_lines)
-
-            if user_block:
-                f.write("\n")
-                f.writelines(user_block)
-
 # --------------------------------------------------
 # LIMIT LENGTH
 # --------------------------------------------------

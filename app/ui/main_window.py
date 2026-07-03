@@ -84,6 +84,7 @@ class MainWindow(QMainWindow):
         if self.current_character is not None:
             self.detail_view.set_character(self.current_character)
 
+
 # --------------------------------------------------
 
     def open_character(self, row, _):

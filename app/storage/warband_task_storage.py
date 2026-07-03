@@ -1,7 +1,5 @@
 from pathlib import Path
 
-
-
 TASK_FILE = Path("data") / "warband_tasks.txt"
 TASK_FILE.parent.mkdir(exist_ok=True)
 

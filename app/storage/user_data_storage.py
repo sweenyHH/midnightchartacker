@@ -118,6 +118,10 @@ def save_section(file_path, section_name, section_lines):
     # -------------------------------
     with open(file_path, "w", encoding="utf-8") as f:
 
+# Remove trailing empty lines before USER_DATA block
+        while import_lines and not import_lines[-1].strip():
+            import_lines.pop()
+
         f.writelines(import_lines)
 
         if sections:

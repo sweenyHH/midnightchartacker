@@ -22,7 +22,7 @@ class ThemeManager:
         base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
         path = os.path.join(base_dir, cls.THEMES[theme_name])
 
-        print(f"[ThemeManager] Loading: {path}")  # ✅ debug
+        print(f"[ThemeManager] Loading: {path}") 
 
         if not os.path.exists(path):
             print(f"[ThemeManager] Missing theme file: {path}")

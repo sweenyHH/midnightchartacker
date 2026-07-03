@@ -54,3 +54,12 @@ def adjust_class_color(color_hex):
             return "#333333"
 
     return color_hex
+
+
+
+def shorten_task_name(name, max_length=10):
+
+    if len(name) <= max_length:
+        return name
+
+    return name[:max_length] + "..."

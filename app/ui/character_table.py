@@ -1,4 +1,13 @@
-from PySide6.QtWidgets import QTableWidget, QTableWidgetItem, QMenu
+
+from PySide6.QtWidgets import (
+    QTableWidget,
+    QTableWidgetItem,
+    QMenu,
+    QCheckBox,
+    QWidget,
+    QHBoxLayout,
+)
+
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QColor
 
@@ -10,10 +19,17 @@ from .character_table_helpers import (
     get_attr,
     get_currency_value,
     adjust_class_color,
+    shorten_task_name,
 )
 
 from app.storage.vault_storage import load_user_vault
 from app.storage.warband_task_storage import load_tasks
+
+from app.storage.warband_task_progress_storage import (
+    get_task_state,
+    set_task_state,
+)
+
 
 
 class CharacterTable(QTableWidget):
@@ -30,7 +46,13 @@ class CharacterTable(QTableWidget):
 
     def load_characters(self, characters):
 
+
         tasks = load_tasks()
+
+        task_headers = [
+            shorten_task_name(task)
+            for task in tasks
+        ]
 
         headers = [
             "Character",
@@ -45,23 +67,30 @@ class CharacterTable(QTableWidget):
             "Delves",
         ]
 
-        headers.extend(tasks)
+        headers.extend(task_headers)
+
 
         self.setColumnCount(len(headers))
         self.setHorizontalHeaderLabels(headers)
 
+        
+        for task_index, task_name in enumerate(tasks):
+
+            column = 10 + task_index
+
+            header_item = self.horizontalHeaderItem(column)
+
+            if header_item:
+                header_item.setToolTip(task_name)
 
         self.setSortingEnabled(True)
-
-        self.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.customContextMenuRequested.connect(
-            self._show_context_menu
-        )
 
         self.setSortingEnabled(False)
 
         self.clearContents()
         self.setRowCount(len(characters))
+
+        self.verticalHeader().setDefaultSectionSize(34)
 
         for row, char in enumerate(characters):
 
@@ -162,15 +191,53 @@ class CharacterTable(QTableWidget):
             self.setItem(row, 8, mplus_item)
             self.setItem(row, 9, delve_item)
 
+# -------------------------------
+# Warband Tasks
+# -------------------------------
 
             task_start_col = 10
 
             for task_index, task_name in enumerate(tasks):
 
-                self.setItem(
+                checkbox = QCheckBox()
+
+                initial_state = get_task_state(
+                    char,
+                    task_name
+                )
+
+                checkbox.setChecked(initial_state)
+
+                def on_state_changed(
+                    state,
+                    character=char,
+                    task=task_name
+                ):
+                    checked = state != 0
+
+                    set_task_state(
+                        character,
+                        task,
+                        checked
+                    )
+
+                checkbox.stateChanged.connect(
+                    on_state_changed
+                )
+
+                container = QWidget()
+                container.setStyleSheet("background: transparent;")
+
+                layout = QHBoxLayout(container)
+                layout.setContentsMargins(0, 0, 0, 0)
+                layout.setAlignment(Qt.AlignCenter)
+
+                layout.addWidget(checkbox)
+
+                self.setCellWidget(
                     row,
                     task_start_col + task_index,
-                    QTableWidgetItem("-")
+                    container
                 )
 
 # -------------------------------
