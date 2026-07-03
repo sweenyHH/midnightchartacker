@@ -56,12 +56,15 @@ class VaultTab(QWidget):
         # -------------------------------
         # CLEAR GRID CONTENTS
         # -------------------------------
+
         while self.grid.count():
 
             item = self.grid.takeAt(0)
 
-            if item.widget():
-                item.widget().deleteLater()
+            widget = item.widget()
+
+            if widget is not None:
+                widget.deleteLater()
 
         # -------------------------------
         # LOAD VAULT DATA FROM STORAGE
