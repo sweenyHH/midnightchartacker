@@ -29,7 +29,6 @@ class OverviewTab(QWidget):
 # --------------------------------------------------
     def set_character(self, character):
 
-
 # FULL LAYOUT CLEAR
         while self.layout.count():
             item = self.layout.takeAt(0)
@@ -84,8 +83,6 @@ class OverviewTab(QWidget):
                     f"<b>{currency.name}:</b> {currency.quantity}"
                 )
             )
-
-            
 
         general_layout.addStretch()
 

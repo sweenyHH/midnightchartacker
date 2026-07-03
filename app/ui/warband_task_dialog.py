@@ -1,0 +1,138 @@
+from PySide6.QtWidgets import (
+    QDialog,
+    QVBoxLayout,
+    QHBoxLayout,
+    QListWidget,
+    QLineEdit,
+    QPushButton,
+    QLabel,
+    QMessageBox,
+)
+
+from app.storage.warband_task_storage import (
+    load_tasks,
+    add_task,
+    delete_task,
+)
+
+
+class WarbandTaskDialog(QDialog):
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.setWindowTitle("Warband Tasks")
+        self.resize(450, 400)
+
+        layout = QVBoxLayout(self)
+
+# --------------------------------------------------
+# TITLE
+# --------------------------------------------------
+        title = QLabel("Warband Tasks")
+        title.setObjectName("warbandTaskTitle")
+
+        layout.addWidget(title)
+
+# --------------------------------------------------
+# TASK LIST
+# --------------------------------------------------
+        self.task_list = QListWidget()
+        self.task_list.setObjectName("warbandTaskList")
+
+        layout.addWidget(self.task_list)
+
+# --------------------------------------------------
+# INPUT ROW
+# --------------------------------------------------
+        input_layout = QHBoxLayout()
+
+        self.task_input = QLineEdit()
+        self.task_input.setPlaceholderText("New task name...")
+
+        add_btn = QPushButton("Add")
+        add_btn.clicked.connect(self.add_task)
+
+        input_layout.addWidget(self.task_input)
+        input_layout.addWidget(add_btn)
+
+        layout.addLayout(input_layout)
+
+# --------------------------------------------------
+# BUTTON ROW
+# --------------------------------------------------
+        button_layout = QHBoxLayout()
+
+        delete_btn = QPushButton("Delete Selected")
+        delete_btn.clicked.connect(self.delete_selected)
+
+        close_btn = QPushButton("Close")
+        close_btn.clicked.connect(self.accept)
+
+        button_layout.addWidget(delete_btn)
+        button_layout.addStretch()
+        button_layout.addWidget(close_btn)
+
+        layout.addLayout(button_layout)
+
+# --------------------------------------------------
+# INITIAL LOAD
+# --------------------------------------------------
+        self.reload_tasks()
+
+# --------------------------------------------------
+# LOAD
+# --------------------------------------------------
+    def reload_tasks(self):
+
+        self.task_list.clear()
+
+        for task in load_tasks():
+            self.task_list.addItem(task)
+
+# --------------------------------------------------
+# ADD
+# --------------------------------------------------
+    def add_task(self):
+
+        task_name = self.task_input.text().strip()
+
+        if not task_name:
+            return
+
+        if not add_task(task_name):
+            QMessageBox.warning(
+                self,
+                "Task Exists",
+                f'"{task_name}" already exists.'
+            )
+            return
+
+        self.task_input.clear()
+        self.reload_tasks()
+
+# --------------------------------------------------
+# DELETE
+# --------------------------------------------------
+    def delete_selected(self):
+
+        item = self.task_list.currentItem()
+
+        if not item:
+            return
+
+        task_name = item.text()
+
+        result = QMessageBox.question(
+            self,
+            "Delete Task",
+            f'Delete "{task_name}"?',
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.No,
+        )
+
+        if result != QMessageBox.Yes:
+            return
+
+        delete_task(task_name)
+        self.reload_tasks()

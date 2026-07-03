@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QMainWindow, QWidget, QVBoxLayout
+from PySide6.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QMessageBox
 from PySide6.QtCore import Signal
 
 from app.services.data_service import DataService
@@ -7,6 +7,12 @@ from app.ui.character_table import CharacterTable
 from app.ui.top_panel import TopPanel
 from app.utils.watcher import FolderWatcher
 from app.ui.paste_dialog import PasteDialog
+
+
+from app.storage.character_file_storage import (
+    delete_character_file,
+)
+
 
 import os
 
@@ -30,10 +36,15 @@ class MainWindow(QMainWindow):
         self.detail_view.hide()
 
         self.current_character = None
-
+        
         self.top_panel = TopPanel(
             self.open_paste_dialog,
-            self.show_list
+            self.show_list,
+            self.open_warband_tasks
+        )
+
+        self.table.character_delete_requested.connect(
+            self.delete_character
         )
 
         layout = QVBoxLayout()
@@ -56,9 +67,6 @@ class MainWindow(QMainWindow):
 
             self.reload_all()
 
-
-
-
 # --------------------------------------------------
 
     def reload_all(self):
@@ -72,10 +80,9 @@ class MainWindow(QMainWindow):
             self.data_service.get_top_reputations()
         )
 
-        # Refresh currently open detail view
+# Refresh currently open detail view
         if self.current_character is not None:
             self.detail_view.set_character(self.current_character)
-
 
 # --------------------------------------------------
 
@@ -84,7 +91,6 @@ class MainWindow(QMainWindow):
         char = self.table.item(row, 0).data(0x0100)
         self.current_character = char
         self.detail_view.set_character(char)
-
 
         self.table.hide()
         self.detail_view.show()
@@ -105,6 +111,46 @@ class MainWindow(QMainWindow):
         self.reload_all()
 
 # --------------------------------------------------
+
+    def open_warband_tasks(self):
+
+        from app.ui.warband_task_dialog import (
+            WarbandTaskDialog
+        )
+
+        dialog = WarbandTaskDialog(self)
+        dialog.exec()
+
+        self.reload_all()
+
+# --------------------------------------------------
+
+    def delete_character(self, character):
+
+        result = QMessageBox.question(
+            self,
+            "Delete Character",
+            (
+                f'Delete "{character.name}"?\n\n'
+                "This will permanently remove "
+                "the character export file."
+            ),
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.No,
+        )
+
+        if result != QMessageBox.Yes:
+            return
+
+        if delete_character_file(character):
+
+            self.current_character = None
+
+            self.reload_all()
+
+            self.show_list()
+
+# --------------------------------------------------
         
     def start_watcher(self, folder):
         self.watcher = FolderWatcher(
@@ -113,12 +159,10 @@ class MainWindow(QMainWindow):
         )
         self.watcher.start()
 
-
     def _update_ui(self):
         import time
         time.sleep(1.0)
         self.reload_all()
-
 
     def closeEvent(self, event):
 

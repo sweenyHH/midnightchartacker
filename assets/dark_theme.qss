@@ -340,3 +340,18 @@ QLabel#vaultBox {
 
    
 }
+
+
+
+/* =====================
+   WARBAND TASKS
+===================== */
+
+QLabel#warbandTaskTitle {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+QListWidget#warbandTaskList {
+    border-radius: 6px;
+}

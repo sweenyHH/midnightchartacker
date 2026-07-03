@@ -5,12 +5,13 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt
 
 from app.ui.theme_manager import ThemeManager
+from app.ui.warband_task_dialog import WarbandTaskDialog
 
 
 
 class TopPanel(QWidget):
 
-    def __init__(self, paste_cb, back_cb):
+    def __init__(self, paste_cb, back_cb, warband_cb):
         super().__init__()
 
         main_layout = QVBoxLayout(self)
@@ -23,12 +24,20 @@ class TopPanel(QWidget):
         self.paste_btn = QPushButton("Paste Character Data")
         self.paste_btn.clicked.connect(paste_cb)
 
+        
+        self.warband_btn = QPushButton("Warband Tasks")
+        self.warband_btn.clicked.connect(warband_cb)
+
+
         self.back_btn = QPushButton("Back")
         self.back_btn.clicked.connect(back_cb)
         self.back_btn.hide()
 
+
         button_row.addWidget(self.paste_btn)
+        button_row.addWidget(self.warband_btn)
         button_row.addWidget(self.back_btn)
+
 
 
 # -------------------------------

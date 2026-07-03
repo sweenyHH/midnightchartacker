@@ -1,5 +1,5 @@
-from PySide6.QtWidgets import QTableWidget, QTableWidgetItem
-from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QTableWidget, QTableWidgetItem, QMenu
+from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QColor
 
 from app.ui.colors import CLASS_COLORS
@@ -13,15 +13,26 @@ from .character_table_helpers import (
 )
 
 from app.storage.vault_storage import load_user_vault
+from app.storage.warband_task_storage import load_tasks
 
 
 class CharacterTable(QTableWidget):
 
+    character_delete_requested = Signal(object)
+
     def __init__(self):
         super().__init__()
 
-        self.setColumnCount(10)
-        self.setHorizontalHeaderLabels([
+        self.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.customContextMenuRequested.connect(
+        self._show_context_menu
+        )
+
+    def load_characters(self, characters):
+
+        tasks = load_tasks()
+
+        headers = [
             "Character",
             "Class",
             "Item Level",
@@ -31,14 +42,21 @@ class CharacterTable(QTableWidget):
             "R. Spark Dust",
             "Raid",
             "Mystic+",
-            "Delves"
-        ])
+            "Delves",
+        ]
+
+        headers.extend(tasks)
+
+        self.setColumnCount(len(headers))
+        self.setHorizontalHeaderLabels(headers)
+
 
         self.setSortingEnabled(True)
 
-# --------------------------------------------------
-
-    def load_characters(self, characters):
+        self.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.customContextMenuRequested.connect(
+            self._show_context_menu
+        )
 
         self.setSortingEnabled(False)
 
@@ -144,6 +162,17 @@ class CharacterTable(QTableWidget):
             self.setItem(row, 8, mplus_item)
             self.setItem(row, 9, delve_item)
 
+
+            task_start_col = 10
+
+            for task_index, task_name in enumerate(tasks):
+
+                self.setItem(
+                    row,
+                    task_start_col + task_index,
+                    QTableWidgetItem("-")
+                )
+
 # -------------------------------
 # Coffer Keys
 # -------------------------------
@@ -189,3 +218,37 @@ class CharacterTable(QTableWidget):
 
         self.resizeColumnsToContents()
         self.setSortingEnabled(True)
+
+# --------------------------------------------------
+# CONTEXT MENU
+# --------------------------------------------------
+
+    def _show_context_menu(self, position):
+
+        item = self.itemAt(position)
+
+        if not item:
+            return
+
+        char_item = self.item(item.row(), 0)
+
+        if not char_item:
+            return
+
+        character = char_item.data(Qt.UserRole)
+
+        if not character:
+            return
+
+        menu = QMenu(self)
+
+        delete_action = menu.addAction(
+            f"Delete {character.name}..."
+        )
+
+        action = menu.exec(
+            self.viewport().mapToGlobal(position)
+        )
+
+        if action == delete_action:
+            self.character_delete_requested.emit(character)
