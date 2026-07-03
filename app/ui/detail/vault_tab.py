@@ -6,7 +6,6 @@ from PySide6.QtWidgets import (
     QSizePolicy,
 )
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QFont
 
 from app.storage.user_data_storage import load_section
 
@@ -15,17 +14,30 @@ class VaultTab(QWidget):
 
     def set_character(self, character):
 
+        print(
+            f"[VaultTab] set_character: "
+            f"{getattr(character, 'name', 'UNKNOWN')}"
+        )
+
+        print(
+            f"[VaultTab] source_file: "
+            f"{getattr(character, 'source_file', 'NONE')}"
+        )
+
         # -------------------------------
         # CLEAN OLD LAYOUT
         # -------------------------------
         old_layout = self.layout()
 
         if old_layout:
+
             while old_layout.count():
                 item = old_layout.takeAt(0)
 
                 if item.widget():
                     item.widget().deleteLater()
+
+            QWidget().setLayout(old_layout)
 
         # -------------------------------
         # ROOT LAYOUT
@@ -36,6 +48,7 @@ class VaultTab(QWidget):
 
         grid = QGridLayout()
         grid.setSpacing(20)
+
         root.addLayout(grid, 1)
 
         # -------------------------------
@@ -47,24 +60,62 @@ class VaultTab(QWidget):
             "row3": [],
         }
 
-        file_path = getattr(character, "source_file", None)
+        file_path = getattr(
+            character,
+            "source_file",
+            None
+        )
 
         if file_path:
 
-            for line in load_section(file_path, "Vault"):
+            for line in load_section(
+                file_path,
+                "Vault"
+            ):
 
                 if "=" not in line:
                     continue
 
-                key, value = line.split("=", 1)
+                try:
+                    key, value = line.split(
+                        "=",
+                        1
+                    )
 
-                row, col = key.split("_")
-                row_name = f"row{int(row) + 1}"
+                    row, col = key.split("_")
 
-                while len(vault[row_name]) <= int(col):
-                    vault[row_name].append(None)
+                    row_name = (
+                        f"row{int(row) + 1}"
+                    )
 
-                vault[row_name][int(col)] = value
+                    if row_name not in vault:
+                        continue
+
+                    while (
+                        len(vault[row_name])
+                        <= int(col)
+                    ):
+                        vault[row_name].append(
+                            None
+                        )
+
+                    vault[row_name][int(col)] = value
+
+                except (
+                    ValueError,
+                    KeyError,
+                ) as e:
+
+                    print(
+                        f"[VaultTab] Ignoring "
+                        f"invalid vault entry: "
+                        f"{line} ({e})"
+                    )
+
+        print(
+            f"[VaultTab] Loaded vault data: "
+            f"{vault}"
+        )
 
         # -------------------------------
         # BOX CREATOR
@@ -72,36 +123,52 @@ class VaultTab(QWidget):
         def create_box(value):
 
             lbl = QLabel(str(value))
-            lbl.setAlignment(Qt.AlignCenter)
 
-            lbl.setMinimumSize(140, 100)
+            lbl.setAlignment(
+                Qt.AlignCenter
+            )
+
+            lbl.setMinimumSize(
+                140,
+                100
+            )
+
             lbl.setSizePolicy(
                 QSizePolicy.Expanding,
                 QSizePolicy.Expanding
             )
 
-            lbl.setObjectName("vaultBox")
+            lbl.setObjectName(
+                "vaultBox"
+            )
 
             return lbl
 
         # -------------------------------
         # FILL ROW
         # -------------------------------
-        def fill_row(row_index, values):
+        def fill_row(
+            row_index,
+            values,
+        ):
 
             values = values[:3]
 
             for col in range(3):
+
                 val = (
                     values[col]
-                    if col < len(values) and values[col]
+                    if (
+                        col < len(values)
+                        and values[col]
+                    )
                     else "-"
                 )
 
                 grid.addWidget(
                     create_box(val),
                     row_index,
-                    col + 1
+                    col + 1,
                 )
 
         # -------------------------------
@@ -113,21 +180,34 @@ class VaultTab(QWidget):
             ("Delve Slots", "row3"),
         ]
 
-        for row_index, (label_text, key) in enumerate(labels):
+        for row_index, (
+            label_text,
+            key,
+        ) in enumerate(labels):
 
             label = QLabel(label_text)
+
             label.setAlignment(
-                Qt.AlignRight | Qt.AlignVCenter
+                Qt.AlignRight
+                | Qt.AlignVCenter
             )
 
+            label.setObjectName(
+                "vaultRowLabel"
+            )
 
-            label.setObjectName("vaultRowLabel")
-
-            grid.addWidget(label, row_index, 0)
+            grid.addWidget(
+                label,
+                row_index,
+                0,
+            )
 
             fill_row(
                 row_index,
-                vault.get(key, [])
+                vault.get(
+                    key,
+                    []
+                ),
             )
 
         # -------------------------------
@@ -142,3 +222,6 @@ class VaultTab(QWidget):
         grid.setRowStretch(1, 1)
         grid.setRowStretch(2, 1)
 
+        print(
+            "[VaultTab] UI rebuild complete"
+        )
