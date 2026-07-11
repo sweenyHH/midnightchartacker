@@ -1,7 +1,8 @@
 # File watcher that triggers updates when files change.
 
-import time
 import threading
+
+from app.utils.logger import logger
 
 # polling observer (required for WSL)
 from watchdog.observers.polling import PollingObserver as Observer
@@ -37,9 +38,19 @@ class FileChangeHandler(FileSystemEventHandler):
 
         print(f"[Watcher] Event detected: {event.src_path}")
 
+        logger.info(
+          f"Watcher detected change: "
+           f"{event.src_path}"
+        )
+
 # Cancel previous timer if still running
 
         if self.timer:
+
+            logger.info(
+                "Watcher debounce timer reset"
+            )
+
             self.timer.cancel()
 
 # Start new timer (debounce)
@@ -50,6 +61,10 @@ class FileChangeHandler(FileSystemEventHandler):
     def _trigger_callback(self):
 
         print("[Watcher] Triggering callback after debounce")
+
+        logger.info(
+            "Watcher callback triggered"
+        )
 
 # Call the UI update callback
 
@@ -69,12 +84,21 @@ class FolderWatcher:
 
         print(f"[FolderWatcher] Watching {self.path}...")
 
+        logger.info(
+            f"Started watching folder: "
+            f"{self.path}"
+        )
+
         self.observer.schedule(self.handler, self.path, recursive=False)
         self.observer.start()
 
     def stop(self):
 
         print("[FolderWatcher] Stopping...")
+
+        logger.info(
+            "Folder watcher stopped"
+        )
 
         self.observer.stop()
         self.observer.join()

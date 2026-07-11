@@ -6,6 +6,7 @@ from .detail.vault_tab import VaultTab
 from .detail.stats_tab import StatsTab
 from .detail.reputation_tab import ReputationTab
 from .detail.debug_tab import DebugTab
+from app.utils.logger import logger
 
 
 class DetailView(QWidget):
@@ -34,9 +35,31 @@ class DetailView(QWidget):
         self.tabs.addTab(self.debug_tab, "Debug")
 
     def set_character(self, character):
+
+        logger.info(
+            f"DetailView loading character: "
+            f"{character.name}"
+        )
+
+        logger.info("Updating OverviewTab")
         self.overview_tab.set_character(character)
+
+        logger.info("Updating CurrenciesTab")
         self.currencies_tab.set_character(character)
+
+        logger.info("Updating VaultTab")
         self.vault_tab.set_character(character)
+
+        logger.info("Updating StatsTab")
         self.stats_tab.set_character(character)
+
+        logger.info("Updating ReputationTab")
         self.reputation_tab.set_character(character)
+
+        logger.info("Updating DebugTab")
         self.debug_tab.set_character(character)
+
+        logger.info(
+            f"DetailView finished loading: "
+            f"{character.name}"
+        )

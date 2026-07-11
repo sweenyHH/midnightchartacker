@@ -30,7 +30,7 @@ from app.storage.warband_task_progress_storage import (
     set_task_state,
 )
 
-
+from app.utils.logger import logger
 
 class CharacterTable(QTableWidget):
 
@@ -46,6 +46,10 @@ class CharacterTable(QTableWidget):
 
     def load_characters(self, characters):
 
+        logger.info(
+            f"Loading character table with "
+            f"{len(characters)} characters"
+        )
 
         tasks = load_tasks()
 
@@ -94,6 +98,11 @@ class CharacterTable(QTableWidget):
 
         for row, char in enumerate(characters):
 
+            logger.info(
+                f"Character table row loaded: "
+                f"{char.name}"
+            )
+       
 # -------------------------------
 # Name
 # -------------------------------
@@ -286,6 +295,10 @@ class CharacterTable(QTableWidget):
         self.resizeColumnsToContents()
         self.setSortingEnabled(True)
 
+# Sort by Item Level descending
+
+        self.sortItems(2, Qt.DescendingOrder)
+
 # --------------------------------------------------
 # CONTEXT MENU
 # --------------------------------------------------
@@ -318,4 +331,10 @@ class CharacterTable(QTableWidget):
         )
 
         if action == delete_action:
+
+            logger.info(
+                f"Delete requested for "
+                f"{character.name}"
+            )
+
             self.character_delete_requested.emit(character)

@@ -8,10 +8,14 @@ from app.ui.colors import STATUS_COLORS
 
 from .config import ROWS_CONFIG
 
+from app.utils.logger import logger
+
 from app.storage.weekly_duties_storage import (
     load_state,
     save_state,
 )
+
+import os
 
 
 class WeeklyDutiesWidget(QWidget):
@@ -39,12 +43,12 @@ class WeeklyDutiesWidget(QWidget):
         self.checkboxes = []
         self.row_labels = []
 
-        # Debounced saving
+# Debounced saving
         self.save_timer = QTimer(self)
         self.save_timer.setSingleShot(True)
         self.save_timer.timeout.connect(self._save)
 
-        # Style checkboxes (green when checked)
+# Style checkboxes (green when checked)
         self.setStyleSheet(f"""
         QCheckBox::indicator {{
             width: 14px;
@@ -70,19 +74,42 @@ class WeeklyDutiesWidget(QWidget):
     def _save(self):
 
         if not self.current_file:
-            return
 
-        save_state(
-            self.current_file,
-            self.checkboxes
-        )
+            logger.warning(
+                "Weekly duties save skipped: "
+                "no character loaded"
+            )
+
+            return
+        
+
+        try:
+
+            save_state(
+                self.current_file,
+                self.checkboxes
+            )
+
+            logger.info(
+                f"Weekly duties saved: "
+                f"{self.current_file}"
+            )
+
+        except Exception:
+
+            logger.exception(
+                f"Failed to save weekly duties: "
+                f"{os.path.basename(self.current_file)}"
+            )
+
+            raise
 
 # --------------------------------------------------
     def _update_row_visuals(self):
 
         for (row_index, boxes), label in zip(self.checkboxes, self.row_labels):
 
-            # reset style
+# reset style
             label.setStyleSheet("")
 
             checked = sum(1 for cb in boxes if cb.isChecked())
@@ -98,10 +125,15 @@ class WeeklyDutiesWidget(QWidget):
 # --------------------------------------------------
     def set_character(self, character):
 
+        logger.info(
+            f"Weekly duties loaded for: "
+            f"{character.name}"
+        )
+
         self.current_file = character.source_file
         self.row_labels = []
 
-        # clear grid properly
+# clear grid properly
         while self.grid.count():
             item = self.grid.takeAt(0)
             widget = item.widget()
@@ -110,14 +142,27 @@ class WeeklyDutiesWidget(QWidget):
 
         self.checkboxes.clear()
 
-        saved_state = load_state(self.current_file)
+        try:
+
+            saved_state = load_state(
+                self.current_file
+            )
+
+        except Exception:
+
+            logger.exception(
+                f"Failed to load weekly duties: "
+                f"{self.current_file}"
+            )
+
+            raise
 
         current_row = 0
         max_boxes = max(count for _, count in self.rows_config)
 
         for row_index, (name, count) in enumerate(self.rows_config):
 
-            # spacer row
+# spacer row
             if name == "__SPACER__":
                 spacer = QLabel("")
                 spacer.setFixedHeight(12)
@@ -125,7 +170,7 @@ class WeeklyDutiesWidget(QWidget):
                 current_row += 1
                 continue
 
-            # label
+# label
             label = QLabel(f"<b>{name}</b>")
             label.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
 
@@ -162,7 +207,13 @@ class WeeklyDutiesWidget(QWidget):
         self._update_row_visuals()
 
 # --------------------------------------------------
+
     def clear_all(self):
+
+        logger.info(
+            f"Weekly duties cleared: "
+            f"{os.path.basename(self.current_file)}"
+        )
 
         for _, boxes in self.checkboxes:
             for cb in boxes:

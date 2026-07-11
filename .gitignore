@@ -16,3 +16,6 @@ __pycache__/
 
 import/*.txt
 data/warband_tasks.txt
+
+# Logs
+logs/

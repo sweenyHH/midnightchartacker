@@ -15,6 +15,7 @@ from app.storage.warband_task_storage import (
     delete_task,
 )
 
+from app.utils.logger import logger
 
 class WarbandTaskDialog(QDialog):
 
@@ -85,10 +86,17 @@ class WarbandTaskDialog(QDialog):
 # --------------------------------------------------
     def reload_tasks(self):
 
+        tasks = load_tasks()
+
+        logger.info(
+            f"Loaded {len(tasks)} warband tasks"
+        )
+
         self.task_list.clear()
 
-        for task in load_tasks():
+        for task in tasks:
             self.task_list.addItem(task)
+
 
 # --------------------------------------------------
 # ADD
@@ -98,15 +106,31 @@ class WarbandTaskDialog(QDialog):
         task_name = self.task_input.text().strip()
 
         if not task_name:
+
+            logger.warning(
+                "Attempted to create empty warband task"
+            )
+
             return
 
         if not add_task(task_name):
+
+            logger.warning(
+                f"Duplicate warband task: "
+                f"{task_name}"
+            )
+
             QMessageBox.warning(
                 self,
                 "Task Exists",
                 f'"{task_name}" already exists.'
             )
             return
+
+        logger.info(
+            f"Warband task created: "
+            f"{task_name}"
+        )
 
         self.task_input.clear()
         self.reload_tasks()
@@ -119,6 +143,11 @@ class WarbandTaskDialog(QDialog):
         item = self.task_list.currentItem()
 
         if not item:
+
+            logger.warning(
+                "Delete task requested with no selection"
+            )
+
             return
 
         task_name = item.text()
@@ -132,7 +161,19 @@ class WarbandTaskDialog(QDialog):
         )
 
         if result != QMessageBox.Yes:
+
+            logger.info(
+                f"Task deletion cancelled: "
+                f"{task_name}"
+            )
+
             return
+
+        logger.info(
+            f"Warband task deleted: "
+            f"{task_name}"
+        )
+
 
         delete_task(task_name)
         self.reload_tasks()

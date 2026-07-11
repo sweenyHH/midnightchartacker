@@ -2,11 +2,14 @@ from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QTextEdit
 from PySide6.QtCore import QTimer
 import os
 
+from app.utils.logger import logger
 
 from app.storage.user_data_storage import (
     load_section,
     save_section,
 )
+
+
 
 class NotesWidget(QWidget):
 
@@ -45,6 +48,11 @@ class NotesWidget(QWidget):
 # --------------------------------------------------
     def set_character(self, character):
 
+        logger.info(
+            f"Notes loaded for: "
+            f"{character.name}"
+        )
+
         self.current_file = character.source_file
 
         
@@ -80,6 +88,12 @@ class NotesWidget(QWidget):
     def _save_notes(self):
 
         if not self.current_file:
+
+            logger.warning(
+                "Notes save skipped: "
+                "no character loaded"
+            )
+
             return
 
         text = self.textbox.toPlainText().strip()
@@ -89,11 +103,26 @@ class NotesWidget(QWidget):
         if text:
             note_lines = text.splitlines()
 
-        save_section(
-            self.current_file,
-            "Notes",
-            note_lines
-        )
+        try:
+
+            save_section(
+                self.current_file,
+                "Notes",
+                note_lines
+            )
+
+            logger.info(
+                f"Notes saved: "
+                f"{os.path.basename(self.current_file)}"
+            )
+
+        except Exception:
+
+            logger.exception(
+                "Failed to save notes"
+            )
+
+            raise
 
 # --------------------------------------------------
 # LIMIT LENGTH

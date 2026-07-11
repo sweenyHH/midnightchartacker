@@ -5,10 +5,13 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt, QTimer
 import os
 
+from app.utils.logger import logger
+
 from app.storage.user_data_storage import (
     load_section,
     save_section,
 )
+
 
 
 
@@ -61,6 +64,11 @@ class VaultProgressWidget(QWidget):
 # --------------------------------------------------
     def set_character(self, character):
 
+        logger.info(
+            f"Vault progress loaded for: "
+            f"{character.name}"
+        )
+
         self.current_file = character.source_file
 
         data = self._load()
@@ -73,6 +81,11 @@ class VaultProgressWidget(QWidget):
 
 # --------------------------------------------------
     def clear_all(self):
+
+        logger.info(
+            f"Vault progress cleared: "
+            f"{os.path.basename(self.current_file)}"
+        )
 
         for field in self.fields.values():
             field.setText("")
@@ -93,7 +106,21 @@ class VaultProgressWidget(QWidget):
 
         result = {}
 
-        lines = load_section(self.current_file, "Vault")
+        try:
+
+            lines = load_section(
+                self.current_file,
+                "Vault"
+            )
+
+        except Exception:
+
+            logger.exception(
+                f"Failed to load vault progress: "
+                f"{self.current_file}"
+            )
+
+            raise
 
         for stripped in lines:
 
@@ -112,6 +139,12 @@ class VaultProgressWidget(QWidget):
     def _save(self):
 
         if not self.current_file:
+
+            logger.warning(
+                "Vault progress save skipped: "
+                "no character loaded"
+            )
+
             return
 
         vault_lines = []
@@ -123,11 +156,27 @@ class VaultProgressWidget(QWidget):
             if value:
                 vault_lines.append(f"{row}_{col}={value}")
 
-        save_section(
-            self.current_file,
-            "Vault",
-            vault_lines
-        )
+        try:
+
+            save_section(
+                self.current_file,
+                "Vault",
+                vault_lines
+            )
+
+            logger.info(
+                f"Vault progress saved: "
+                f"{os.path.basename(self.current_file)}"
+            )
+
+        except Exception:
+
+            logger.exception(
+                f"Failed to save vault progress: "
+                f"{self.current_file}"
+            )
+
+            raise
 
 
  

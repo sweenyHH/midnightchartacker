@@ -4,6 +4,7 @@ import os
 from app.parser.base_parser import parse_txt
 from app.parser.reputation_parser import REPUTATION_PREFIXES
 
+from app.utils.logger import logger
 
 class DataService:
 
@@ -26,7 +27,11 @@ class DataService:
 
         self.folder_path = path
 
-        # Reset everything when switching folder
+        logger.info(
+            f"Data folder set to: {path}"
+        )
+
+# Reset everything when switching folder
         self.characters = []
         self.file_timestamps = {}
 
@@ -40,7 +45,11 @@ class DataService:
         if not self.folder_path:
             return
 
-        print("[DataService] Scanning folder...")
+        logger.info(
+            "Scanning data folder"
+        )
+
+
 
         updated_characters = []
 
@@ -65,9 +74,18 @@ class DataService:
                         if full_path not in self.file_timestamps
                         else "UPDATED"
                     )
-                    print(f"[DataService] {status} file: {file}")
+
+                    logger.info(
+                     f"{status} character file: {file}"
+                    )
+
 
                     character = parse_txt(full_path)
+
+                    logger.info(
+                        f"Parsed character: "
+                        f"{character.name}"
+                    )
 
 # store reputations (latest snapshot)
                     if hasattr(character, "reputations") and character.reputations:
@@ -79,8 +97,14 @@ class DataService:
 # unchanged → reuse
                     character = self._get_existing_character(full_path)
 
-                    # fallback (safety)
+# fallback (safety)
                     if character is None:
+
+                        logger.info(
+                            f"Parsed character: "
+                            f"{character.name}"
+                        )
+
                         character = parse_txt(full_path)
 
                 if character:
@@ -89,7 +113,20 @@ class DataService:
             except Exception as e:
                 print(f"[DataService] Error processing {file}: {e}")
 
+            except Exception:
+
+                logger.exception(
+                    f"Error processing file: {file}"
+                )
+
 # Replace character list
+
+        logger.info(
+            f"Character scan complete: "
+            f"{len(updated_characters)} "
+            f"characters loaded"
+        )
+
         self.characters = updated_characters
 
 # --------------------------------------------------

@@ -13,6 +13,7 @@ from app.storage.character_file_storage import (
     delete_character_file,
 )
 
+from app.utils.logger import logger
 
 import os
 
@@ -26,6 +27,8 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("Midnight Character Tracker")
         self.setFixedSize(1800, 900)
+
+        logger.info("MainWindow initialized")
 
         self.data_service = DataService()
 
@@ -71,9 +74,15 @@ class MainWindow(QMainWindow):
 
     def reload_all(self):
 
+        logger.info("Reloading all data")
+
         self.data_service.load_data()
 
         characters = self.data_service.get_characters()
+
+        logger.info(
+        f"Loaded {len(characters)} characters"
+        )
         
         self.table.load_characters(characters)
         self.top_panel.update_reputation(
@@ -89,15 +98,46 @@ class MainWindow(QMainWindow):
 
     def open_character(self, row, _):
 
+        logger.info(
+            f"Opening character row: {row}"
+        )
+
         char = self.table.item(row, 0).data(0x0100)
+
+        logger.info(
+            f"Character selected: {char.name}"
+        )
+
         self.current_character = char
+
+        logger.info(
+            "Starting DetailView update"
+        )
+
         self.detail_view.set_character(char)
+
+        logger.info(
+            "DetailView update finished"
+        )
+
+        logger.info(
+            "Switching UI to detail view"
+        )
 
         self.table.hide()
         self.detail_view.show()
         self.top_panel.back_btn.show()
 
+        logger.info(
+            "Detail view displayed"
+        )
+
     def show_list(self):
+
+        logger.info(
+            "Returned to character list"
+        )
+
         self.detail_view.hide()
         self.table.show()
         self.top_panel.back_btn.hide()
@@ -105,6 +145,10 @@ class MainWindow(QMainWindow):
 # --------------------------------------------------
  
     def open_paste_dialog(self):
+
+        logger.info(
+          "Opening paste dialog"
+        )
 
         dialog = PasteDialog()
         dialog.exec()
@@ -114,6 +158,10 @@ class MainWindow(QMainWindow):
 # --------------------------------------------------
 
     def open_warband_tasks(self):
+
+        logger.info(
+          "Opening Warband Tasks dialog"
+        )
 
         from app.ui.warband_task_dialog import (
             WarbandTaskDialog
@@ -145,6 +193,10 @@ class MainWindow(QMainWindow):
 
         if delete_character_file(character):
 
+            logger.info(
+             f"Character deleted: {character.name}"
+            )
+
             self.current_character = None
 
             self.reload_all()
@@ -161,11 +213,24 @@ class MainWindow(QMainWindow):
         self.watcher.start()
 
     def _update_ui(self):
+
+        logger.info(
+            "Watcher triggered UI update START"
+        )
+
         import time
         time.sleep(1.0)
         self.reload_all()
 
+        logger.info(
+            "Watcher triggered UI update END"
+        )
+
     def closeEvent(self, event):
+
+        logger.info(
+            "Application closing"
+        )
 
         if hasattr(self, "watcher"):
             self.watcher.stop()

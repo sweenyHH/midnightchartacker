@@ -4,6 +4,8 @@ from PySide6.QtWidgets import (
 import os
 import re
 
+from app.utils.logger import logger
+
 # import safe write function
 from app.storage.user_data_storage import extract_user_data
 
@@ -83,6 +85,11 @@ class PasteDialog(QDialog):
         text = self.text_edit.toPlainText().strip()
 
         if not text:
+
+            logger.warning(
+                "Paste dialog save attempted with empty text"
+            )
+
             print("[PasteDialog] No text provided.")
             return
 
@@ -94,19 +101,54 @@ class PasteDialog(QDialog):
         if match:
             full_name = match.group(1).strip()
 
+            logger.info(
+                f"Character import detected: "
+                f"{full_name}"
+            )
+
 # sanitize filename
             safe_name = re.sub(r'[\\/*?:"<>|]', "_", full_name)
             file_name = f"{safe_name}.txt"
 
         else:
+
             file_name = "unknown_character.txt"
-            print("[PasteDialog] WARNING: Could not extract character name.")
+
+            logger.warning(
+                "Character import failed to extract character name"
+            )
+
+            print(
+                "[PasteDialog] WARNING: "
+                "Could not extract character name."
+            )
 
         full_path = os.path.join(self.target_folder, file_name)
 
 # -------------------------------
 # SAVE FILE (SAFE OVERWRITE)
 # -------------------------------
-        write_character_file_with_user_data(full_path, text)
 
-        self.accept()
+        try:
+
+            write_character_file_with_user_data(
+                full_path,
+                text
+            )
+
+            logger.info(
+                f"Character import saved: "
+                f"{full_path}"
+            )
+
+            self.accept()
+
+        except Exception:
+
+            logger.exception(
+                f"Character import failed: "
+                f"{full_path}"
+            )
+
+            raise
+
