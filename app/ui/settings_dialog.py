@@ -12,9 +12,11 @@ from app.storage.settings_storage import (
     load_setting,
     save_setting,
 )
-
+from app.utils.logger import logger, LOG_DIR
 from app.ui.theme_manager import ThemeManager
-
+import os
+import platform
+import subprocess
 
 class SettingsDialog(QDialog):
 
@@ -50,6 +52,17 @@ class SettingsDialog(QDialog):
         layout.addWidget(self.light_radio)
         layout.addWidget(self.wow_radio)
         layout.addWidget(self.modern_radio)
+
+# --------------------------------------------------
+# LOGS
+# --------------------------------------------------
+
+        logs_button = QPushButton("Open Log Folder")
+        logs_button.clicked.connect(
+            self._open_log_folder
+        )
+
+        layout.addWidget(logs_button)
 
 # --------------------------------------------------
 # LOAD CURRENT SETTING
@@ -95,6 +108,74 @@ class SettingsDialog(QDialog):
 
         layout.addStretch()
         layout.addLayout(button_row)
+
+# --------------------------------------------------
+# OPEN LOG FOLDER
+# --------------------------------------------------
+
+    def _open_log_folder(self):
+
+        log_path = str(LOG_DIR.resolve())
+
+        try:
+
+            logger.info(
+                "Log folder opened"
+            )
+
+            system = platform.system()
+
+            # -----------------------------
+            # Windows
+            # -----------------------------
+            if system == "Windows":
+
+                os.startfile(log_path)
+
+            # -----------------------------
+            # macOS
+            # -----------------------------
+            elif system == "Darwin":
+
+                subprocess.Popen(
+                    ["open", log_path]
+                )
+
+            # -----------------------------
+            # Linux / WSL
+            # -----------------------------
+            else:
+
+                # Detect WSL
+                with open(
+                    "/proc/version",
+                    "r",
+                    encoding="utf-8"
+                ) as f:
+
+                    version_info = f.read().lower()
+
+                # WSL
+                if "microsoft" in version_info:
+
+                    subprocess.Popen(
+                        ["explorer.exe", "."],
+                        cwd=log_path
+                    )
+
+                # Native Linux
+                else:
+
+                    subprocess.Popen(
+                        ["xdg-open", log_path]
+                    )
+
+        except Exception:
+
+            logger.exception(
+                "Failed to open log folder"
+            )
+
 
 # --------------------------------------------------
 # SAVE
