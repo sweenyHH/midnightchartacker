@@ -7,6 +7,7 @@ from app.ui.character_table import CharacterTable
 from app.ui.top_panel import TopPanel
 from app.utils.watcher import FolderWatcher
 from app.ui.paste_dialog import PasteDialog
+from app.app_info import APP_NAME
 
 
 from app.storage.character_file_storage import (
@@ -25,7 +26,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("Midnight Character Tracker")
+        self.setWindowTitle(APP_NAME)
         self.setFixedSize(1800, 900)
 
         logger.info("MainWindow initialized")

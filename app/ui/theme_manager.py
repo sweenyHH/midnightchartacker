@@ -1,5 +1,5 @@
 import os
-
+from app.utils.resource_path import resource_path
 
 class ThemeManager:
 
@@ -19,8 +19,9 @@ class ThemeManager:
             print(f"[ThemeManager] Unknown theme: {theme_name}")
             return
 
-        base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-        path = os.path.join(base_dir, cls.THEMES[theme_name])
+        path = resource_path(
+            cls.THEMES[theme_name]
+        )
 
         print(f"[ThemeManager] Loading: {path}") 
 

@@ -36,8 +36,6 @@ class FileChangeHandler(FileSystemEventHandler):
         if not event.src_path.endswith(".txt"):
             return
 
-        print(f"[Watcher] Event detected: {event.src_path}")
-
         logger.info(
           f"Watcher detected change: "
            f"{event.src_path}"
@@ -59,8 +57,6 @@ class FileChangeHandler(FileSystemEventHandler):
         self.timer.start()
 
     def _trigger_callback(self):
-
-        print("[Watcher] Triggering callback after debounce")
 
         logger.info(
             "Watcher callback triggered"

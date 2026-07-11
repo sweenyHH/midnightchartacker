@@ -1,1 +1,1 @@
-theme=wow
+theme=light

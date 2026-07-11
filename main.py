@@ -4,12 +4,18 @@
 
 import sys
 import platform
-import traceback
 from PySide6.QtWidgets import QApplication
 from app.ui.main_window import MainWindow
 from app.ui.theme_manager import ThemeManager
 from app.storage.settings_storage import load_setting
 from app.utils.logger import logger
+from app.app_info import (
+    APP_NAME,
+    APP_VERSION,
+)
+from PySide6.QtGui import QIcon
+from app.utils.resource_path import resource_path
+
 
 # --------------------------------------------------
 # GLOBAL EXCEPTION HANDLER
@@ -52,6 +58,18 @@ def main():
 
     app = QApplication(sys.argv)
 
+    app.setWindowIcon(
+        QIcon(
+            str(
+                resource_path(
+                    "assets/icon.ico"
+                )
+            )
+        )
+    )
+
+    
+
 # start logging new session
     
     logger.info(
@@ -59,6 +77,14 @@ def main():
     )
     logger.info(
         "New application session started"
+    )
+
+    logger.info(
+        f"Application: {APP_NAME}"
+    )
+
+    logger.info(
+        f"Version: {APP_VERSION}"
     )
 
     logger.info(
