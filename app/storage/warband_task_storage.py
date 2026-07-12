@@ -1,7 +1,6 @@
-from pathlib import Path
+from app.utils.app_paths import get_data_dir
 
-TASK_FILE = Path("data") / "warband_tasks.txt"
-TASK_FILE.parent.mkdir(exist_ok=True)
+TASK_FILE = get_data_dir() / "warband_tasks.txt"
 
 def load_tasks():
     
