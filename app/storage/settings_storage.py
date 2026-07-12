@@ -1,9 +1,10 @@
-from pathlib import Path
+from app.utils.app_paths import get_data_dir
 
+SETTINGS_FILE = get_data_dir() / "settings.txt"
 
-SETTINGS_FILE = Path("data") / "settings.txt"
-SETTINGS_FILE.parent.mkdir(exist_ok=True)
-
+logger.info(
+    f"Settings file: {SETTINGS_FILE}"
+)
 
 def load_setting(key, default=None):
 
