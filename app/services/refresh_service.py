@@ -11,6 +11,9 @@
 
 
 from app.utils.logger import logger
+from app.services.warband_currency_service import (
+    get_warband_currency_totals
+)
 
 class RefreshService:
     """
@@ -21,7 +24,10 @@ class RefreshService:
     architecture refactor.
     """
 
-    def __init__(self):
+    def __init__(self, data_service):
+        # Service responsible for loading character data.
+        self.data_service = data_service
+
         # Prevent concurrent refresh operations.
         self._reload_running = False
 
@@ -39,3 +45,36 @@ class RefreshService:
     def finish_reload(self):
 
         self._reload_running = False
+
+    def refresh_data(self):
+        """
+        Reloads character data and returns
+        all information required by the UI.
+        """
+
+        logger.info(
+            "Refreshing application data"
+        )
+
+        self.data_service.load_data()
+
+        characters = (
+            self.data_service.get_characters()
+        )
+
+        currency_totals = (
+            get_warband_currency_totals(
+                characters
+            )
+        )
+
+        reputations = (
+            self.data_service.get_top_reputations()
+        )
+
+        return (
+            characters,
+            reputations,
+            currency_totals,
+        )
+

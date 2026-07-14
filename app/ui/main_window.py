@@ -30,7 +30,10 @@ class MainWindow(QMainWindow):
         logger.info("MainWindow initialized")
 
         self.data_service = DataService()
-        self.refresh_service = RefreshService()
+
+        self.refresh_service = RefreshService(
+            self.data_service
+        )
 
         self.table = CharacterTable()
         self.table.cellClicked.connect(self.open_character)
@@ -80,23 +83,21 @@ class MainWindow(QMainWindow):
 
         logger.info("Reloading all data")
 
-        self.data_service.load_data()
+        (
+            characters,
+            reputations,
+            currency_totals,
+        ) = self.refresh_service.refresh_data()
 
-        characters = self.data_service.get_characters()
-
-        currency_totals = (
-            get_warband_currency_totals(
-                characters
-            )
-        )
 
         logger.info(
         f"Loaded {len(characters)} characters"
         )
         
         self.table.load_characters(characters)
+
         self.top_panel.update_reputation(
-            self.data_service.get_top_reputations(),
+            reputations,
             currency_totals
         )
 
