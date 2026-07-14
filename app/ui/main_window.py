@@ -29,8 +29,6 @@ class MainWindow(QMainWindow):
             self.data_service
         )
 
-        self.refresh_service.refresh_requested.connect(self._update_ui)
-
         self.table = CharacterTable()
         self.table.cellClicked.connect(self.open_character)
 
@@ -65,8 +63,6 @@ class MainWindow(QMainWindow):
         default_folder = str(get_import_dir())
 
         self.data_service.set_folder(default_folder)
-
-        self.refresh_service.start_watcher(default_folder)
 
         self.reload_all()
 
@@ -218,26 +214,13 @@ class MainWindow(QMainWindow):
             self.show_list()
 
 # --------------------------------------------------
-        
-    def _update_ui(self):
-
-        logger.info(
-            "Watcher triggered UI update START"
-        )
-
-        self.reload_all()
-
-        logger.info(
-            "Watcher triggered UI update END"
-        )
-
+     
+ 
     def closeEvent(self, event):
 
         logger.info(
             "Application closing"
         )
-
-        self.refresh_service.stop_watcher()
 
         event.accept()
 

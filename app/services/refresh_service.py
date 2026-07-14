@@ -3,16 +3,13 @@
 # Responsibilities:
 # - Reload coordination
 # - Reload protection
-# - Watcher integration
 # - Selection preservation
-# - Refresh notifications
 #
 # The service remains UI-agnostic.
 
-from PySide6.QtCore import QObject, Signal
+from PySide6.QtCore import QObject
 
 from app.utils.logger import logger
-from app.utils.watcher import FolderWatcher
 from app.services.warband_currency_service import (
     get_warband_currency_totals
 )
@@ -42,11 +39,8 @@ class RefreshResult:
 
 
 class RefreshService(QObject):
-    """
-    Coordinates application refresh operations.
-    """
-
-    refresh_requested = Signal()
+  
+# Coordinates application refresh operations.
 
     def __init__(self, data_service):
         super().__init__()
@@ -156,33 +150,5 @@ class RefreshService(QObject):
         finally:
             self._reload_running = False
 
-    def start_watcher(self, folder):
-        """
-        Starts filesystem monitoring.
-        """
 
-        self.watcher = FolderWatcher(
-            folder,
-            self._handle_file_change,
-        )
 
-        self.watcher.start()
-
-    def stop_watcher(self):
-        """
-        Stops filesystem monitoring.
-        """
-
-        if hasattr(self, "watcher"):
-            self.watcher.stop()
-
-    def _handle_file_change(self):
-        """
-        Called when the import folder changes.
-        """
-
-        logger.info(
-            "RefreshService detected file change"
-        )
-
-        self.refresh_requested.emit()
