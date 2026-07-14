@@ -83,27 +83,32 @@ class MainWindow(QMainWindow):
 
         logger.info("Reloading all data")
 
-        (
-            characters,
-            reputations,
-            currency_totals,
-        ) = self.refresh_service.refresh_data()
-
+        result = (self.refresh_service.refresh_data(self.current_character))
 
         logger.info(
-        f"Loaded {len(characters)} characters"
+        f"Loaded {len(result.characters)} characters"
         )
         
-        self.table.load_characters(characters)
+        self.table.load_characters(result.characters)
+
 
         self.top_panel.update_reputation(
-            reputations,
-            currency_totals
+            result.reputations,
+            result.currency_totals,
         )
 
 # Refresh currently open detail view
-        if self.current_character is not None:
-            self.detail_view.set_character(self.current_character)
+
+        
+        self.current_character = (
+            result.selected_character
+        )
+
+        if result.selected_character is not None:
+            self.detail_view.set_character(
+                result.selected_character
+            )
+
 
 
 # --------------------------------------------------

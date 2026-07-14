@@ -15,6 +15,29 @@ from app.services.warband_currency_service import (
     get_warband_currency_totals
 )
 
+class RefreshResult:
+    """
+    Holds all data produced by a refresh operation.
+
+    This object is returned by RefreshService and
+    consumed by the UI layer.
+    """
+
+    def __init__(
+        self,
+        characters,
+        reputations,
+        currency_totals,
+        selected_character,
+    ):
+        self.characters = characters
+        self.reputations = reputations
+        self.currency_totals = currency_totals
+        self.selected_character = (
+            selected_character
+        )
+
+
 class RefreshService:
     """
     Coordinates application refresh operations.
@@ -46,7 +69,34 @@ class RefreshService:
 
         self._reload_running = False
 
-    def refresh_data(self):
+    def _find_refreshed_character(
+        self,
+        characters,
+        selected_character,
+    ):
+        """
+        Returns the freshly loaded character instance
+        matching the previously selected character.
+        """
+
+        if selected_character is None:
+            return None
+
+        selected_source_file = (
+            selected_character.source_file
+        )
+
+        for character in characters:
+            if (
+                character.source_file
+                == selected_source_file
+            ):
+                return character
+
+        return None
+
+
+    def refresh_data(self, selected_character=None,):
         """
         Reloads character data and returns
         all information required by the UI.
@@ -72,9 +122,16 @@ class RefreshService:
             self.data_service.get_top_reputations()
         )
 
-        return (
-            characters,
-            reputations,
-            currency_totals,
+        refreshed_character = (
+            self._find_refreshed_character(
+                characters,
+                selected_character,
+            )
         )
 
+        return RefreshResult(
+            characters=characters,
+            reputations=reputations,
+            currency_totals=currency_totals,
+            selected_character=refreshed_character,
+        )
