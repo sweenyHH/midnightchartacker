@@ -1,3 +1,7 @@
+from pathlib import Path
+from app.utils.app_paths import get_import_dir
+from app.utils.logger import logger
+
 from app.storage.user_data_storage import (
     load_section,
     save_section,
@@ -67,4 +71,43 @@ def set_task_state(
         progress,
     )
 
+def remove_task_from_all_characters(task_name):
+    """
+    Removes a deleted warband task from all
+    character progress files.
+    """
 
+    affected_characters = 0
+
+    for file_path in get_import_dir().glob("*.txt"):
+
+        class CharacterRef:
+
+            def __init__(self, source_file):
+                self.source_file = source_file
+
+        character = CharacterRef(
+            str(file_path)
+        )
+
+        progress = load_progress(character)
+
+        if task_name not in progress:
+            continue
+
+        del progress[task_name]
+
+        save_progress(
+            character,
+            progress,
+        )
+
+        affected_characters += 1
+
+    logger.info(
+        f"Removed task '{task_name}' "
+        f"from {affected_characters} "
+        f"character files"
+    )
+
+    return affected_characters

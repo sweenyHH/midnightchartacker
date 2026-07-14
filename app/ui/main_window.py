@@ -11,9 +11,6 @@ from app.storage.character_file_storage import (
 )
 from app.utils.logger import logger
 from app.utils.app_paths import get_import_dir
-from app.services.warband_currency_service import (
-    get_warband_currency_totals
-)
 from app.services.refresh_service import RefreshService
 
 class MainWindow(QMainWindow):

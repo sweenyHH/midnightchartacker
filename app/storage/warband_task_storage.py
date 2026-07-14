@@ -1,4 +1,5 @@
 from app.utils.app_paths import get_data_dir
+from app.storage.warband_task_progress_storage import remove_task_from_all_characters
 
 TASK_FILE = get_data_dir() / "warband_tasks.txt"
 
@@ -51,8 +52,8 @@ def add_task(task_name):
 
 
 def delete_task(task_name):
-    
-# Remove a task.
+
+# Remove a task and all associated progress.
 
     tasks = load_tasks()
 
@@ -62,5 +63,9 @@ def delete_task(task_name):
     tasks.remove(task_name)
 
     save_tasks(tasks)
+
+    remove_task_from_all_characters(
+        task_name
+    )
 
     return True
