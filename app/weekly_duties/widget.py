@@ -43,11 +43,6 @@ class WeeklyDutiesWidget(QWidget):
         self.checkboxes = []
         self.row_labels = []
 
-# Debounced saving
-        self.save_timer = QTimer(self)
-        self.save_timer.setSingleShot(True)
-        self.save_timer.timeout.connect(self._save)
-
 # Style checkboxes (green when checked)
         self.setStyleSheet(f"""
         QCheckBox::indicator {{
@@ -65,10 +60,6 @@ class WeeklyDutiesWidget(QWidget):
             background: transparent;
         }}
         """)
-
-# --------------------------------------------------
-    def _schedule_save(self):
-        self.save_timer.start(3000)
 
 # --------------------------------------------------
     def _save(self):
@@ -219,4 +210,4 @@ class WeeklyDutiesWidget(QWidget):
             for cb in boxes:
                 cb.setChecked(False)
 
-        self._schedule_save()
+        self._save()

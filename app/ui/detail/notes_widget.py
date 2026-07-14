@@ -83,7 +83,7 @@ class NotesWidget(QWidget):
 
     def _schedule_save(self):
 
-        self.save_timer.start(3000)
+        self.save_timer.start(1000)
 
     def _save_notes(self):
 

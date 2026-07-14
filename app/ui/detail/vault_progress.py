@@ -53,12 +53,6 @@ class VaultProgressWidget(QWidget):
         self.clear_btn.clicked.connect(self.clear_all)
         self.layout.addWidget(self.clear_btn)
 
-
-# Debounced saving
-        self.save_timer = QTimer(self)
-        self.save_timer.setSingleShot(True)
-        self.save_timer.timeout.connect(self._save)
-
         self.current_file = None
 
 # --------------------------------------------------
@@ -90,14 +84,7 @@ class VaultProgressWidget(QWidget):
         for field in self.fields.values():
             field.setText("")
 
-        self._schedule_save()
-
-
-# --------------------------------------------------
-# DEBOUNCED SAVE
-# --------------------------------------------------
-    def _schedule_save(self):
-        self.save_timer.start(3000)
+        self._save()
 
 # --------------------------------------------------
 # LOAD (USER BLOCK)
