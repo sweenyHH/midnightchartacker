@@ -5,7 +5,7 @@ A desktop companion for **World of Warcraft** players that helps track character
 Midnight Character Tracker combines imported character data with user-managed tracking features and provides a clean overview of your entire roster in a single application.
 
 <p align="center">
-  mode.png"
+  <img src="docs/screenshots/Mainwindow_darkmode.png"
        alt="Midnight Character Tracker - Dark Mode"
        width="900">
 </p>
