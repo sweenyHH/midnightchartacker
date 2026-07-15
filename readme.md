@@ -4,6 +4,12 @@ A desktop companion for **World of Warcraft** players that helps track character
 
 Midnight Character Tracker combines imported character data with user-managed tracking features and provides a clean overview of your entire roster in a single application.
 
+<p align="center">
+  mode.png"
+       alt="Midnight Character Tracker - Dark Mode"
+       width="900">
+</p>
+
 The character data export needs to be done with the Addon CharacterExport , which can be downloaded here: [https://www.curseforge.com/wow/addons/characterexport](https://www.curseforge.com/wow/addons/characterexport)
 
 (The Addon CharacterExport is NOT created or maintained by me! Kudos to the Author Sitttar for his work.)
