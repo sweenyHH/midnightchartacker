@@ -7,7 +7,6 @@ from PySide6.QtWidgets import (
     QGridLayout,
     QFrame,
 )
-from PySide6.QtCore import Qt
 
 from PySide6.QtCore import Qt, Signal
 
@@ -79,7 +78,7 @@ class TopPanel(QWidget):
 # --------------------------------------------------
 # UPDATE METHOD
 # --------------------------------------------------
-    def update_reputation(self, reputation_list, currency_totals=None,):
+    def update_reputation(self, reputation_list, currency_totals=None):
 
         if currency_totals is None:
             currency_totals = {}
@@ -132,6 +131,7 @@ class TopPanel(QWidget):
 # RENOWN BLOCK
 # -------------------------------
         renown_widget = QFrame()
+        
         renown_widget.setObjectName(
             "topPanelFrame"
         )
@@ -140,6 +140,7 @@ class TopPanel(QWidget):
         )
 
         renown_layout = QVBoxLayout(renown_widget)
+        renown_layout.setAlignment(Qt.AlignTop)
 
         renown_title = QLabel("<b>Renown</b>")
         renown_title.setAlignment(Qt.AlignCenter)
@@ -180,7 +181,7 @@ class TopPanel(QWidget):
         renown_layout.addLayout(
             renown_grid
         )
-        print("Built renown block")
+
 
 # -------------------------------
 # WARBAND RESOURCES BLOCK
@@ -198,6 +199,7 @@ class TopPanel(QWidget):
         currency_layout = QVBoxLayout(
             currency_widget
         )
+        currency_layout.setAlignment(Qt.AlignTop)
 
         currency_title = QLabel(
             "<b>Warband Resources</b>"
@@ -261,14 +263,12 @@ class TopPanel(QWidget):
                     QLabel(value_text),
                     row,
                     col_offset + 1
-                )    
-
-
+                )
 
         currency_layout.addLayout(
             currency_grid
         )
-
+        
 # -------------------------------
 # FINAL LAYOUT
 # -------------------------------

@@ -94,6 +94,7 @@ class OverviewTab(QWidget):
         self.general_layout.addWidget(
             self.other_currencies_label
         )
+        self.general_layout.addStretch()
 
         self.left_column = QVBoxLayout()
         self.left_column.addWidget(self.currency_table)
