@@ -1,0 +1,585 @@
+== Location ==
+Zone: Leerensturm
+Subzone: Heulender Grat
+Map: Leerensturm
+Map ID: 2405
+Parent Map: Quel'Thalas
+Parent Map ID: 2537
+Coordinates: 51.6, 71.0
+Hearthstone Location: Wanderers Ruh'
+
+Character Stats:
+Character: Arrows-Earthen Ring
+Faction: Alliance
+Level: 90
+Race: Haranir
+Class: Jägerin
+Specialization: Tierherrschaft (DAMAGER)
+Primary Stat: Agility
+Average Item Level: 251.25
+Equipped Item Level: 250.62
+PvP Item Level: 251.25
+Health: n/a/354539
+Fokus: n/a/100
+XP: 0/100000000
+XP To Level: 100000000
+XP Progress: 0%
+Armor: 1019
+== Primary Attributes ==
+Strength: 378
+Agility: 1616
+Stamina: 15348
+Intellect: 509
+Attack Power: 1616
+== Combat Ratings ==
+Kritische Trefferchance: 486 rating / 24.57%
+Tempo: 697 rating / 18.16%
+Meisterschaft: 289 rating / 32.84%
+Vielseitigkeit: 266 rating / 4.93%
+Lebensraub: 0 rating / 0%
+Geschwindigkeit: 0 rating / 0%
+Vermeidung: 45 rating / 1.22%
+
+Currencies:
+Gold: 1079689g 60s 42c
+Currency Count: 47
+
+== Midnight ==
+Anglerperlen (ID: 3373) - Quantity: 131
+Feldauszeichnung (ID: 3405) - Quantity: 44
+Leerenlichtmergel (ID: 3316) - Quantity: 27520
+Splitter von Dundun (ID: 3376) - Quantity: 8/8 - Weekly: 0/8
+Tatkraft des Kürschnereifachmanns (ID: 3265) - Quantity: 295
+Tatkraft des Lederverarbeitungsfachmanns (ID: 3263) - Quantity: 140
+Überrest der Pein (ID: 3392) - Quantity: 1492
+Übersprudelndes Arkana (ID: 3379) - Quantity: 1517
+Ungetrübter Überfluss (ID: 3377) - Quantity: 5400
+Unverseuchte Leerenprobe (ID: 3400) - Quantity: 1 - Total Earned: 2
+
+== Dungeon und Schlachtzug ==
+Zeitverzerrtes Abzeichen (ID: 1166) - Quantity: 3940
+
+== Spieler gegen Spieler ==
+Blutige Abzeichen (ID: 2123) - Quantity: 150 - Total Earned: 150
+Ehre (ID: 1792) - Quantity: 500/15000
+Eroberung (ID: 1602) - Quantity: 0
+
+== Verschiedenes ==
+Abzeichen: Reiter v. Azeroth (ID: 2588) - Quantity: 13
+Bronzedrachenfeierabzeichen (ID: 3100) - Quantity: 0
+Gemeinschaftscoupons (ID: 3363) - Quantity: 678/2000
+Gewinnlos des Dunkelmond-Jahrmarkts (ID: 515) - Quantity: 20
+Händlerdevisen (ID: 2032) - Quantity: 3880
+
+== Shadowlands ==
+Chiffren der Ersten (ID: 1979) - Quantity: 1480
+Dankbare Gabe (ID: 1885) - Quantity: 135
+Durchfluteter Rubin (ID: 1820) - Quantity: 100/100
+Katalogisierte Forschung (ID: 1931) - Quantity: 5365
+Kosmischer Flux (ID: 2009) - Quantity: 43713
+Reservoiranima (ID: 1813) - Quantity: 39511/200000
+Seelenasche (ID: 1828) - Quantity: 28531
+Seelenglut (ID: 1906) - Quantity: 9203
+Stygia (ID: 1767) - Quantity: 764
+Stygische Glut (ID: 1977) - Quantity: 281
+Turmwissen (ID: 1904) - Quantity: 870/3510 - Total Earned: 1160
+
+== Battle for Azeroth ==
+Kämpfergold (ID: 1299) - Quantity: 960/5000
+Kriegsressourcen (ID: 1560) - Quantity: 615
+
+== Legion ==
+Blindes Auge (ID: 1149) - Quantity: 67/5000
+Erweckende Essenz (ID: 1533) - Quantity: 483
+Kriegsvorräte der Legionsrichter (ID: 1342) - Quantity: 39/1000
+Kuriose Münze (ID: 1275) - Quantity: 3
+Nethersplitter (ID: 1226) - Quantity: 748
+Ordensressourcen (ID: 1220) - Quantity: 3096
+Uraltes Mana (ID: 1155) - Quantity: 76/300
+Verschleierter Argunit (ID: 1508) - Quantity: 935/2000
+
+== Warlords of Draenor ==
+Artefaktfragment (ID: 944) - Quantity: 0/1000
+Garnisonsressourcen (ID: 824) - Quantity: 15/10000
+
+== Mists of Pandaria ==
+Geringes Amulett des Glücks (ID: 738) - Quantity: 51
+
+== Cataclysm ==
+Partikel der Dunkelheit (ID: 614) - Quantity: 5
+
+== Burning Crusade ==
+Geistsplitter (ID: 1704) - Quantity: 9/200
+
+== Unbenutzt ==
+Flugsteine (ID: 2245) - Quantity: 0/2000 - Unused
+Parakausale Flocken (ID: 2594) - Quantity: 1956 - Unused
+
+Bags:
+== Backpack (20/20) ==
+[Ruhestein] x1 [ID: 6948, iLvl: 1, Q: 1]
+[Mini-B3U13RÄUB-R] x3 [ID: 244193, iLvl: 1, Q: 3]
+[Kampfhaustierbandage] x38 [ID: 86143, iLvl: 10, Q: 2]
+[Besonders gewöhnliches Ei] x1 [ID: 204363, iLvl: 1, Q: 3]
+[Kristallharzfragment] x5 [ID: 260531, iLvl: 1, Q: 2]
+[Entschärfte Falle] x2 [ID: 255825, iLvl: 1, Q: 2]
+[Kyrennas Khadgarimitat] x1 [ID: 254673, iLvl: 1, Q: 1]
+[Lady Marilins Arkweinreserve] x1 [ID: 254384, iLvl: 1, Q: 1]
+[Kafa'kota-Beere] x16 [ID: 81054, iLvl: 1, Q: 1]
+[Mondstein der Urahnen] x6 [ID: 21745, iLvl: 1, Q: 1]
+[Glücksraketenbündel] x3 [ID: 21744, iLvl: 1, Q: 1]
+[Strengschnüffelnde Suppe für Niffen] x3 [ID: 204790, iLvl: 21, Q: 1]
+[Geisterblumentee mit Sonnenfrucht] x1 [ID: 249689, iLvl: 1, Q: 2]
+[Mittagessen vom Hotel Inkontinental] x2 [ID: 233118, iLvl: 23, Q: 2]
+[Zwielichtgewürzter Barsch] x2 [ID: 212492, iLvl: 1, Q: 1]
+[Höhlenbewohnerschmaus] x4 [ID: 212242, iLvl: 23, Q: 1]
+[Bewahrung des Lichts] x1 [ID: 241287, iLvl: 278, Q: 1]
+[Lichtverschmolzener Manatrank] x1 [ID: 241301, iLvl: 278, Q: 1]
+[Trank der Böen] x1 [ID: 191396, iLvl: 21, Q: 1]
+[Erheblicher Manatrank] x1 [ID: 13444, iLvl: 15, Q: 1]
+
+== Bag 1 (36/36) ==
+[Erheblicher Heiltrank] x1 [ID: 13446, iLvl: 12, Q: 1]
+[Überragender Heiltrank] x1 [ID: 3928, iLvl: 12, Q: 1]
+[Heiltrank] x2 [ID: 929, iLvl: 10, Q: 1]
+[Geringer Manatrank] x1 [ID: 3385, iLvl: 10, Q: 1]
+[Mächtiger Heiltrank] x95 [ID: 258138, iLvl: 1, Q: 1]
+[Erdverkrusteter Edelstein] x1 [ID: 223951, iLvl: 1, Q: 1]
+[Feuerflasche der Vulpera] x1 [ID: 156570, iLvl: 1, Q: 1]
+[Ahnenmooshörner] x1 [ID: 249648, iLvl: 250, Q: 4]
+[Blätterdach des Wurzelsprechers] x1 [ID: 256999, iLvl: 224, Q: 2]
+[Ahnenmoostaster] x1 [ID: 249647, iLvl: 250, Q: 4]
+[Hohler Ring] x1 [ID: 226245, iLvl: 79, Q: 2]
+[Andenken des ruhmreichen Kreuzfahrers] x1 [ID: 251792, iLvl: 250, Q: 4]
+[Versiegelte Chaosurne] x1 [ID: 251787, iLvl: 250, Q: 4]
+[Buchband des Leerenschnitters] x1 [ID: 251785, iLvl: 250, Q: 4]
+[Schneller Smaragd] x1 [ID: 213488, iLvl: 89, Q: 3]
+[Vielseitiger Saphir] x1 [ID: 213476, iLvl: 89, Q: 3]
+[Rezept: Furiose Flora] x1 [ID: 263473, iLvl: 1, Q: 3]
+[Mysteriöse Himmelssplitter] x55 [ID: 255826, iLvl: 1, Q: 3]
+[Geringe Rune der entstellten Gliedmaße] x1 [ID: 239088, iLvl: 80, Q: 3]
+[Ring - Schimmernder kritischer Trefferwert] x1 [ID: 223657, iLvl: 80, Q: 3]
+[Strahlende Essenz] x1 [ID: 210494, iLvl: 76, Q: 4]
+[Titanenemitter] x1 [ID: 225888, iLvl: 1, Q: 1]
+[Palawltars Kodex der dimensionalen Struktur] x1 [ID: 225216, iLvl: 1, Q: 1]
+[Münze der Urahnen] x10 [ID: 21100, iLvl: 1, Q: 1]
+[Sanktuario-Schachspielkollektion] x1 [ID: 265804, iLvl: 1, Q: 3]
+[Elementarpartikel] x2 [ID: 202071, iLvl: 21, Q: 1]
+[Essenztauscher] x1 [ID: 138393, iLvl: 15, Q: 3]
+[Muschelpfeife] x1 [ID: 203708, iLvl: 5, Q: 1]
+[Gigantische Traumsaat] x4 [ID: 208047, iLvl: 1, Q: 4]
+[Essenz des Holzes] x3 [ID: 269010, iLvl: 1, Q: 3]
+[Sturmarionkern] x23 [ID: 246951, iLvl: 1, Q: 3]
+[Feuerscheinrubin] x3 [ID: 224642, iLvl: 1, Q: 3]
+[Strahlendes Überbleibsel] x116 [ID: 206350, iLvl: 1, Q: 3]
+[Neltharions Geschenkmarke] x2 [ID: 203701, iLvl: 1, Q: 3]
+[Uraltes Gewölbeartefakt] x13 [ID: 201411, iLvl: 1, Q: 3]
+[Ehrenabzeichen] x3 [ID: 137642, iLvl: 1, Q: 3]
+
+== Bag 2 (23/34) ==
+[Dunkles Partikel] x40 [ID: 267051, iLvl: 1, Q: 2]
+[Überquellendes Leuchtfeuer] x1 [ID: 252607, iLvl: 1, Q: 2]
+[Latentes Arkana] x57 [ID: 242241, iLvl: 1, Q: 2]
+[Ein zusammengerolltes Kissen] x1 [ID: 257054, iLvl: 1, Q: 1]
+[Ein verlorenes Jagdmesser] x1 [ID: 257024, iLvl: 1, Q: 1]
+[Ein zerfledderter Ball] x1 [ID: 256882, iLvl: 1, Q: 1]
+[Glücksbringer] x47 [ID: 253750, iLvl: 1, Q: 1]
+[Leerenbesudelte Überreste] x23 [ID: 245937, iLvl: 1, Q: 1]
+[Robustes Medaillon] x1 [ID: 224274, iLvl: 1, Q: 1]
+[Hölzerne Figur] x1 [ID: 224273, iLvl: 1, Q: 1]
+[Kalzifiziertes Tagebuch] x1 [ID: 224272, iLvl: 1, Q: 1]
+[Elfenbeinzunderkasten] x1 [ID: 224266, iLvl: 1, Q: 1]
+[Polierter Haustierglücksbringer] x223 [ID: 163036, iLvl: 1, Q: 1]
+[Feine Leerenrückstände] x2 [ID: 260638, iLvl: 24, Q: 0]
+[Stellarvortexrückstände] x6 [ID: 260659, iLvl: 24, Q: 0]
+[Edler leerengehärteter Balg] x2 [ID: 238625, iLvl: 1, Q: 3]
+[Helles, zottiges Fell] x1 [ID: 260606, iLvl: 24, Q: 0]
+[Leerenstaubrückstände] x1 [ID: 260615, iLvl: 24, Q: 0]
+[Kürschnermesser] x1 [ID: 7005, iLvl: 2, Q: 1]
+[Triumphales Säckchen mit Morgenlichtwappen des Champions] x8 [ID: 246751, iLvl: 24, Q: 4]
+[Befleckte Morgenlichthellebarde] x1 [ID: 258955, iLvl: 220, Q: 2]
+[Elementarschutt] x1 [ID: 260650, iLvl: 24, Q: 0]
+[Farblose Steine] x1 [ID: 260669, iLvl: 24, Q: 0]
+
+== Bag 3 (0/32) ==
+[Empty]
+
+== Bag 4 (0/34) ==
+[Empty]
+
+== Reagent Bag (9/34) ==
+[Funke der Strahlen] x9 [ID: 232875, iLvl: 24, Q: 4]
+[Händchen fürs Kunsthandwerk] x680 [ID: 210814, iLvl: 21, Q: 3]
+[Verfluchter Geisterfisch] x1 [ID: 220152, iLvl: 21, Q: 3]
+[Leerengehärtete Schuppen] x16 [ID: 238513, iLvl: 23, Q: 1]
+[Leerengehärtete Schuppen] x6 [ID: 238514, iLvl: 23, Q: 1]
+[Schnitzzahn] x1 [ID: 238523, iLvl: 23, Q: 2]
+[Pflanzenprotein] x1 [ID: 242640, iLvl: 23, Q: 1]
+[Leerengehärtetes Leder] x4 [ID: 238511, iLvl: 23, Q: 1]
+[Netherstoff] x9 [ID: 21877, iLvl: 11, Q: 1]
+
+Bank:
+[Bank data unavailable - open your personal bank at least once to build cache.]
+
+Equipment:
+== Head ==
+[Maul des urzeitlichen Wächters] x1 [ID: 249988, iLvl: 250, Q: 4]
+- Rarity: Epic
+- Item Level: 250
+- Durability: 100/100
+- Type: Rüstung / Kette
+- Equip Slot: Head
+- Item String: item:249988::::::::90:253::108:5:13338:43:12667:13575:12782::::::
+- Bonus IDs: 13338, 43, 12667, 13575, 12782
+- Binding: Bind on Use
+- AGI: 86
+- STA: 1085
+- ARMOR: 130
+- CRIT: 89
+- HASTE: 44
+- Unzerstörbar: 57
+
+== Neck ==
+[Herzschnuranhänger der Amani] x1 [ID: 265739, iLvl: 246, Q: 4]
+- Rarity: Epic
+- Item Level: 246
+- Type: Neck
+- Equip Slot: Neck
+- Item String: item:265739::::::::90:253::42:3:12785:6652:13668:1:28:4240:::::
+- Bonus IDs: 12785, 6652, 13668
+- STA: 580
+- CRIT: 97
+- HASTE: 108
+- Prismatischer Sockel: 1
+
+== Shoulder ==
+[Trophäen des urzeitlichen Wächters] x1 [ID: 249986, iLvl: 243, Q: 4]
+- Rarity: Epic
+- Item Level: 243
+- Durability: 72/100
+- Type: Rüstung / Kette
+- Equip Slot: Shoulder
+- Item String: item:249986::::::::90:253::4:5:12780:13332:13340:6652:13574::::::
+- Bonus IDs: 12780, 13332, 13340, 6652, 13574
+- Binding: Bind on Use
+- AGI: 61
+- STA: 743
+- ARMOR: 115
+- HASTE: 64
+- VERS: 32
+
+== Back ==
+[Sprießender Mykomantel] x1 [ID: 249619, iLvl: 250, Q: 4]
+- Rarity: Epic
+- Item Level: 250
+- Type: Back
+- Equip Slot: Back
+- Item String: item:249619::::::::90:253::109:3:12786:6652:13577:1:28:6011:::::
+- Bonus IDs: 12786, 6652, 13577
+- Binding: Bind on Pickup
+- AGI: 48
+- STA: 610
+- ARMOR: 47
+- MAST: 47
+- VERS: 28
+
+== Chest ==
+[Schuppenplatte des urzeitlichen Wächters] x1 [ID: 249991, iLvl: 259, Q: 4]
+- Rarity: Epic
+- Item Level: 259
+- Durability: 104/165
+- Type: Rüstung / Kette
+- Equip Slot: Chest
+- Item String: item:249991::::::::90:253::108:5:6652:12793:13336:13575:3144::::::
+- Bonus IDs: 6652, 12793, 13336, 13575, 3144
+- Binding: Bind on Use
+- AGI: 94
+- STA: 1219
+- ARMOR: 182
+- CRIT: 42
+- HASTE: 98
+
+== Shirt ==
+[Empty]
+
+== Tabard ==
+[Wappenrock der Drachenschuppenexpedition] x1 [ID: 198730, iLvl: 1, Q: 4]
+- Rarity: Epic
+- Item Level: 1
+- Type: Tabard
+- Equip Slot: Tabard
+- Item String: item:198730::::::::90:253::11::1:28:2424:::::
+
+== Wrist ==
+[Ahnenmoosbänder] x1 [ID: 249652, iLvl: 250, Q: 4]
+- Rarity: Epic
+- Item Level: 250
+- Durability: 39/55
+- Type: Rüstung / Kette
+- Equip Slot: Wrist
+- Item String: item:249652::::::::90:253::109:4:12786:6652:12667:13577:1:28:6014:::::
+- Bonus IDs: 12786, 6652, 12667, 13577
+- Binding: Bind on Use
+- AGI: 48
+- STA: 610
+- ARMOR: 87
+- HASTE: 31
+- VERS: 44
+
+== Hands ==
+[Klauenschützer des urzeitlichen Wächters] x1 [ID: 249989, iLvl: 250, Q: 4]
+- Rarity: Epic
+- Item Level: 250
+- Durability: 38/55
+- Type: Rüstung / Kette
+- Equip Slot: Hands
+- Item String: item:249989::::::::90:253::109:5:6652:12786:13337:13574:3135::::::
+- Bonus IDs: 6652, 12786, 13337, 13574, 3135
+- Binding: Bind on Use
+- AGI: 65
+- STA: 814
+- ARMOR: 98
+- CRIT: 30
+- MAST: 70
+
+== Waist ==
+[Gürtel des Hara'tibeschützers] x1 [ID: 263268, iLvl: 246, Q: 4]
+- Rarity: Epic
+- Item Level: 246
+- Durability: 38/55
+- Type: Rüstung / Kette
+- Equip Slot: Waist
+- Item String: item:263268::::::::90:253::42:3:13577:12785:12667:1:28:4240:::::
+- Bonus IDs: 13577, 12785, 12667
+- Binding: Bind on Use
+- AGI: 62
+- STA: 773
+- ARMOR: 96
+- CRIT: 47
+- MAST: 51
+
+== Legs ==
+[Beinschützer des urzeitlichen Wächters] x1 [ID: 249987, iLvl: 250, Q: 4]
+- Rarity: Epic
+- Item Level: 250
+- Durability: 81/120
+- Type: Rüstung / Kette
+- Equip Slot: Legs
+- Item String: item:249987::::::::90:253::109:5:6652:12786:13339:13575:3135::::::
+- Bonus IDs: 6652, 12786, 13339, 13575, 3135
+- Binding: Bind on Use
+- AGI: 86
+- STA: 1085
+- ARMOR: 152
+- CRIT: 89
+- MAST: 44
+
+== Feet ==
+[Treter des Dunkelstreifers] x1 [ID: 249377, iLvl: 256, Q: 4]
+- Rarity: Epic
+- Item Level: 256
+- Durability: 75/80
+- Type: Rüstung / Kette
+- Equip Slot: Feet
+- Item String: item:249377::::::::90:253::3:4:6652:13577:13333:12788:1:28:4240:::::
+- Bonus IDs: 6652, 13577, 13333, 12788
+- Binding: Bind on Use
+- AGI: 68
+- STA: 880
+- ARMOR: 112
+- CRIT: 73
+- HASTE: 30
+
+== Finger 1 ==
+[Schlaufe des Waldjägers] x1 [ID: 256985, iLvl: 240, Q: 4]
+- Rarity: Epic
+- Item Level: 240
+- Type: Finger
+- Equip Slot: Finger
+- Item String: item:256985::::::::90:253::36:3:12779:6652:13668:1:28:3321:::::
+- Bonus IDs: 12779, 6652, 13668
+- STA: 536
+- HASTE: 109
+- VERS: 82
+- Prismatischer Sockel: 1
+
+== Finger 2 ==
+[Blühender Laubring] x1 [ID: 249623, iLvl: 259, Q: 4]
+- Rarity: Epic
+- Item Level: 259
+- Type: Finger
+- Equip Slot: Finger
+- Item String: item:249623::::::::90:253::110:3:12793:6652:13668:1:28:6014:::::
+- Bonus IDs: 12793, 6652, 13668
+- STA: 685
+- HASTE: 158
+- MAST: 77
+- Prismatischer Sockel: 1
+
+== Trinket 1 ==
+[Tiegel der unsteten Energien] x1 [ID: 264507, iLvl: 246, Q: 4]
+- Rarity: Epic
+- Item Level: 246
+- Type: Trinket
+- Equip Slot: Trinket
+- Item String: item:264507::::::::90:253::42:1:12785:1:28:4240:::::
+- Bonus IDs: 12785
+- AGI: 79
+
+== Trinket 2 ==
+[Waldwakrapuku] x1 [ID: 251784, iLvl: 259, Q: 4]
+- Rarity: Epic
+- Item Level: 259
+- Type: Trinket
+- Equip Slot: Trinket
+- Item String: item:251784::::::::90:253::110:3:12793:6652:40:1:28:6014:::::
+- Bonus IDs: 12793, 6652, 40
+- AGI: 89
+- Vermeidung: 45
+
+== Main Hand ==
+[Schwerer Dornenbolzenwerfer] x1 [ID: 262732, iLvl: 253, Q: 4]
+- Rarity: Epic
+- Item Level: 253
+- Durability: 60/120
+- Type: Waffe / Armbrüste
+- Equip Slot: Ranged
+- Item String: item:262732::::::::90:253::110:2:6652:12787:1:28:6018:::::
+- Bonus IDs: 6652, 12787
+- Binding: Bind Type: 18
+- AGI: 89
+- STA: 1128
+- HASTE: 55
+- VERS: 80
+- DPS: 66.67
+
+== Off Hand ==
+[Empty]
+
+Reputations:
+Amanistamm (Renown 14) - Progress: 1955/2500
+Arathi von Heilsturz (Renown 25) - Progress: 0/2500
+Beutejagd: Saison 1 (Renown 2) - Progress: 3000/4000
+Der Bund von K'aresh (Renown 9) - Progress: 80/2500
+Der Konvent der Tiefen (Renown 15) - Progress: 2327/2500
+Die Durchtrennten Fäden (Renown 17) - Progress: 1250/2500
+Die Kartelle von Lorenhall (Renown 6) - Progress: 2480/2500
+Die Singularität (Renown 12) - Progress: 1095/2500
+Die Strahlen der Flamme (Renown 1) - Progress: 800/2500
+Drachenschuppenexpedition (Renown 25) - Progress: 0/2500
+Fasshaxes Besatzung (Renown 1) - Progress: 15/2500
+Garbagio Treueclub (Renown 9) - Progress: 0/2500
+Hara'ti (Renown 17) - Progress: 640/2500
+Hof in Silbermond (Renown 19) - Progress: 950/2500
+Niffen von Loamm (Renown 16) - Progress: 85/2500
+Rat von Dornogal (Renown 18) - Progress: 1720/2500
+Ritualstätten (Renown 1) - Progress: 849/2500
+Tiefen: Saison 1 (Renown 4) - Progress: 2305/4200
+Tiefen: Saison 2 (Renown 2) - Progress: 2534/4200
+Tiefen: Saison 3 (Renown 3) - Progress: 1412/4200
+Traumwächter (Renown 20) - Progress: 0/2500
+Tuskarr von Iskaara (Renown 30) - Progress: 0/2500
+Valdrakkenabkommen (Renown 30) - Progress: 0/2500
+Vandalen der Manaschmiede (Renown 8) - Progress: 500/2500
+Zentauren der Maruuk (Renown 25) - Progress: 0/2500
+7. Legion (Freundlich) - Value: 3010 (3000-9000) - Progress: 10/6000
+Ankoaner der Meeresklinge (Neutral) - Value: 247 (0-3000) - Progress: 247/3000
+Archive von Azeroth (Freundlich) - Value: 42000 (42000-42000) - Progress: 0/0
+Argentumkreuzzug (Neutral) - Value: 0 (0-3000) - Progress: 0/3000
+Armee des Lichts (Wohlwollend) - Value: 9060 (9000-21000) - Progress: 60/12000
+Ausgestoßene Arakkoa (Neutral) - Value: 0 (0-3000) - Progress: 0/3000
+Beutebucht (Neutral) - Value: 500 (0-3000) - Progress: 500/3000
+Bilgewasserkartell (Freundlich) - Value: 3200 (3000-9000) - Progress: 200/6000
+Bizmos Boxbar (Neutral) - Value: 3000 (3000-4000) - Progress: 0/1000
+Blutritter (Neutral) - Value: 1500 (1500-2000) - Progress: 0/500
+Brann Bronzebart (Ehrfürchtig) - Value: 31600 (24500-31600) - Progress: 7100/7100
+Brut Nozdormus (Hasserfüllt) - Value: -38583 (-42000--6000) - Progress: 3417/36000
+Dampfdruckkartell (Freundlich) - Value: 3200 (3000-9000) - Progress: 200/6000
+Darnassus (Freundlich) - Value: 6856 (3000-9000) - Progress: 3856/6000
+Das Konsortium (Freundlich) - Value: 8326 (3000-9000) - Progress: 5326/6000
+Das Violette Auge (Wohlwollend) - Value: 10421 (9000-21000) - Progress: 1421/12000
+Das Äscherne Verdikt (Wohlwollend) - Value: 12694 (9000-21000) - Progress: 3694/12000
+Der Archivarskodex (Respektvoll) - Value: 41000 (41000-41000) - Progress: 0/0
+Der Argusvorstoß (Freundlich) - Value: 4300 (3000-9000) - Progress: 1300/6000
+Der General (Wohlwollend) - Value: 12500 (12500-15000) - Progress: 0/2500
+Der Hochbergstamm (Freundlich) - Value: 5895 (3000-9000) - Progress: 2895/6000
+Der Irdene Ring (Freundlich) - Value: 8070 (3000-9000) - Progress: 5070/6000
+Der Schwarze Prinz (Neutral) - Value: 2800 (0-3000) - Progress: 2800/3000
+Der Silberbund (Neutral) - Value: 2231 (0-3000) - Progress: 2231/3000
+Der Wesir (Wohlwollend) - Value: 14584 (12500-15000) - Progress: 2084/2500
+Der Wyrmruhpakt (Neutral) - Value: 0 (0-3000) - Progress: 0/3000
+Die Aufgestiegenen (Respektvoll) - Value: 36612 (21000-42000) - Progress: 15612/21000
+Die Eingeschworenen (Neutral) - Value: 1155 (0-3000) - Progress: 1155/3000
+Die Erleuchteten (Ehrfürchtig) - Value: 42000 (42000-42000) - Progress: 0/0
+Die Exodar (Freundlich) - Value: 5956 (3000-9000) - Progress: 2956/6000
+Die Frosterben (Neutral) - Value: 2225 (0-3000) - Progress: 2225/3000
+Die Himmlischen Erhabenen (Neutral) - Value: 1000 (0-3000) - Progress: 1000/3000
+Die Kalu'ak (Neutral) - Value: 0 (0-3000) - Progress: 0/3000
+Die Klaxxi (Neutral) - Value: 1000 (0-3000) - Progress: 1000/3000
+Die Legionsrichter (Freundlich) - Value: 3260 (3000-9000) - Progress: 260/6000
+Die Seher (Neutral) - Value: 0 (0-3000) - Progress: 0/3000
+Die Sha'tar (Freundlich) - Value: 5710 (3000-9000) - Progress: 2710/6000
+Die Sturmwacht (Freundlich) - Value: 5600 (3000-9000) - Progress: 2600/6000
+Die Traumweber (Neutral) - Value: 0 (0-3000) - Progress: 0/3000
+Die Tushui (Freundlich) - Value: 5956 (3000-9000) - Progress: 2956/6000
+Die Unvergängliche Armee (Ehrfürchtig) - Value: 42000 (42000-42000) - Progress: 0/0
+Die Weberin (Wohlwollend) - Value: 15000 (12500-15000) - Progress: 2500/2500
+Die Wilde Jagd (Ehrfürchtig) - Value: 42000 (42000-42000) - Progress: 0/0
+Die Wächter der Sande (Freundlich) - Value: 5085 (3000-9000) - Progress: 2085/6000
+Die Wächterinnen (Neutral) - Value: 150 (0-3000) - Progress: 150/3000
+Dunkelmond-Jahrmarkt (Neutral) - Value: 325 (0-3000) - Progress: 325/3000
+Eganwo Foz Drol (Ehrfürchtig) - Value: 42000 (42000-42000) - Progress: 0/0
+Ehrenfeste (Wohlwollend) - Value: 12461 (9000-21000) - Progress: 3461/12000
+Eisenschmiede (Freundlich) - Value: 3100 (3000-9000) - Progress: 100/6000
+Ewige Warte (Neutral) - Value: 500 (0-3000) - Progress: 500/3000
+Expedition Valianz (Freundlich) - Value: 4282 (3000-9000) - Progress: 1282/6000
+Expedition des Cenarius (Neutral) - Value: 2855 (0-3000) - Progress: 2855/3000
+Farondis' Hofstaat (Neutral) - Value: 225 (0-3000) - Progress: 225/3000
+Flickmeister (Freundlich) - Value: 42000 (42000-42000) - Progress: 0/0
+Forscherliga (Neutral) - Value: 2225 (0-3000) - Progress: 2225/3000
+Furorion (Wohlwollend) - Value: 42000 (42000-42000) - Progress: 0/0
+Gilneas (Freundlich) - Value: 5106 (3000-9000) - Progress: 2106/6000
+Glimmeroggrenner (Neutral) - Value: 2100 (2100-2800) - Progress: 0/700
+Glutorden (Wohlwollend) - Value: 12205 (9000-21000) - Progress: 3205/12000
+Gnomeregan (Freundlich) - Value: 5956 (3000-9000) - Progress: 2956/6000
+Goldener Lotus (Neutral) - Value: 1000 (0-3000) - Progress: 1000/3000
+Handwerkerkonsortium - Zweig der Dracheninseln (Freundlich) - Value: 12500 (12500-12500) - Progress: 0/0
+Hof der Ernter (Respektvoll) - Value: 40887 (21000-42000) - Progress: 19887/21000
+Hof der Nacht (Neutral) - Value: 21000 (21000-42000) - Progress: 0/21000
+Hydraxianer (Neutral) - Value: 100 (0-3000) - Progress: 100/3000
+Hüter der Zeit (Neutral) - Value: 0 (0-3000) - Progress: 0/3000
+Jinyu der Perlflossen (Neutral) - Value: 0 (0-3000) - Progress: 0/3000
+Kirin Tor (Freundlich) - Value: 7995 (3000-9000) - Progress: 4995/6000
+Kobaltkonvent (Neutral) - Value: 3600 (3600-10000) - Progress: 0/6400
+Kurenai (Unfreundlich) - Value: -1070 (-3000-0) - Progress: 1930/3000
+Magister (Neutral) - Value: 1500 (1500-2000) - Progress: 0/500
+Obsidianwächter (Wohlwollend) - Value: 10275 (9000-21000) - Progress: 1275/12000
+Offensive der Zerschmetterten Sonne (Freundlich) - Value: 3191 (3000-9000) - Progress: 191/6000
+Prachtmeeradmiralität (Wohlwollend) - Value: 10750 (9000-21000) - Progress: 1750/12000
+Ramkahen (Neutral) - Value: 0 (0-3000) - Progress: 0/3000
+Ritter der Schwarzen Klinge (Neutral) - Value: 0 (0-3000) - Progress: 0/3000
+Rostbolzenwiderstand (Neutral) - Value: 1575 (0-3000) - Progress: 1575/3000
+Sabellian (Ehrfürchtig) - Value: 42000 (42000-42000) - Progress: 0/0
+Schemen der Gasse (Neutral) - Value: 1500 (1500-2000) - Progress: 0/500
+Schlächterduellum (Freundlich) - Value: 3280 (3000-9000) - Progress: 280/6000
+Schwarzmeer AG (Freundlich) - Value: 6450 (3000-9000) - Progress: 3450/6000
+Shado-Pan (Freundlich) - Value: 4500 (3000-9000) - Progress: 1500/6000
+Soridormi (Wohlwollend) - Value: 42000 (42000-42000) - Progress: 0/0
+Sporeggar (Freundlich) - Value: 4235 (3000-9000) - Progress: 1235/6000
+Sturmlanzengarde (Neutral) - Value: 2047 (0-3000) - Progress: 2047/3000
+Sturmwind (Freundlich) - Value: 8385 (3000-9000) - Progress: 5385/6000
+Tortollanische Sucher (Neutral) - Value: 310 (0-3000) - Progress: 310/3000
+Unteres Viertel (Neutral) - Value: 2493 (0-3000) - Progress: 2493/3000
+Valarjar (Neutral) - Value: 2000 (0-3000) - Progress: 2000/3000
+Valeera Sanguinar (Ehrfürchtig) - Value: 41248 (32290-41248) - Progress: 8958/8958
+Ve'nari (Wohlwollend) - Value: 42000 (42000-42000) - Progress: 0/0
+Venture Company (Freundlich) - Value: 3000 (3000-9000) - Progress: 0/6000
+Vorstoß des Todes (Ehrfürchtig) - Value: 42000 (42000-42000) - Progress: 0/0
+Weltenwanderer (Neutral) - Value: 1500 (1500-2000) - Progress: 0/500
+Wildhammerklan (Neutral) - Value: 0 (0-3000) - Progress: 0/3000
+Winterpelzfurbolgs (Neutral) - Value: 2050 (0-3000) - Progress: 2050/3000
+Wächter des Hyjal (Neutral) - Value: 0 (0-3000) - Progress: 0/3000
+Zirkel des Cenarius (Neutral) - Value: 1669 (0-3000) - Progress: 1669/3000
+[Debug] Retail reputation API entries: 114
+[Debug] Major faction entries: 26
+[Debug] Total reputation entries: 123

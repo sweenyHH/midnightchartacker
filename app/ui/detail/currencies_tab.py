@@ -156,7 +156,7 @@ class CurrenciesTab(QWidget):
         grouped = {}
 
         for c in character.currencies:
-            if c.name == "Gold":
+            if c.currency_key == "gold":
                 continue
 
             groups = getattr(c, "groups", None)

@@ -27,12 +27,15 @@ def get_attr(char, attr_name):
     return str(value) if value is not None else "-"
 
 
-def get_currency_value(char, name):
+def get_character_currency_by_key(
+    char,
+    currency_key,
+):
     for c in char.currencies:
-        if c.name == name:
+        if c.currency_key == currency_key:
             return c
-    return None
 
+    return None
 
 def adjust_class_color(color_hex):
     theme = (ThemeManager.current_theme or "").lower()

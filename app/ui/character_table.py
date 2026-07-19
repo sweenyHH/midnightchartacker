@@ -17,7 +17,7 @@ from .character_table_helpers import (
     NumericItem,
     format_vault_values,
     get_attr,
-    get_currency_value,
+    get_character_currency_by_key,
     adjust_class_color,
     shorten_task_name,
 )
@@ -252,9 +252,10 @@ class CharacterTable(QTableWidget):
 # -------------------------------
 # Coffer Keys
 # -------------------------------
-            coffer = get_currency_value(
+
+            coffer = get_character_currency_by_key(
                 char,
-                "Restored Coffer Key"
+                "restored_coffer_key"
             )
 
             coffer_value = coffer.quantity if coffer else 0
@@ -269,9 +270,10 @@ class CharacterTable(QTableWidget):
 # -------------------------------
 # Spark Dust
 # -------------------------------
-            spark = get_currency_value(
+
+            spark = get_character_currency_by_key(
                 char,
-                "Radiant Spark Dust"
+                "radiant_spark_dust"
             )
 
             if spark:

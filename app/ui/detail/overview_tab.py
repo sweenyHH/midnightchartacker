@@ -153,7 +153,7 @@ class OverviewTab(QWidget):
         gold = next(
             (
                 x for x in character.currencies
-                if x.name == "Gold"
+                if x.currency_key == "gold"
             ),
             None
         )
@@ -170,7 +170,7 @@ class OverviewTab(QWidget):
             c for c in character.currencies
             if getattr(c, "groups", None)
             and "Other" in c.groups
-            and c.name != "Gold"
+            and c.currency_key != "gold"
         ]
 
         combined = {}
