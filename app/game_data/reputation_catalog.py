@@ -155,3 +155,21 @@ def is_featured_reputation(key):
         return False
 
     return definition.featured
+
+def get_reputation_display_name(key, language):
+    _load_catalog()
+
+    definition = _REPUTATIONS_BY_KEY.get(
+        key
+    )
+
+    if definition is None:
+        return key
+
+    if language == "de":
+        return definition.german_name
+
+    if language == "fr":
+        return definition.french_name
+
+    return definition.english_name

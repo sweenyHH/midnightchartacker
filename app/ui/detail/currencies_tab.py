@@ -6,6 +6,9 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt
 
 from .utils import get_layout
+from app.game_data.currency_catalog import get_currency_display_name
+
+from app.services.display_language import get_display_language
 
 
 # --------------------------------------------------
@@ -80,8 +83,19 @@ class CurrencyGroupWidget(QWidget):
         
         for row, c in enumerate(self.currencies):
 
+            language = get_display_language()
+
+            display_name = (
+                get_currency_display_name(
+                    c.currency_key,
+                    language,
+                )
+                or c.name
+            )
+
 # NAME (BOLD)
-            name_item = QTableWidgetItem(c.name)
+            name_item = QTableWidgetItem(display_name)
+            
             font = name_item.font()
             font.setBold(True)
             name_item.setFont(font)

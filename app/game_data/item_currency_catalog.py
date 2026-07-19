@@ -161,3 +161,23 @@ def is_featured_item_currency(
         return False
 
     return definition.featured
+
+def get_item_currency_display_name(key, language):
+    _load_catalog()
+
+    definition = (
+        _ITEM_CURRENCIES_BY_KEY.get(
+            key
+        )
+    )
+
+    if definition is None:
+        return key
+
+    if language == "de":
+        return definition.german_name
+
+    if language == "fr":
+        return definition.french_name
+
+    return definition.english_name

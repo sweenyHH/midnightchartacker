@@ -7,6 +7,9 @@ from app.ui.colors import STATUS_COLORS
 
 from PySide6.QtCore import Qt
 
+from app.game_data.reputation_catalog import get_reputation_display_name
+from app.services.display_language import get_display_language
+
 
 class ReputationTab(QWidget):
 
@@ -54,10 +57,24 @@ class ReputationTab(QWidget):
 # LOAD CHARACTER
 # -------------------------------
     def set_character(self, character):
+
+        language = get_display_language()
+
         self.reputations = sorted(
             character.reputations,
-            key=lambda r: r.name.lower()
+            key=lambda r: (
+                get_reputation_display_name(
+                    r.reputation_key,
+                    language,
+                )
+                or r.name
+            ).lower()
         )
+
+        self.populate_table(
+            self.reputations
+        )
+
         self.populate_table(self.reputations)
 
 # -------------------------------
@@ -73,7 +90,18 @@ class ReputationTab(QWidget):
 # FACTION (LEFT)
 # -------------------------------
 
-            name_item = QTableWidgetItem(rep.name)
+            language = get_display_language()
+
+            display_name = (
+                get_reputation_display_name(
+                    rep.reputation_key,
+                    language,
+                )
+                or rep.name
+            )
+
+            name_item = QTableWidgetItem(display_name)
+
             name_item.setTextAlignment(Qt.AlignLeft | Qt.AlignVCenter)
 
 # Bold for all factions
@@ -134,9 +162,19 @@ class ReputationTab(QWidget):
             self.populate_table(self.reputations)
             return
 
+        language = get_display_language()
+
         filtered = [
-            rep for rep in self.reputations
-            if text in rep.name.lower()
+            rep
+            for rep in self.reputations
+            if text in (
+                get_reputation_display_name(
+                    rep.reputation_key,
+                    language,
+                )
+                or rep.name
+                ).lower()
+            
         ]
 
         self.populate_table(filtered)

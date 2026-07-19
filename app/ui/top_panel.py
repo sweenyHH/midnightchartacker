@@ -13,10 +13,17 @@ from PySide6.QtCore import Qt, Signal
 from app.ui.settings_dialog import SettingsDialog
 from app.ui.detail.utils import format_gold
 from app.utils.number_formatter import format_number
+from app.services.display_language import get_display_language
+from app.game_data.reputation_catalog import get_reputation_display_name
 
 
 from app.game_data.currency_catalog import (
     get_currency_by_key,
+    get_currency_display_name,
+)
+
+from app.services.display_language import (
+    get_display_language,
 )
 
 
@@ -118,7 +125,14 @@ class TopPanel(QWidget):
             if r.rep_type == "renown"
         ]
 
-        renown.sort(key=lambda r: r.name)
+        language = get_display_language()
+
+        renown.sort(
+            key=lambda r: get_reputation_display_name(
+                r.reputation_key,
+                language,
+            )
+        )
 
 
         def chunk(lst, size=3):
@@ -158,8 +172,15 @@ class TopPanel(QWidget):
 
             for row, rep in enumerate(group):
 
+                display_name = (
+                    get_reputation_display_name(
+                        rep.reputation_key,
+                        language,
+                    )
+                )
+
                 name = QLabel(
-                    f"<b>{rep.name}</b>"
+                    f"<b>{display_name}</b>"
                 )
 
                 grid.addWidget(
@@ -236,15 +257,25 @@ class TopPanel(QWidget):
             [
                 "conquest",
                 "honor",
-                "bloody_token",
+                "bloody_tokens",
             ],
         ]
 
-        currency_definitions = {
-            key: get_currency_by_key(key)
-            for group in CURRENCY_COLUMNS
-            for key in group
-        }
+        currency_definitions = {}
+
+        for group in CURRENCY_COLUMNS:
+            for key in group:
+
+                definition = get_currency_by_key(key)
+
+                print(
+                    f"{key} -> {definition}"
+                )
+
+                currency_definitions[key] = definition
+
+
+
 
         for group_index, group in enumerate(
             CURRENCY_COLUMNS
@@ -257,7 +288,7 @@ class TopPanel(QWidget):
                 definition = currency_definitions[key]
 
                 currency_grid.addWidget(
-                    QLabel(f"<b>{definition.english_name}</b>"),
+                    QLabel(f"<b>{get_currency_display_name(key, language)}</b>"),
                     row,
                     col_offset
                 )
@@ -267,10 +298,11 @@ class TopPanel(QWidget):
                     0
                 )
 
-                if key == "gold"
+                if key == "gold":
                     value_text = format_gold(value)
                 else:
                     value_text = format_number(value)
+
 
                 currency_grid.addWidget(
                     QLabel(value_text),

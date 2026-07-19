@@ -1,11 +1,12 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QTabWidget
 
-from .detail.overview_tab import OverviewTab
+from .detail.tracking_tab import TrackingTab
 from .detail.currencies_tab import CurrenciesTab
 from .detail.vault_tab import VaultTab
 from .detail.stats_tab import StatsTab
 from .detail.reputation_tab import ReputationTab
 from .detail.debug_tab import DebugTab
+from .detail.overview_tab import OverviewTab
 from app.utils.logger import logger
 
 
@@ -21,17 +22,19 @@ class DetailView(QWidget):
 
 # instantiate tabs
         self.overview_tab = OverviewTab()
+        self.tracking_tab = TrackingTab()
         self.currencies_tab = CurrenciesTab()
         self.vault_tab = VaultTab()
         self.stats_tab = StatsTab()
         self.reputation_tab = ReputationTab()
         self.debug_tab = DebugTab()
 
-        self.overview_tab.vault_widget.on_save_callback = (self.refresh_vault_tab)
+        self.tracking_tab.vault_widget.on_save_callback = (self.refresh_vault_tab)
 
         self.current_character = None
 
-        self.tabs.addTab(self.overview_tab, "Overview")
+        self.tabs.addTab(self.overview_tab,"Overview")
+        self.tabs.addTab(self.tracking_tab, "Tracking")
         self.tabs.addTab(self.currencies_tab, "Currencies")
         self.tabs.addTab(self.vault_tab, "Vault")
         self.tabs.addTab(self.stats_tab, "Stats")
@@ -49,6 +52,9 @@ class DetailView(QWidget):
 
         logger.info("Updating OverviewTab")
         self.overview_tab.set_character(character)
+
+        logger.info("Updating TrackingTab")
+        self.tracking_tab.set_character(character)
 
         logger.info("Updating CurrenciesTab")
         self.currencies_tab.set_character(character)

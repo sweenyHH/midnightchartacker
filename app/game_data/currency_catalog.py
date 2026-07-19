@@ -179,6 +179,7 @@ def get_featured_currencies():
 
 def get_currency_display_name(
     key,
+    language,
 ):
     _load_catalog()
 
@@ -188,5 +189,11 @@ def get_currency_display_name(
 
     if definition is None:
         return key
+
+    if language == "de":
+        return definition.german_name
+
+    if language == "fr":
+        return definition.french_name
 
     return definition.english_name

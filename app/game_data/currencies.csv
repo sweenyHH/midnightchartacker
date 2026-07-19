@@ -1,4 +1,5 @@
 ﻿id;key;english_name;german_name;french_name;featured
+0;gold;Gold;Gold;Or;TRUE
 1717;7th_legion_service_medal;7th Legion Service Medal;Dienstmedaille der 7. Legion;Médaille de service de la 7e Légion;FALSE
 1889;adventure_campaign_progress;Adventure Campaign Progress;Abenteuerkampagnenfortschritt;Progression des aventures de la campagne;FALSE
 3383;adventurer_dawncrest;Adventurer Dawncrest;Morgenlichtwappen des Abenteurers;Écu de l’aube d’aventure;FALSE
@@ -42,7 +43,7 @@
 3009;bonus_valorstones;Bonus Valorstones;Bonustapferkeitssteine;Pierres de vaillance supplémentaires;FALSE
 3216;bountys_remnants;Bounty's Remnants;Beutereste;Vestiges de butin;FALSE
 1299;brawlers_gold;Brawler's Gold;Kämpfergold;Or des Bastonneurs;FALSE
-3379;brimming_arcana;Brimming Arcana;Übersprudelndes Arkana;Arcana saturé;FALSE
+3379;brimming_arcana;Brimming Arcana;Übersprudelndes Arkana;Arcana saturé;TRUE
 2778;bronze;Bronze;Bronze;Bronze;FALSE
 3372;bronze_double;Bronze;Bronze;Bronze;FALSE
 3100;bronze_celebration_token;Bronze Celebration Token;Bronzedrachenfeierabzeichen;Jeton de célébration du Vol draconique de bronze;FALSE
@@ -63,8 +64,8 @@
 1755;coalescing_visions;Coalescing Visions;Manifestierte Visionen;Visions coalescentes;FALSE
 3310;coffer_key_shards;Coffer Key Shards;Kastenschlüsselsplitter;Fragments de clé de coffre;FALSE
 1416;coins_of_air;Coins of Air;Münzen der Luft;Pièces d’air;FALSE
-3363;community_coupons;Community Coupons;Gemeinschaftscoupons;Bons communautaires;FALSE
-1602;conquest;Conquest;Eroberung;Points de conquête;FALSE
+3363;community_coupons;Community Coupons;Gemeinschaftscoupons;Bons communautaires;TRUE
+1602;conquest;Conquest;Eroberung;Points de conquête;TRUE
 1744;corrupted_memento;Corrupted Memento;Verderbtes Andenken;Souvenir corrompu;FALSE
 1719;corrupted_mementos;Corrupted Mementos;Verderbte Andenken;Souvenirs corrompus;FALSE
 2009;cosmic_flux;Cosmic Flux;Kosmischer Flux;Flux cosmique;FALSE
@@ -138,7 +139,7 @@
 1172;highborne_archaeology_fragment;Highborne Archaeology Fragment;Archäolog. Fragment (Hochgeborene);Fragment archéologique bien-né;FALSE
 1173;highmountain_tauren_archaeology_fragment;Highmountain Tauren Archaeology Fragment;Archäolog. Fragment (Hochbergtauren);Fragment archéologique tauren de Haut-Roc;FALSE
 1752;honeyback_hive;Honeyback Hive;Honigrückenschwarm;Essaim Dos-de-Miel;FALSE
-1792;honor;Honor;Ehre;Honneur;FALSE
+1792;honor;Honor;Ehre;Honneur;TRUE
 1891;honor_from_rated;Honor from Rated;Ehre aus gewertetem PvP;Points d’honneur - coté;FALSE
 1600;honorbound;Honorbound;Eidgebundene;Brigade de l’Honneur;FALSE
 1716;honorbound_service_medal;Honorbound Service Medal;Dienstmedaille der Eidgebundenen;Médaille de service de la Brigade de l’Honneur;FALSE
@@ -190,7 +191,7 @@
 3212;radiant_spark_dust;Radiant Spark Dust;Strahlender Funkenstaub;Poussière d’étincelle radieuse;FALSE
 1758;rajani;Rajani;Rajani;Rajani;FALSE
 1810;redeemed_soul;Redeemed Soul;Erlöste Seele;Âme rachetée;FALSE
-3392;remnant_of_anguish;Remnant of Anguish;Überrest der Pein;Vestige d’angoisse;FALSE
+3392;remnant_of_anguish;Remnant of Anguish;Überrest der Pein;Vestige d’angoisse;TRUE
 2912;renascent_awakening;Renascent Awakening;Wiederauflebendes Erwecken;Éveil renaissant;FALSE
 2796;renascent_dream;Renascent Dream;Wiedererweckter Traum;Rêve renaissant;FALSE
 2166;renascent_lifeblood;Renascent Lifeblood;Wiedererwecktes Lebensblut;Sang-de-vie renaissant;FALSE
@@ -242,7 +243,7 @@
 1977;stygian_ember;Stygian Ember;Stygische Glut;Braise stygienne;FALSE
 1884;the_avowed;The Avowed;Die Eingeschworenen;Les Confirmés;FALSE
 777;timeless_coin;Timeless Coin;Zeitlose Münze;Pièce du Temps figé;FALSE
-1166;timewarped_badge;Timewarped Badge;Zeitverzerrtes Abzeichen;Insigne distordu dans le temps;FALSE
+1166;timewarped_badge;Timewarped Badge;Zeitverzerrtes Abzeichen;Insigne distordu dans le temps;TRUE
 1268;timeworn_artifact;Timeworn Artifact;Verwittertes Artefakt;Artéfact érodé;FALSE
 3223;titan_disc;Titan Disc;Scheibe der Titanen;Disque des Titans;FALSE
 1718;titan_residuum;Titan Residuum;Titanenresiduum;Résidu des Titans;FALSE
@@ -257,7 +258,7 @@
 1757;uldum_accord;Uldum Accord;Abkommen von Uldum;Accord d’Uldum;FALSE
 3377;unalloyed_abundance;Unalloyed Abundance;Ungetrübter Überfluss;Abondance pure;FALSE
 3400;uncontaminated_void_sample;Uncontaminated Void Sample;Unverseuchte Leerenprobe;Échantillon du Vide décontaminé;FALSE
-2803;undercoin;Undercoin;Lorenmünze;Sous-pièce;FALSE
+2803;undercoin;Undercoin;Lorenmünze;Sous-pièce;TRUE
 1738;unshackled;Unshackled;Entfesselt;Les Affranchis;FALSE
 3356;untainted_mana_crystals;Untainted Mana-Crystals;Unbesudelte Manakristalle;Cristaux de mana non corrompus;FALSE
 3303;untethered_coin;Untethered Coin;Ungebundene Münze;Pièce détachée;FALSE
@@ -268,7 +269,7 @@
 3341;veteran_dawncrest;Veteran Dawncrest;Morgenlichtwappen des Veteranen;Écu de l’aube de vétéran;FALSE
 3342;veteran_dawncrest_double;Veteran Dawncrest;Morgenlichtwappen des Veteranen;Écu de l’aube de vétéran;FALSE
 3220;vintage_kajacola_can;Vintage Kaja'Cola Can;Altertümliche Kaja'Cola-Dose;Canette de Kaja’Cola vintage;FALSE
-3316;voidlight_marl;Voidlight Marl;Leerenlichtmergel;Marne de Lumière du Vide;FALSE
+3316;voidlight_marl;Voidlight Marl;Leerenlichtmergel;Marne de Lumière du Vide;TRUE
 399;vrykul_archaeology_fragment;Vrykul Archaeology Fragment;Archäolog. Fragment (Vrykul);Fragment archéologique vrykul;FALSE
 1533;wakening_essence;Wakening Essence;Erweckende Essenz;Essence d’éveil;FALSE
 1560;war_resources;War Resources;Kriegsressourcen;Ressources de guerre;FALSE

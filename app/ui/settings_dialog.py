@@ -111,6 +111,28 @@ class SettingsDialog(QDialog):
             self.english_numbers
         )
 
+# --------------------------------------------------
+# Display Language
+# --------------------------------------------------
+
+        layout.addWidget(
+            QLabel("<b>Display Language</b>")
+        )
+
+        self.language_en = QRadioButton("English")
+        self.language_de = QRadioButton("German")
+        self.language_fr = QRadioButton("French")
+
+        self.language_group = QButtonGroup(self)
+
+        self.language_group.addButton(self.language_en)
+        self.language_group.addButton(self.language_de)
+        self.language_group.addButton(self.language_fr)
+
+        layout.addWidget(self.language_en)
+        layout.addWidget(self.language_de)
+        layout.addWidget(self.language_fr)
+
 
 # --------------------------------------------------
 # LOGS
@@ -164,6 +186,29 @@ class SettingsDialog(QDialog):
             self.german_numbers.setChecked(
                 True
             )
+
+# --------------------------------------------------
+# LOAD DISPLAY LANGUAGE
+# --------------------------------------------------
+
+        current_language = load_setting(
+            "display_language",
+            "en"
+        )
+
+        if current_language == "de":
+
+            self.language_de.setChecked(True)
+
+        elif current_language == "fr":
+
+            self.language_fr.setChecked(True)
+
+        else:
+
+            self.language_en.setChecked(True)
+
+
 
 # --------------------------------------------------
 # BUTTONS
@@ -298,6 +343,28 @@ class SettingsDialog(QDialog):
             save_setting(
                 "number_format",
                 "german"
+            )
+
+
+        if self.language_de.isChecked():
+
+            save_setting(
+                "display_language",
+                "de"
+            )
+
+        elif self.language_fr.isChecked():
+
+            save_setting(
+                "display_language",
+                "fr"
+            )
+
+        else:
+
+            save_setting(
+                "display_language",
+                "en"
             )
 
         self.settings_saved.emit()

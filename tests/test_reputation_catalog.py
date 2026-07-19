@@ -3,6 +3,7 @@ from app.game_data.reputation_catalog import (
     get_reputation_by_key,
     get_reputation_by_name,
     is_featured_reputation,
+    get_reputation_display_name,
 )
 
 
@@ -145,3 +146,40 @@ def test_featured_lookup():
     assert is_featured_reputation(
         "argent_crusade"
     ) is False
+
+
+# ==================================================
+# Display name loca
+# ==================================================
+
+def test_display_name_english():
+
+    assert (
+        get_reputation_display_name(
+            "council_of_dornogal",
+            "en",
+        )
+        == "Council of Dornogal"
+    )
+
+
+def test_display_name_german():
+
+    assert (
+        get_reputation_display_name(
+            "council_of_dornogal",
+            "de",
+        )
+        == "Rat von Dornogal"
+    )
+
+
+def test_display_name_french():
+
+    assert (
+        get_reputation_display_name(
+            "council_of_dornogal",
+            "fr",
+        )
+        == "Conseil de Dornogal"
+    )

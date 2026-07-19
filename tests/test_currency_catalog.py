@@ -101,12 +101,35 @@ def test_get_featured_currencies():
         currency.key == "angler_pearls"
         for currency in currencies
     )
-
-def test_display_name_lookup():
+    
+def test_display_name_english():
 
     assert (
         get_currency_display_name(
-            "angler_pearls"
+            "brimming_arcana",
+            "en",
         )
-        == "Angler Pearls"
+        == "Brimming Arcana"
+    )
+
+
+def test_display_name_german():
+
+    assert (
+        get_currency_display_name(
+            "brimming_arcana",
+            "de",
+        )
+        == "Übersprudelndes Arkana"
+    )
+
+
+def test_display_name_french():
+
+    assert (
+        get_currency_display_name(
+            "brimming_arcana",
+            "fr",
+        )
+        == "Arcana saturé"
     )

@@ -3,6 +3,7 @@ from app.game_data.item_currency_catalog import (
     get_item_currency_by_key,
     get_item_currency_by_name,
     is_featured_item_currency,
+    get_item_currency_display_name,
 )
 
 def test_lookup_by_id():
@@ -73,3 +74,35 @@ def test_is_featured_item_currency():
     assert is_featured_item_currency(
         "angler_pearls"
     ) is False
+
+def test_display_name_english():
+
+    assert (
+        get_item_currency_display_name(
+            "spark_of_radiance",
+            "en",
+        )
+        == "Spark of Radiance"
+    )
+
+
+def test_display_name_german():
+
+    assert (
+        get_item_currency_display_name(
+            "spark_of_radiance",
+            "de",
+        )
+        == "Funke der Strahlen"
+    )
+
+
+def test_display_name_french():
+
+    assert (
+        get_item_currency_display_name(
+            "spark_of_radiance",
+            "fr",
+        )
+        == "Étincelle de radiance"
+    )
