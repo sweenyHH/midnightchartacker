@@ -261,20 +261,11 @@ class TopPanel(QWidget):
             ],
         ]
 
-        currency_definitions = {}
-
-        for group in CURRENCY_COLUMNS:
-            for key in group:
-
-                definition = get_currency_by_key(key)
-
-                print(
-                    f"{key} -> {definition}"
-                )
-
-                currency_definitions[key] = definition
-
-
+        currency_definitions = {
+            key: get_currency_by_key(key)
+            for group in CURRENCY_COLUMNS
+            for key in group
+        }
 
 
         for group_index, group in enumerate(
