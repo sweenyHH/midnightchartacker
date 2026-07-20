@@ -64,7 +64,11 @@ def _load_catalog():
                     ],
                     featured=_to_bool(
                         row["featured"]
-                        ),
+                    ),
+
+                    overview=_to_bool(
+                        row["overview"]
+                    ),
                 )
             )
 
@@ -161,6 +165,18 @@ def is_featured_item_currency(
         return False
 
     return definition.featured
+
+def get_overview_item_currencies():
+
+    _load_catalog()
+
+    return [
+        definition
+        for definition
+        in _ITEM_CURRENCIES_BY_ID.values()
+        if definition.overview
+    ]
+
 
 def get_item_currency_display_name(key, language):
     _load_catalog()

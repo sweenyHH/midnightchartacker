@@ -14,9 +14,13 @@ from app.ui.character_table_helpers import (
     adjust_class_color,
 )
 from app.ui.blizzard_color_codes import get_mplus_color
-from app.game_data.currency_catalog import get_currency_display_name
+from app.game_data.currency_catalog import get_overview_currencies, get_currency_display_name
+from app.game_data.item_currency_catalog import get_overview_item_currencies, get_item_currency_display_name
 
 from app.services.display_language import get_display_language
+from app.ui.detail.utils import format_gold
+from app.utils.number_formatter import format_number
+from app.storage.vault_storage import load_user_vault
 
 
 class OverviewTab(QWidget):
@@ -40,12 +44,149 @@ class OverviewTab(QWidget):
         self.mythic_card.setFrameShape(QFrame.Box)
 
         self.mythic_layout = QVBoxLayout(self.mythic_card)
-        self.stats_row = QHBoxLayout()
 
-        self.mythic_title = QLabel("<h3>Mythic+</h3>")
+        self.mplus_tile = QFrame()
+        self.mplus_tile.setFrameShape(
+            QFrame.Box
+        )
+
+        self.mplus_layout = QVBoxLayout(
+            self.mplus_tile
+        )
+
+        self.mplus_tile_title = QLabel(
+            "Mythic+"
+        )
+
         self.mythic_score_label = QLabel()
-        self.mythic_layout.addWidget(self.mythic_title)
-        self.mythic_layout.addWidget(self.mythic_score_label)
+
+        self.mythic_score_label.setStyleSheet(
+            """
+            font-size: 28px;
+            font-weight: bold;
+            """
+        )
+
+        self.mplus_layout.addWidget(
+            self.mplus_tile_title
+        )
+
+        self.mplus_layout.addWidget(
+            self.mythic_score_label
+        )
+
+        self.vault_tile = QFrame()
+
+        self.vault_tile.setFrameShape(
+            QFrame.Box
+        )
+
+        self.vault_layout = QVBoxLayout(
+            self.vault_tile
+        )
+
+        self.vault_grid = QGridLayout()
+
+        self.vault_tile_title = QLabel(
+            "Vault"
+        )
+
+        self.vault_delves_name = QLabel(
+            "Delves"
+        )
+
+        self.vault_raid_name = QLabel(
+            "Raid"
+        )
+
+        self.vault_mplus_name = QLabel(
+            "M+"
+        )
+
+        self.vault_delves_value = QLabel()
+        self.vault_raid_value = QLabel()
+        self.vault_mplus_value = QLabel()
+
+        self.vault_layout.addWidget(
+            self.vault_tile_title
+        )
+
+        self.vault_grid.addWidget(
+            self.vault_delves_name,
+            0,
+            0
+        )
+
+        self.vault_grid.addWidget(
+            self.vault_delves_value,
+            0,
+            1
+        )
+
+        self.vault_grid.addWidget(
+            self.vault_raid_name,
+            1,
+            0
+        )
+
+        self.vault_grid.addWidget(
+            self.vault_raid_value,
+            1,
+            1
+        )
+
+        self.vault_grid.addWidget(
+            self.vault_mplus_name,
+            2,
+            0
+        )
+
+        self.vault_grid.addWidget(
+            self.vault_mplus_value,
+            2,
+            1
+        )
+
+        self.vault_grid.setColumnStretch(
+            0,
+            1
+        )
+
+        self.vault_grid.setColumnStretch(
+            1,
+            0
+        )
+
+        self.vault_layout.addLayout(
+            self.vault_grid
+        )
+       
+
+        self.top_row = QHBoxLayout()
+        self.bottom_row = QHBoxLayout()
+
+        self.pve_tiles_row = QHBoxLayout()
+
+        self.pve_title = QLabel("<h3>PvE</h3>")
+
+
+        self.pve_tiles_row.addWidget(
+            self.mplus_tile,
+            1
+        )
+
+        self.pve_tiles_row.addWidget(
+            self.vault_tile,
+            1
+        )
+
+        self.mythic_layout.addWidget(
+            self.pve_title
+        )
+
+        self.mythic_layout.addLayout(
+            self.pve_tiles_row
+        )
 
         self.pvp_card = QFrame()
         self.pvp_card.setFrameShape(QFrame.Box)
@@ -65,68 +206,86 @@ class OverviewTab(QWidget):
 
         self.resources_title = QLabel("<h3>Character Resources</h3>")
 
-        self.mythic_title.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+        self.pve_title.setAlignment(Qt.AlignLeft | Qt.AlignTop)
         self.pvp_title.setAlignment(Qt.AlignLeft | Qt.AlignTop)
         self.resources_title.setAlignment(Qt.AlignLeft | Qt.AlignTop)
 
-        self.coffer_name_label = QLabel()
-        self.coffer_value_label = QLabel()
-
-        self.undercoin_name_label = QLabel()
-        self.undercoin_value_label = QLabel()
-
-        self.spark_name_label = QLabel()
-        self.spark_value_label = QLabel()
+        self.resource_rows = {}
 
         self.resources_layout.addWidget(
             self.resources_title
         )
 
-        self.resources_grid.addWidget(
-            self.coffer_name_label,
-            0,
-            0
-        )
+        definitions = []
 
-        self.resources_grid.addWidget(
-            self.coffer_value_label,
-            0,
-            1
-        )
+        for definition in get_overview_currencies():
+            definitions.append(
+                ("currency", definition)
+            )
 
-        self.resources_grid.addWidget(
-            self.undercoin_name_label,
-            1,
-            0
-        )
+        for definition in get_overview_item_currencies():
+            definitions.append(
+                ("item", definition)
+            )
 
-        self.resources_grid.addWidget(
-            self.undercoin_value_label,
-            1,
-            1
-        )
+        for index, (kind, definition) in enumerate(
+            definitions
+        ):
 
-        self.resources_grid.addWidget(
-            self.spark_name_label,
-            2,
-            0
-        )
+            name_label = QLabel()
+            value_label = QLabel()
 
-        self.resources_grid.addWidget(
-            self.spark_value_label,
-            2,
-            1
-        )
+            row = index // 2
 
-        self.resources_grid.setColumnStretch(
-            0,
-            3
-        )
+            if index % 2 == 0:
 
-        self.resources_grid.setColumnStretch(
-            1,
-            1
-        )
+                name_column = 0
+                value_column = 1
+
+            else:
+
+                name_column = 2
+                value_column = 3
+
+            self.resources_grid.addWidget(
+                name_label,
+                row,
+                name_column
+            )
+
+            self.resources_grid.addWidget(
+                value_label,
+                row,
+                value_column
+            )
+
+            self.resource_rows[
+                (kind, definition.key)
+            ] = (
+                name_label,
+                value_label,
+            )
+
+            self.resources_grid.setColumnStretch(
+                0,
+                3
+            )
+
+            self.resources_grid.setColumnStretch(
+                1,
+                1
+            )
+
+            self.resources_grid.setColumnStretch(
+                2,
+                3
+            )
+
+            self.resources_grid.setColumnStretch(
+                3,
+                1
+            )
+
 
         self.resources_layout.addLayout(
             self.resources_grid
@@ -136,14 +295,34 @@ class OverviewTab(QWidget):
         self.character_layout.addWidget(self.info_label)
         self.character_layout.addWidget(self.ilvl_label)
 
-        self.main_layout.addWidget(self.character_card)
+        self.top_row.addWidget(
+            self.character_card,
+            1
+        )
 
-        self.main_layout.addLayout(self.stats_row)
-        self.stats_row.addWidget(self.mythic_card)
+        self.top_row.addWidget(
+            self.mythic_card,
+            1
+        )
 
-        self.stats_row.addWidget(self.pvp_card)
+        self.bottom_row.addWidget(
+            self.resources_card,
+            1
+        )
 
-        self.main_layout.addWidget(self.resources_card)
+        self.bottom_row.addWidget(
+            self.pvp_card,
+            1
+        )
+
+        self.main_layout.addLayout(
+            self.top_row
+        )
+
+        self.main_layout.addLayout(
+            self.bottom_row
+        )
+
 
         self.main_layout.addStretch()
 
@@ -155,7 +334,9 @@ class OverviewTab(QWidget):
             "-"
         )
 
-        self.name_label.setText(f"<h2>{character.name}</h2>")
+        self.name_label.setText(
+            f"<h2>{character.name}</h2>"
+        )
 
         self.info_label.setText(
             f"<b>Level {getattr(character, 'level', '-')}</b> "
@@ -166,9 +347,13 @@ class OverviewTab(QWidget):
 
         if class_name in CLASS_COLORS:
 
-            adjusted = adjust_class_color(CLASS_COLORS[class_name])
+            adjusted = adjust_class_color(
+                CLASS_COLORS[class_name]
+            )
 
-            self.info_label.setStyleSheet(f"color: {adjusted};")
+            self.info_label.setStyleSheet(
+                f"color: {adjusted};"
+            )
 
         else:
 
@@ -185,14 +370,28 @@ class OverviewTab(QWidget):
             None,
         )
 
-        self.mythic_score_label.setText(f"Score: {score}")
-        self.mythic_score_label.setStyleSheet(f"color: {get_mplus_color(score)};")
+        self.mythic_score_label.setText(
+            str(score)
+        )
+
+        self.mythic_score_label.setStyleSheet(
+            f"""
+            color: {get_mplus_color(score)};
+            font-size: 28px;
+            font-weight: bold;
+            """
+        )
+
+
         self.honor_level_label.setText(
             f"Honor Level: "
             f"{getattr(character, 'honor_level', '-')}"
         )
 
-        if (character.honor_progress is not None and character.honor_progress_max is not None):
+        if (
+            character.honor_progress is not None
+            and character.honor_progress_max is not None
+        ):
 
             self.honor_progress_label.setText(
                 f"Honor Progress: "
@@ -203,7 +402,9 @@ class OverviewTab(QWidget):
 
         else:
 
-            self.honor_progress_label.setText("Honor Progress: -")
+            self.honor_progress_label.setText(
+                "Honor Progress: -"
+            )
 
         def find_currency(currency_key):
 
@@ -218,42 +419,107 @@ class OverviewTab(QWidget):
 
         language = get_display_language()
 
-        coffer = find_currency("restored_coffer_key")
+        for definition in get_overview_currencies():
 
-        self.coffer_name_label.setText(
-            get_currency_display_name(
-                "restored_coffer_key",
-                language,
+            currency = find_currency(
+                definition.key
             )
-        )
 
-        self.coffer_value_label.setText(
-            str(coffer.quantity if coffer else 0)
-        )
-
-        undercoin = find_currency("undercoin")
-
-        self.undercoin_name_label.setText(
-            get_currency_display_name(
-                "undercoin",
-                language,
+            name_label, value_label = (
+                self.resource_rows[
+                    ("currency", definition.key)
+                ]
             )
-        )
 
-        self.undercoin_value_label.setText(
-            str(undercoin.quantity if undercoin else 0)
-        )
-
-        spark = find_currency("radiant_spark_dust")
-
-        self.spark_name_label.setText(
-            get_currency_display_name(
-                "radiant_spark_dust",
-                language,
+            name_label.setText(
+                get_currency_display_name(
+                    definition.key,
+                    language,
+                )
             )
+
+            quantity = (
+                currency.quantity
+                if currency
+                else 0
+            )
+
+            if definition.key == "gold":
+
+                value_text = format_gold(
+                    quantity
+                )
+
+            else:
+
+                value_text = format_number(
+                    quantity
+                )
+
+            value_label.setText(
+                value_text
+            )
+
+        for definition in get_overview_item_currencies():
+
+            currency = find_currency(
+                definition.key
+            )
+
+            name_label, value_label = (
+                self.resource_rows[
+                    ("item", definition.key)
+                ]
+            )
+
+            name_label.setText(
+                get_item_currency_display_name(
+                    definition.key,
+                    language,
+                )
+            )
+
+            quantity = (
+                currency.quantity
+                if currency
+                else 0
+            )
+
+            value_label.setText(
+                format_number(
+                    quantity
+                )
+            )
+
+        vault = load_user_vault(
+            character
         )
 
-        self.spark_value_label.setText(
-            str(spark.quantity if spark else 0)
+        def dots(slots):
+
+            result = []
+
+            for index in range(3):
+
+                if (
+                    index < len(slots)
+                    and slots[index]
+                ):
+                    result.append("●")
+
+                else:
+                    result.append("○")
+
+            return " ".join(result)
+
+        self.vault_delves_value.setText(
+            dots(vault["row3"])
         )
 
+        self.vault_raid_value.setText(
+            dots(vault["row1"])
+        )
+
+        self.vault_mplus_value.setText(
+            dots(vault["row2"])
+        )

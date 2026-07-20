@@ -4,6 +4,7 @@ from app.game_data.item_currency_catalog import (
     get_item_currency_by_name,
     is_featured_item_currency,
     get_item_currency_display_name,
+    get_overview_item_currencies,
 )
 
 def test_lookup_by_id():
@@ -105,4 +106,20 @@ def test_display_name_french():
             "fr",
         )
         == "Étincelle de radiance"
+    )
+
+def test_get_overview_item_currencies():
+
+    currencies = (
+        get_overview_item_currencies()
+    )
+
+    keys = {
+        c.key
+        for c in currencies
+    }
+
+    assert (
+        "spark_of_radiance"
+        in keys
     )

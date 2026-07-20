@@ -54,7 +54,7 @@ def _load_catalog():
         ]
 
         for row in reader:
-            
+
             definition = CurrencyCatalogDefinition(
                 currency_id=int(row["id"]),
                 key=row["key"],
@@ -63,7 +63,13 @@ def _load_catalog():
                 german_name=row["german_name"],
                 french_name=row["french_name"],
 
-                featured=_to_bool(row["featured"]),
+                featured=_to_bool(
+                    row["featured"]
+                ),
+
+                overview=_to_bool(
+                    row["overview"]
+                ),
             )
 
             if (
@@ -175,6 +181,17 @@ def get_featured_currencies():
         for definition
         in _CURRENCIES_BY_ID.values()
         if definition.featured
+    ]
+
+def get_overview_currencies():
+
+    _load_catalog()
+
+    return [
+        definition
+        for definition
+        in _CURRENCIES_BY_ID.values()
+        if definition.overview
     ]
 
 def get_currency_display_name(

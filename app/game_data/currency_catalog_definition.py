@@ -10,6 +10,7 @@ class CurrencyCatalogDefinition:
         french_name,
 
         featured=False,
+        overview=False,
     ):
         self.currency_id = currency_id
         self.key = key
@@ -19,3 +20,4 @@ class CurrencyCatalogDefinition:
         self.french_name = french_name
 
         self.featured = featured
+        self.overview = overview

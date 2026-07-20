@@ -10,6 +10,7 @@ class ItemCurrencyDefinition:
         french_name,
 
         featured=False,
+        overview=False,
     ):
         self.item_id = item_id
         self.key = key
@@ -19,3 +20,4 @@ class ItemCurrencyDefinition:
         self.french_name = french_name
 
         self.featured = featured
+        self.overview = overview

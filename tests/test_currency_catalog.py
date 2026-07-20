@@ -5,6 +5,7 @@ from app.game_data.currency_catalog import (
     is_featured_currency,
     get_featured_currencies,
     get_currency_display_name,
+    get_overview_currencies,
 )
 
 
@@ -133,3 +134,14 @@ def test_display_name_french():
         )
         == "Arcana saturé"
     )
+
+def test_get_overview_currencies():
+
+    currencies = get_overview_currencies()
+
+    keys = {
+        c.key
+        for c in currencies
+    }
+
+    assert "gold" in keys
