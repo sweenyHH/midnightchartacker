@@ -2,11 +2,11 @@
 
 ## Status
 
-Accepted
+Implemented
 
 ## Context
 
-Midnight Character Tracker imports character data from text-based character exports.
+Warband Manager imports character data from text-based character exports.
 
 The application requires persistent storage for character information while remaining simple to use and easy to distribute.
 

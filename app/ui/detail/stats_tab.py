@@ -8,6 +8,10 @@ from .utils import get_layout
 
 from app.ui.colors import ITEM_QUALITY_COLORS
 from app.localization.ui_strings import get_ui_string
+from app.services.display_language import get_display_language
+from app.game_data.equipment_slot_catalog import get_equipment_slot_display_name
+from app.game_data.attribute_catalog import get_attribute_display_name
+from app.game_data.combat_rating_catalog import get_combat_rating_display_name
 
 
 class StatsTab(QWidget):
@@ -58,7 +62,18 @@ class StatsTab(QWidget):
         for row, (k, v) in enumerate(attrs.items()):
             
 # Attribute (BOLD)
-            attr_item = QTableWidgetItem(k)
+            language = get_display_language()
+
+            display_name = (
+                get_attribute_display_name(
+                    k,
+                    language,
+                )
+            )
+
+            attr_item = QTableWidgetItem(
+                display_name
+            )
             font = attr_item.font()
             font.setBold(True)
             attr_item.setFont(font)
@@ -111,19 +126,52 @@ class StatsTab(QWidget):
         combat = getattr(character, "combat_ratings", {})
         combat_table.setRowCount(len(combat))
 
-        for row, (k, v) in enumerate(combat.items()):
-            rating = v.get("rating", "-")
-            percent = v.get("percent", "-")
-            percent = f"{percent}%" if percent != "-" else "-"
+        language = get_display_language()
 
-            stat_item = QTableWidgetItem(k)
+        for row, (k, v) in enumerate(combat.items()):
+
+            rating = v.get("rating", "-")
+
+            percent = v.get("percent", "-")
+
+            percent = (
+                f"{percent}%"
+                if percent != "-"
+                else "-"
+            )
+
+            display_name = (
+                get_combat_rating_display_name(
+                    k,
+                    language,
+                )
+            )
+
+            stat_item = QTableWidgetItem(
+                display_name
+            )
+
             font = stat_item.font()
             font.setBold(True)
             stat_item.setFont(font)
-            combat_table.setItem(row, 0, stat_item)
 
-            combat_table.setItem(row, 1, QTableWidgetItem(str(rating)))
-            combat_table.setItem(row, 2, QTableWidgetItem(str(percent)))
+            combat_table.setItem(
+                row,
+                0,
+                stat_item,
+            )
+
+            combat_table.setItem(
+                row,
+                1,
+                QTableWidgetItem(str(rating))
+            )
+
+            combat_table.setItem(
+                row,
+                2,
+                QTableWidgetItem(str(percent))
+            )
 
         combat_table.verticalHeader().setDefaultSectionSize(30)
 
@@ -180,13 +228,33 @@ class StatsTab(QWidget):
         ])
 
         equipment = getattr(character, "equipment", [])
+        equipment = [
+            item
+            for item in equipment
+            if item.slot not in (
+                "shirt",
+                "tabard",
+            )
+        ]
+
         table.setRowCount(len(equipment))
 
         for row, item in enumerate(equipment):
 
 # Slot
            
-            slot_item = QTableWidgetItem(item.slot)
+            language = get_display_language()
+
+            slot_name = (
+                get_equipment_slot_display_name(
+                    item.slot,
+                    language,
+                )
+            )
+
+            slot_item = QTableWidgetItem(
+                slot_name
+            )
 
 # make bold
             font = slot_item.font()

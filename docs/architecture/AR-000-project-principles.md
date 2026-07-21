@@ -6,7 +6,7 @@ Accepted
 
 ## Context
 
-Midnight Character Tracker was developed alongside a backend development learning path.
+Warband Manager was developed alongside a backend development learning path.
 
 One of the primary goals of the project was not only to build a useful application, but also to reinforce and apply concepts that had been learned through structured study.
 

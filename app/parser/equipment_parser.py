@@ -1,6 +1,6 @@
 import re
 from app.model.equipment import Equipment
-
+from app.game_data.equipment_slot_catalog import get_equipment_slot_by_name
 
 def parse_equipment(lines):
 
@@ -57,7 +57,22 @@ def parse_equipment(lines):
                 equipment.append(current_item)
                 current_item = None
 
-            current_slot = line.strip("=").strip()
+            raw_slot = (
+                line.strip("=")
+                .strip()
+            )
+
+            definition = (
+                get_equipment_slot_by_name(
+                    raw_slot
+                )
+            )
+
+            current_slot = (
+                definition.key
+                if definition
+                else raw_slot
+            )
             continue
 
 # -------------------------------

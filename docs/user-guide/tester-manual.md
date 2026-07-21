@@ -18,7 +18,7 @@ These files represent complete character exports that can be loaded directly by 
 
 ## How to Use
 
-1. Start Midnight Character Tracker.
+1. Start Warband Manager.
 2. Open **Settings**.
 3. Click **Open Log Folder**.
 4. Navigate one level up to the parent folder.
@@ -59,7 +59,7 @@ docs/demo-data/example-parses/
 ```
 
 2. Copy the complete contents of the file.
-3. Start Midnight Character Tracker.
+3. Start Warband Manager.
 4. Click **Paste Character Data**.
 5. Paste the copied content.
 6. Confirm the import.

@@ -1,3 +1,6 @@
+from app.game_data.attribute_catalog import get_attribute_by_name
+from app.game_data.combat_rating_catalog import get_combat_rating_by_name
+
 # parses sections for attributes and combat rating
 
 def _parse_combat_value(value_str):
@@ -46,8 +49,27 @@ def handle_section(line, current_section, character):
 # -------------------------
 
     if current_section == "attributes" and ":" in line:
+
         k, v = line.split(":", 1)
-        character.attributes[k.strip()] = v.strip()
+
+        raw_name = k.strip()
+
+        definition = (
+            get_attribute_by_name(
+                raw_name
+            )
+        )
+
+        key = (
+            definition.key
+            if definition
+            else raw_name
+        )
+
+        character.attributes[
+            key
+        ] = v.strip()
+
         return True
 
 # -------------------------
@@ -57,11 +79,32 @@ def handle_section(line, current_section, character):
     if current_section == "combat_ratings" and ":" in line:
         k, v = line.split(":", 1)
 
-        key = k.strip()
+        
 
 # FILTER OUT WRONG ENTRIES
-        if key in ["Currencies", "Currency Count"]:
-            return True  # ignore silently
+        raw_name = k.strip()
+
+        if raw_name in [
+            "Currencies",
+            "Currency Count",
+        ]:
+            return True
+
+        definition = (
+            get_combat_rating_by_name(
+                raw_name
+            )
+        )
+
+        key = (
+            definition.key
+            if definition
+            else raw_name
+        )
+
+        character.combat_ratings[key] = (
+            _parse_combat_value(v.strip())
+        )
 
 # STRUCTURED PARSING
 

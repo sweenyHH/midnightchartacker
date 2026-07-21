@@ -1,10 +1,9 @@
 from pathlib import Path
 import os
 import platform
+from app.app_info import APP_STORAGE_NAME
 
 # moves folders with user input / char.txt files out of the application folders
-
-APP_NAME = "Midnight Character Tracker"
 
 
 def get_app_data_dir():
@@ -23,7 +22,7 @@ def get_app_data_dir():
             / "share"
         )
 
-    path = base / APP_NAME
+    path = base / APP_STORAGE_NAME
 
     path.mkdir(
         parents=True,

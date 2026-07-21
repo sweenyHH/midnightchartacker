@@ -1,12 +1,12 @@
-# Midnight Character Tracker
+# Warband Manager
 
 A desktop companion for **World of Warcraft** players that helps track character progress, currencies, Great Vault rewards, weekly activities, notes, and warband-wide tasks.
 
-Midnight Character Tracker combines imported character data with user-managed tracking features and provides a clean overview of your entire roster in a single application.
+Warband Manager combines imported character data with user-managed tracking features and provides a clean overview of your entire roster in a single application.
 
 <p align="center">
   <img src="docs/screenshots/Mainwindow_darkmode.png"
-       alt="Midnight Character Tracker - Dark Mode"
+       alt="Warband Manager - Dark Mode"
        width="900">
 </p>
 
@@ -27,7 +27,7 @@ Check these boxes:
 - Progress
 - Reputations
 
-(checking the other boxes will grow the export significantly while no data is used by Midnight Character Tracker)
+(checking the other boxes will grow the export significantly while no data is used by Warband Manager)
 
 ## For Testers not playing WoW retail:
 
@@ -162,7 +162,7 @@ There is currently no packaged Linux release.
 Example:
 
 bash:
-git clone [https://github.com/sweenyHH/midnight-character-tracker](https://github.com/sweenyHH/midnight-character-tracker)
+git clone [https://github.com/sweenyHH/warband-manager](https://github.com/sweenyHH/warband-manager)
 cd midnightchartracker
 
 python3 -m venv venv
@@ -175,7 +175,7 @@ python main.py
 
 ## Importing Character Data
 
-1. Open Midnight Character Tracker
+1. Open Warband Manager
 2. Click **Paste Character Data**
 3. Paste your exported character data
 4. Save the import
@@ -215,9 +215,9 @@ No online account or cloud service is required.
 
 ## Project Status
 
-Midnight Character Tracker is actively maintained and used with real character data.
+Warband Manager is actively maintained and used with real character data.
 
-For the near future, an extended version of Midnight Character Tracker will be released, supporting Exports from French and German WoW Clients.
+For the near future, an extended version of Warband Manager will be released, supporting Exports from French and German WoW Clients.
 
 Bug reports, suggestions, and feedback are welcome.
 
@@ -234,6 +234,6 @@ docs/
 
 ## License
 
-Midnight Character Tracker is distributed under a custom source-available license.
+Warband Manager is distributed under a custom source-available license.
 
 See the LICENSE file for details.

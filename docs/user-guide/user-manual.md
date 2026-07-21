@@ -1,8 +1,8 @@
-# Midnight Character Tracker User Manual
+# Warband Manager User Manual
 
 ## Introduction
 
-Midnight Character Tracker is a desktop application for managing and tracking World of Warcraft characters.
+Warband Manager is a desktop application for managing and tracking World of Warcraft characters.
 
 The application combines imported character data with manually maintained information such as notes, weekly duties, vault progress, and warband tasks.
 
@@ -31,11 +31,11 @@ Check these boxes:
 - Progress
 - Reputations
 
-(checking the other boxes will grow the export significantly while no data is used by Midnight Character Tracker)
+(checking the other boxes will grow the export significantly while no data is used by Warband Manager)
 
 To import a character:
 
-1. Start Midnight Character Tracker.
+1. Start Warband Manager.
 2. Click **Paste Character Data**.
 3. Paste a character export.
 4. Confirm the import.

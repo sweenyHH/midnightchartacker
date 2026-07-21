@@ -1,4 +1,4 @@
-# Midnight Character Tracker
+# Warband Manager
 
 Purpose:
 Desktop companion application for World of Warcraft characters.

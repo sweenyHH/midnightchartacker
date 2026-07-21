@@ -1,6 +1,6 @@
 # Demo Data
 
-This folder contains sample data for evaluating Midnight Character Tracker without playing World of Warcraft.
+This folder contains sample data for evaluating Warband Manager without playing World of Warcraft.
 
 ## Option 1 - Populate the Application Quickly
 
@@ -10,7 +10,7 @@ character-files/
 
 Copy the files into the application's import folder.
 
-After launching Midnight Character Tracker, the characters will be detected automatically.
+After launching Warband Manager, the characters will be detected automatically.
 
 This is the fastest way to explore the application.
 

@@ -102,7 +102,7 @@ def test_parse_equipment():
         (
             item
             for item in character.equipment
-            if item.slot == "Head"
+            if item.slot == "head"
         ),
         None,
     )

@@ -1,7 +1,7 @@
 # Refactor Progress
 
 ## Project
-Midnight Character Tracker
+Warband Manager
 
 ---
 
