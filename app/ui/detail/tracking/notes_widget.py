@@ -17,22 +17,20 @@ class NotesWidget(QWidget):
     def __init__(self):
         super().__init__()
 
+        self.setObjectName("notesWidget")
         self.layout = QVBoxLayout(self)
 
 # spacing
         self.layout.setSpacing(8)
-
-        self.layout.addWidget(
-            QLabel(
-                f"<b>{get_ui_string('notes')}</b>"
-            )
-        )
-
+        
+        self.title_label = QLabel(f"<b>{get_ui_string('notes')}</b>")
+        self.title_label.setObjectName("notesTitle")
+        self.layout.addWidget(self.title_label)
         self.textbox = QTextEdit()
+        self.textbox.setObjectName("notesEditor")
 
 # disable rich text
         self.textbox.setAcceptRichText(False)
-
         self.textbox.setPlaceholderText(
             get_ui_string(
                 "notes_placeholder"

@@ -3,13 +3,9 @@ from PySide6.QtWidgets import (
     QGridLayout, QCheckBox, QPushButton
 )
 from PySide6.QtCore import Qt, QTimer
-
 from app.ui.colors import STATUS_COLORS
-
-from .config import ROWS_CONFIG
-
+from .weekly_duties_config import ROWS_CONFIG
 from app.utils.logger import logger
-
 from app.storage.weekly_duties_storage import (
     load_state,
     save_state,
@@ -49,6 +45,7 @@ class WeeklyDutiesWidget(QWidget):
         self.current_file = None
         self.checkboxes = []
         self.row_labels = []
+        self._build_grid()
 
 # Style checkboxes (green when checked)
         self.setStyleSheet(f"""
@@ -67,6 +64,115 @@ class WeeklyDutiesWidget(QWidget):
             background: transparent;
         }}
         """)
+
+
+    def _build_grid(self):
+
+        max_boxes = max(
+            count
+            for _, count
+            in self.rows_config
+        )
+
+        current_row = 0
+
+        for row_index, (
+            name,
+            count,
+        ) in enumerate(
+            self.rows_config
+        ):
+
+            if name == "__SPACER__":
+
+                spacer = QLabel("")
+
+                spacer.setFixedHeight(12)
+
+                self.grid.addWidget(
+                    spacer,
+                    current_row,
+                    0,
+                )
+
+                current_row += 1
+
+                continue
+
+            label = QLabel(
+                f"<b>{name}</b>"
+            )
+
+            label.setObjectName(
+                "weeklyDutiesRowLabel"
+            )
+
+            label.setAlignment(
+                Qt.AlignLeft
+                | Qt.AlignVCenter
+            )
+
+            self.grid.addWidget(
+                label,
+                current_row,
+                0,
+            )
+
+            self.row_labels.append(
+                label
+            )
+
+            boxes = []
+
+            for col in range(
+                max_boxes
+            ):
+
+                if col < count:
+
+                    cb = QCheckBox()
+
+                    cb.setObjectName(
+                        "weeklyDutiesCheckbox"
+                    )
+
+                    cb.stateChanged.connect(
+                        self._save
+                    )
+
+                    cb.stateChanged.connect(
+                        self._update_row_visuals
+                    )
+
+                    self.grid.addWidget(
+                        cb,
+                        current_row,
+                        col + 1,
+                    )
+
+                    boxes.append(cb)
+
+                else:
+
+                    self.grid.addWidget(
+                        QLabel(""),
+                        current_row,
+                        col + 1,
+                    )
+
+            self.checkboxes.append(
+                (
+                    row_index,
+                    boxes,
+                )
+            )
+
+            current_row += 1
+
+        self.grid.setColumnStretch(
+            0,
+            1,
+        )        
 
 # --------------------------------------------------
     def _save(self):
@@ -129,16 +235,6 @@ class WeeklyDutiesWidget(QWidget):
         )
 
         self.current_file = character.source_file
-        self.row_labels = []
-
-# clear grid properly
-        while self.grid.count():
-            item = self.grid.takeAt(0)
-            widget = item.widget()
-            if widget:
-                widget.deleteLater()
-
-        self.checkboxes.clear()
 
         try:
 
@@ -155,52 +251,21 @@ class WeeklyDutiesWidget(QWidget):
 
             raise
 
-        current_row = 0
-        max_boxes = max(count for _, count in self.rows_config)
+        for row_index, boxes in self.checkboxes:
 
-        for row_index, (name, count) in enumerate(self.rows_config):
+            for col, cb in enumerate(boxes):
 
-# spacer row
-            if name == "__SPACER__":
-                spacer = QLabel("")
-                spacer.setFixedHeight(12)
-                self.grid.addWidget(spacer, current_row, 0)
-                current_row += 1
-                continue
+                key = f"{row_index}_{col}"
 
-# label
-            label = QLabel(f"<b>{name}</b>")
-            label.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+                cb.blockSignals(True)
 
-            label.setStyleSheet("")
+                cb.setChecked(
+                    bool(
+                        saved_state.get(key)
+                    )
+                )
 
-            self.grid.addWidget(label, current_row, 0)
-            self.row_labels.append(label)
-
-            boxes = []
-
-            for col in range(max_boxes):
-
-                if col < count:
-                    cb = QCheckBox()
-
-                    key = f"{row_index}_{col}"
-                    if saved_state.get(key):
-                        cb.setChecked(True)
-
-                    cb.stateChanged.connect(self._save)
-                    cb.stateChanged.connect(self._update_row_visuals)
-
-                    self.grid.addWidget(cb, current_row, col + 1)
-                    boxes.append(cb)
-
-                else:
-                    self.grid.addWidget(QLabel(""), current_row, col + 1)
-
-            self.checkboxes.append((row_index, boxes))
-            current_row += 1
-
-        self.grid.setColumnStretch(0, 1)
+                cb.blockSignals(False)
 
         self._update_row_visuals()
 

@@ -16,7 +16,8 @@ class CurrenciesTab(QWidget):
 
     def __init__(self):
         super().__init__()
-
+        
+        self.setObjectName("currenciesTab")
         self.group_widgets = {}
 
         root_layout = QVBoxLayout(self)
@@ -26,13 +27,16 @@ class CurrenciesTab(QWidget):
         # ==========================================
 
         self.btn_widget = QWidget()
+        self.btn_widget.setObjectName("currenciesControls")
         self.btn_widget.setMaximumHeight(40)
 
         btn_layout = QHBoxLayout(self.btn_widget)
         btn_layout.setContentsMargins(0, 0, 0, 0)
 
         self.expand_btn = QPushButton(get_ui_string("expand_all"))
+        self.expand_btn.setObjectName("currenciesExpandButton")
         self.collapse_btn = QPushButton(get_ui_string("collapse_all"))
+        self.collapse_btn.setObjectName("currenciesCollapseButton")
 
         self.expand_btn.clicked.connect(self.expand_all)
         self.collapse_btn.clicked.connect(self.collapse_all)
@@ -48,6 +52,7 @@ class CurrenciesTab(QWidget):
         # ==========================================
 
         self.scroll = QScrollArea()
+        self.scroll.setObjectName("currenciesScrollArea")
         self.scroll.setWidgetResizable(True)
         root_layout.addWidget(self.scroll)
 

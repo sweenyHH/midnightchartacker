@@ -19,9 +19,9 @@ class CurrencyGroupWidget(QWidget):
     def __init__(self, group_name):
         super().__init__()
 
+        self.setObjectName("currencyGroup")
         self.group_name = group_name
         self.currencies = []
-
 
         self.is_expanded = False
         self.layout = QVBoxLayout(self)
@@ -32,6 +32,7 @@ class CurrencyGroupWidget(QWidget):
         display_name = (get_group_display_name(group_name))
 
         self.header = QPushButton(f"▶ {display_name}")
+        self.header.setObjectName("currencyGroupHeader")
         self.header.setCheckable(True)
         self.header.clicked.connect(self.toggle)
         self.layout.addWidget(self.header)
@@ -39,6 +40,7 @@ class CurrencyGroupWidget(QWidget):
 # TABLE
 
         self.table = QTableWidget()
+        self.table.setObjectName("currencyTable")
         self.table.hide()
         self.table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self._build_table()

@@ -39,7 +39,8 @@ class CharacterTable(QTableWidget):
 
     def __init__(self):
         super().__init__()
-
+        
+        self.setObjectName("characterTable")
         self.setContextMenuPolicy(Qt.CustomContextMenu)
         self.customContextMenuRequested.connect(
         self._show_context_menu
@@ -88,10 +89,7 @@ class CharacterTable(QTableWidget):
             if header_item:
                 header_item.setToolTip(task_name)
 
-        self.setSortingEnabled(True)
-
         self.setSortingEnabled(False)
-
         self.clearContents()
         self.setRowCount(len(characters))
 
@@ -210,6 +208,7 @@ class CharacterTable(QTableWidget):
             for task_index, task_name in enumerate(tasks):
 
                 checkbox = QCheckBox()
+                checkbox.setObjectName("taskCheckbox")
 
                 initial_state = get_task_state(
                     char,
@@ -236,6 +235,7 @@ class CharacterTable(QTableWidget):
                 )
 
                 container = QWidget()
+                container.setObjectName("taskCheckboxContainer")
                 container.setStyleSheet("background: transparent;")
 
                 layout = QHBoxLayout(container)

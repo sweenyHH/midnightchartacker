@@ -23,30 +23,31 @@ from app.game_data.currency_catalog import (
     get_currency_display_name,
 )
 
-from app.services.display_language import (
-    get_display_language,
-)
-
-
 class TopPanel(QWidget):
 
     settings_changed = Signal()
 
     def __init__(self, paste_cb, back_cb, warband_cb):
         super().__init__()
-
+        
+        self.setObjectName("topPanel")
         main_layout = QVBoxLayout(self)
 
 # --------------------------------------------------
 # ROW 1 — BUTTONS
 # --------------------------------------------------
-        button_row = QHBoxLayout()
+        self.button_row_widget = QWidget()
+        self.button_row_widget.setObjectName("topPanelButtons")
+
+        button_row = QHBoxLayout(self.button_row_widget)
 
         self.paste_btn = QPushButton(
             get_ui_string(
                 "paste_character_data"
             )
         )
+        self.paste_btn.setObjectName("topPanelButton")
+
         self.paste_btn.clicked.connect(paste_cb)
 
         self.warband_btn = QPushButton(
@@ -54,6 +55,7 @@ class TopPanel(QWidget):
                 "warband_tasks"
             )
         )
+        self.warband_btn.setObjectName("topPanelButton")
         self.warband_btn.clicked.connect(warband_cb)
 
         self.settings_btn = QPushButton(
@@ -61,6 +63,7 @@ class TopPanel(QWidget):
                 "settings"
             )
         )
+        self.settings_btn.setObjectName("topPanelButton")
         self.settings_btn.clicked.connect(
             self.open_settings
         )
@@ -70,6 +73,9 @@ class TopPanel(QWidget):
                 "back"
             )
         )
+        self.back_btn.setObjectName("topPanelBackButton")
+        
+
         self.back_btn.clicked.connect(back_cb)
         self.back_btn.hide()
 
@@ -80,12 +86,13 @@ class TopPanel(QWidget):
 
         button_row.addStretch()
 
-        main_layout.addLayout(button_row)
+        main_layout.addWidget(self.button_row_widget)
 
 # --------------------------------------------------
 # ROW 2 — REPUTATION
 # --------------------------------------------------
         self.rep_container = QWidget()
+        self.rep_container.setObjectName("topPanelContent")
         self.rep_layout = QVBoxLayout(self.rep_container)
 
         main_layout.addWidget(self.rep_container)
@@ -171,10 +178,8 @@ class TopPanel(QWidget):
 # RENOWN BLOCK
 # -------------------------------
         renown_widget = QFrame()
+        renown_widget.setObjectName("topPanelCard")
         
-        renown_widget.setObjectName(
-            "topPanelFrame"
-        )
         renown_widget.setFrameShape(
             QFrame.Box
         )
@@ -185,6 +190,7 @@ class TopPanel(QWidget):
         renown_title = QLabel(
             f"<b>{get_ui_string('renown')}</b>"
         )
+        renown_title.setObjectName("topPanelSectionTitle")
         renown_title.setAlignment(Qt.AlignCenter)
 
         renown_layout.addWidget(renown_title)
@@ -237,9 +243,7 @@ class TopPanel(QWidget):
 # -------------------------------
 
         currency_widget = QFrame()
-        currency_widget.setObjectName(
-            "topPanelFrame"
-        )
+        currency_widget.setObjectName("topPanelCard")
 
         currency_widget.setFrameShape(
             QFrame.Box
@@ -253,6 +257,7 @@ class TopPanel(QWidget):
         currency_title = QLabel(
             f"<b>{get_ui_string('warband_resources')}</b>"
         )
+        currency_title.setObjectName("topPanelSectionTitle")
 
         currency_title.setAlignment(
             Qt.AlignCenter

@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout
-from app.ui.detail.notes_widget import NotesWidget
-from app.weekly_duties.widget import WeeklyDutiesWidget
-from app.ui.detail.vault_progress import VaultProgressWidget
+from app.ui.detail.tracking.notes_widget import NotesWidget
+from app.ui.detail.tracking.weekly_duties_widget import WeeklyDutiesWidget
+from app.ui.detail.tracking.vault_progress_widget import VaultProgressWidget
 from app.utils.logger import logger
 
 
@@ -9,6 +9,8 @@ class TrackingTab(QWidget):
 
     def __init__(self):
         super().__init__()
+
+        self.setObjectName("trackingTab")
 
 # MAIN LAYOUT (persistent)
         self.layout = QVBoxLayout(self)
@@ -25,8 +27,13 @@ class TrackingTab(QWidget):
 
         self.main_row = QHBoxLayout()
 
-        self.left_column = QVBoxLayout()
-        self.right_column = QVBoxLayout()
+        self.left_column_widget = QWidget()
+        self.left_column_widget.setObjectName("trackingColumn")
+        self.left_column = QVBoxLayout(self.left_column_widget)
+
+        self.right_column_widget = QWidget()
+        self.right_column_widget.setObjectName("trackingColumn")
+        self.right_column = QVBoxLayout(self.right_column_widget)
 
         self.left_column.addWidget(
             self.notes_widget
@@ -40,13 +47,14 @@ class TrackingTab(QWidget):
             self.duties_widget
         )
 
-        self.main_row.addLayout(
-            self.left_column,
+        self.main_row.addWidget(
+            self.left_column_widget,
             2
         )
 
-        self.main_row.addLayout(
-            self.right_column,
+
+        self.main_row.addWidget(
+            self.right_column_widget,
             3
         )
 

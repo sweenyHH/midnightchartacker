@@ -19,6 +19,8 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        self.setObjectName("mainWindow")
+
         self.setWindowTitle(APP_NAME)
         self.setFixedSize(1800, 900)
 
@@ -31,9 +33,12 @@ class MainWindow(QMainWindow):
         )
 
         self.table = CharacterTable()
+        self.table.setObjectName("characterList")
         self.table.cellClicked.connect(self.open_character)
 
         self.detail_view = DetailView()
+        self.detail_view.setObjectName("detailView")
+
         self.detail_view.hide()
 
         self.current_character = None
@@ -43,6 +48,7 @@ class MainWindow(QMainWindow):
             self.show_list,
             self.open_warband_tasks
         )
+        self.top_panel.setObjectName("topPanel")
 
         self.top_panel.settings_changed.connect(
             self.reload_all
@@ -58,6 +64,8 @@ class MainWindow(QMainWindow):
         layout.addWidget(self.detail_view)
 
         container = QWidget()
+
+        container.setObjectName("mainContainer")
         container.setLayout(layout)
         self.setCentralWidget(container)
 
@@ -142,16 +150,6 @@ class MainWindow(QMainWindow):
         logger.info(
             "Detail view displayed"
         )
-
-    def show_list(self):
-
-        logger.info(
-            "Returned to character list"
-        )
-
-        self.detail_view.hide()
-        self.table.show()
-        self.top_panel.back_btn.hide()
 
     def show_list(self):
 

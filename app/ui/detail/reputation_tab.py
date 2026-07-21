@@ -17,6 +17,7 @@ class ReputationTab(QWidget):
     def __init__(self):
         super().__init__()
 
+        self.setObjectName("reputationTab")
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
 
@@ -24,6 +25,7 @@ class ReputationTab(QWidget):
 # SEARCH FIELD
 # -------------------------------
         self.search = QLineEdit()
+        self.search.setObjectName("reputationSearch")
         self.search.setPlaceholderText(
             get_ui_string(
                 "search_reputations"
@@ -37,6 +39,7 @@ class ReputationTab(QWidget):
 # TABLE
 # -------------------------------
         self.table = QTableWidget()
+        self.table.setObjectName("reputationTable")
 
         self.table.setColumnCount(3)
         self.table.setHorizontalHeaderLabels([
@@ -74,10 +77,6 @@ class ReputationTab(QWidget):
                 )
                 or r.name
             ).lower()
-        )
-
-        self.populate_table(
-            self.reputations
         )
 
         self.populate_table(self.reputations)

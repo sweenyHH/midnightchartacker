@@ -29,6 +29,8 @@ class SettingsDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
 
+        self.setObjectName("settingsDialog")
+
         self.setWindowTitle(
             get_ui_string("settings")
         )
@@ -40,22 +42,26 @@ class SettingsDialog(QDialog):
 # TITLE
 # --------------------------------------------------
 
-        title = QLabel(
-            get_ui_string(
-                "application_settings"
-            )
-        )
-        title.setObjectName("settingsTitle")
-
-        layout.addWidget(title)
+        self.title_label = QLabel(get_ui_string("application_settings"))
+        self.title_label.setObjectName("settingsTitle")
+        layout.addWidget(self.title_label)
 
 # --------------------------------------------------
 # THEME
 # --------------------------------------------------
 
-        QLabel(
+        self.theme_label = QLabel(
             f"<b>{get_ui_string('theme')}</b>"
         )
+
+        self.theme_label.setObjectName(
+            "settingsSectionTitle"
+        )
+
+        layout.addWidget(
+            self.theme_label
+        )
+
 
         self.dark_radio = QRadioButton(
             get_ui_string("dark")
@@ -78,18 +84,22 @@ class SettingsDialog(QDialog):
         self.theme_group.addButton(
             self.dark_radio
         )
+        self.dark_radio.setObjectName("settingsRadioButton")
 
         self.theme_group.addButton(
             self.light_radio
         )
+        self.light_radio.setObjectName("settingsRadioButton")
 
         self.theme_group.addButton(
             self.wow_radio
         )
+        self.wow_radio.setObjectName("settingsRadioButton")
 
         self.theme_group.addButton(
             self.modern_radio
         )
+        self.modern_radio.setObjectName("settingsRadioButton")
 
         layout.addWidget(self.dark_radio)
         layout.addWidget(self.light_radio)
@@ -101,10 +111,16 @@ class SettingsDialog(QDialog):
 # Number Format
 # --------------------------------------------------
 
+        self.number_format_label = QLabel(
+            f"<b>{get_ui_string('number_format')}</b>"
+        )
+
+        self.number_format_label.setObjectName(
+            "settingsSectionTitle"
+        )
+
         layout.addWidget(
-            QLabel(
-                f"<b>{get_ui_string('number_format')}</b>"
-            )
+            self.number_format_label
         )
 
         self.german_numbers = QRadioButton(
@@ -112,12 +128,14 @@ class SettingsDialog(QDialog):
                 "number_format_german"
             )
         )
-
+        self.german_numbers.setObjectName("settingsRadioButton")
+        
         self.english_numbers = QRadioButton(
             get_ui_string(
                 "number_format_english"
             )
         )
+        self.english_numbers.setObjectName("settingsRadioButton")
 
         self.number_format_group = QButtonGroup(self)
 
@@ -141,23 +159,32 @@ class SettingsDialog(QDialog):
 # Display Language
 # --------------------------------------------------
 
+        self.display_language_label = QLabel(
+            f"<b>{get_ui_string('display_language')}</b>"
+        )
+
+        self.display_language_label.setObjectName(
+            "settingsSectionTitle"
+        )
+
         layout.addWidget(
-            QLabel(
-                f"<b>{get_ui_string('display_language')}</b>"
-            )
+            self.display_language_label
         )
 
         self.language_en = QRadioButton(
             get_ui_string("english")
         )
+        self.language_en.setObjectName("settingsRadioButton")
 
         self.language_de = QRadioButton(
             get_ui_string("german")
         )
+        self.language_de.setObjectName("settingsRadioButton")
 
         self.language_fr = QRadioButton(
             get_ui_string("french")
         )
+        self.language_fr.setObjectName("settingsRadioButton")
 
         self.language_group = QButtonGroup(self)
 
@@ -179,6 +206,7 @@ class SettingsDialog(QDialog):
                 "open_log_folder"
             )
         )
+        logs_button.setObjectName("settingsUtilityButton")
         logs_button.clicked.connect(
             self._open_log_folder
         )
@@ -259,10 +287,12 @@ class SettingsDialog(QDialog):
         save_button = QPushButton(
             get_ui_string("save")
         )
+        save_button.setObjectName("settingsSaveButton")
 
         cancel_button = QPushButton(
             get_ui_string("cancel")
         )
+        cancel_button.setObjectName("settingsCancelButton")
 
         save_button.clicked.connect(
             self._save_settings

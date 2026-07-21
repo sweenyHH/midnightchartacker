@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QTabWidget
 
-from .detail.tracking_tab import TrackingTab
+from .detail.tracking.tracking_tab import TrackingTab
 
 from app.ui.detail.stats.stats_tab import StatsTab
 from .detail.reputation_tab import ReputationTab

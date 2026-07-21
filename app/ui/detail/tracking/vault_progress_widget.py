@@ -22,13 +22,12 @@ class VaultProgressWidget(QWidget):
 
     def __init__(self):
         super().__init__()
-
+        
+        self.setObjectName("vaultProgressWidget")
         self.layout = QVBoxLayout(self)
-        self.layout.addWidget(
-            QLabel(
-                f"<b>{get_ui_string('vault_progress')}</b>"
-            )
-        )
+        self.title_label = QLabel(f"<b>{get_ui_string('vault_progress')}</b>")
+        self.title_label.setObjectName("vaultProgressTitle")
+        self.layout.addWidget(self.title_label)
 
         self.grid = QGridLayout()
         self.layout.addLayout(self.grid)
@@ -47,6 +46,7 @@ class VaultProgressWidget(QWidget):
 
             for col in range(3):
                 field = QLineEdit()
+                field.setObjectName("vaultProgressField")
                 field.setMaximumWidth(60)
                 field.setPlaceholderText("...")
                 field.setAlignment(Qt.AlignCenter)
@@ -60,11 +60,8 @@ class VaultProgressWidget(QWidget):
         self.grid.setColumnStretch(0, 1)
 
 # Clear button
-        self.clear_btn = QPushButton(
-            get_ui_string(
-                "clear_all"
-            )
-        )
+        self.clear_btn = QPushButton(get_ui_string("clear_all"))
+        self.clear_btn.setObjectName("vaultClearButton")
         self.clear_btn.clicked.connect(self.clear_all)
         self.layout.addWidget(self.clear_btn)
 

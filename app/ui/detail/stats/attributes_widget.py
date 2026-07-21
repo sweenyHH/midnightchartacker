@@ -25,21 +25,19 @@ class AttributesWidget(QWidget):
 
     def __init__(self):
         super().__init__()
+        
+        self.setObjectName("statsSection")
 
         layout = QVBoxLayout(self)
 
-        layout.addWidget(
-            QLabel(
-                f"<b>{get_ui_string('primary_attributes')}</b>"
-            )
-        )
+        self.title_label = QLabel(f"<b>{get_ui_string('primary_attributes')}</b>")
+        self.title_label.setObjectName("statsSectionTitle")
+        layout.addWidget(self.title_label)
 
         self.attr_table = QTableWidget()
-
+        self.attr_table.setObjectName("statsTable")
         self.attr_table.verticalHeader().setVisible(False)
-
         self.attr_table.setColumnCount(2)
-
         self.attr_table.setHorizontalHeaderLabels(
             [
                 get_ui_string(

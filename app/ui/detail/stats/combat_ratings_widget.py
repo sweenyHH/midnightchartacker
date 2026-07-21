@@ -26,11 +26,16 @@ class CombatRatingsWidget(QWidget):
     def __init__(self):
         super().__init__()
 
+        self.setObjectName("statsSection")
+
         layout = QVBoxLayout(self)
 
-        layout.addWidget(QLabel(f"<b>{get_ui_string('combat_ratings')}</b>"))
+        self.title_label = QLabel(f"<b>{get_ui_string('combat_ratings')}</b>")
+        self.title_label.setObjectName("statsSectionTitle")
+        layout.addWidget(self.title_label)
 
         self.combat_table = QTableWidget()
+        self.combat_table.setObjectName("statsTable")
         self.combat_table.verticalHeader().setVisible(False)
         self.combat_table.setColumnCount(3)
         self.combat_table.setHorizontalHeaderLabels(
