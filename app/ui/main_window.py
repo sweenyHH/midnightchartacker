@@ -12,6 +12,7 @@ from app.storage.character_file_storage import (
 from app.utils.logger import logger
 from app.utils.app_paths import get_import_dir
 from app.services.refresh_service import RefreshService
+from app.localization.ui_strings import get_ui_string
 
 class MainWindow(QMainWindow):
 
@@ -201,11 +202,13 @@ class MainWindow(QMainWindow):
 
         result = QMessageBox.question(
             self,
-            "Delete Character",
-            (
-                f'Delete "{character.name}"?\n\n'
-                "This will permanently remove "
-                "the character export file."
+            get_ui_string(
+                "delete_character"
+            ),
+            get_ui_string(
+                "delete_character_confirmation"
+            ).format(
+                name=character.name
             ),
             QMessageBox.Yes | QMessageBox.No,
             QMessageBox.No,

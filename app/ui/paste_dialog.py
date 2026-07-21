@@ -6,8 +6,8 @@ import os
 import re
 
 from app.utils.logger import logger
+from app.localization.ui_strings import get_ui_string
 
-# import safe write function
 from app.storage.user_data_storage import extract_user_data
 
 
@@ -42,16 +42,28 @@ class PasteDialog(QDialog):
             get_import_dir()
         )
 
-        self.setWindowTitle("Paste Character Data")
+        self.setWindowTitle(
+            get_ui_string(
+                "paste_character_data"
+            )
+        )
         self.setMinimumSize(700, 500)
 
         layout = QVBoxLayout()
 
-        label = QLabel("Paste your character export here:")
+        label = QLabel(
+            get_ui_string(
+                "paste_character_export_here"
+            )
+        )
         layout.addWidget(label)
 
         self.text_edit = QTextEdit()
-        self.text_edit.setPlaceholderText("Paste your WoW export text here...")
+        self.text_edit.setPlaceholderText(
+            get_ui_string(
+                "paste_wow_export_here"
+            )
+        )
         self.text_edit.setFocus()
         layout.addWidget(self.text_edit)
 
@@ -60,10 +72,14 @@ class PasteDialog(QDialog):
 # -------------------------------
         button_layout = QHBoxLayout()
 
-        save_button = QPushButton("Save")
+        save_button = QPushButton(
+            get_ui_string("save")
+        )
         save_button.clicked.connect(self.save_text)
 
-        cancel_button = QPushButton("Cancel")
+        cancel_button = QPushButton(
+            get_ui_string("cancel")
+        )
         cancel_button.clicked.connect(self.close)
 
         button_layout.addWidget(save_button)

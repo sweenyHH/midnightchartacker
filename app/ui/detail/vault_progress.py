@@ -11,6 +11,9 @@ from app.storage.user_data_storage import (
     load_section,
     save_section,
 )
+from app.localization.ui_strings import (
+    get_ui_string,
+)
 
 
 
@@ -21,14 +24,22 @@ class VaultProgressWidget(QWidget):
         super().__init__()
 
         self.layout = QVBoxLayout(self)
-        self.layout.addWidget(QLabel("<b>Vault Progress</b>"))
+        self.layout.addWidget(
+            QLabel(
+                f"<b>{get_ui_string('vault_progress')}</b>"
+            )
+        )
 
         self.grid = QGridLayout()
         self.layout.addLayout(self.grid)
 
         self.fields = {}  # (row, col) → QLineEdit
 
-        row_labels = ["Raid Slots", "M+ Slots", "Delve Slots"]
+        row_labels = [
+            get_ui_string("raid_slots"),
+            get_ui_string("mplus_slots"),
+            get_ui_string("delve_slots"),
+        ]
 
         for row in range(3):
             label = QLabel(row_labels[row])
@@ -49,7 +60,11 @@ class VaultProgressWidget(QWidget):
         self.grid.setColumnStretch(0, 1)
 
 # Clear button
-        self.clear_btn = QPushButton("Clear All")
+        self.clear_btn = QPushButton(
+            get_ui_string(
+                "clear_all"
+            )
+        )
         self.clear_btn.clicked.connect(self.clear_all)
         self.layout.addWidget(self.clear_btn)
 

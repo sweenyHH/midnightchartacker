@@ -20,6 +20,7 @@ from app.ui.theme_manager import ThemeManager
 import os
 import platform
 import subprocess
+from app.localization.ui_strings import get_ui_string
 
 class SettingsDialog(QDialog):
 
@@ -28,7 +29,9 @@ class SettingsDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.setWindowTitle("Settings")
+        self.setWindowTitle(
+            get_ui_string("settings")
+        )
         self.resize(350, 250)
 
         layout = QVBoxLayout(self)
@@ -37,7 +40,11 @@ class SettingsDialog(QDialog):
 # TITLE
 # --------------------------------------------------
 
-        title = QLabel("Application Settings")
+        title = QLabel(
+            get_ui_string(
+                "application_settings"
+            )
+        )
         title.setObjectName("settingsTitle")
 
         layout.addWidget(title)
@@ -46,12 +53,25 @@ class SettingsDialog(QDialog):
 # THEME
 # --------------------------------------------------
 
-        layout.addWidget(QLabel("<b>Theme</b>"))
+        QLabel(
+            f"<b>{get_ui_string('theme')}</b>"
+        )
 
-        self.dark_radio = QRadioButton("Dark")
-        self.light_radio = QRadioButton("Light")
-        self.wow_radio = QRadioButton("WoW")
-        self.modern_radio = QRadioButton("Modern")
+        self.dark_radio = QRadioButton(
+            get_ui_string("dark")
+        )
+
+        self.light_radio = QRadioButton(
+            get_ui_string("light")
+        )
+
+        self.wow_radio = QRadioButton(
+            get_ui_string("wow")
+        )
+
+        self.modern_radio = QRadioButton(
+            get_ui_string("modern")
+        )
 
         self.theme_group = QButtonGroup(self)
 
@@ -82,15 +102,21 @@ class SettingsDialog(QDialog):
 # --------------------------------------------------
 
         layout.addWidget(
-            QLabel("<b>Number Format</b>")
+            QLabel(
+                f"<b>{get_ui_string('number_format')}</b>"
+            )
         )
 
         self.german_numbers = QRadioButton(
-            "German (1.234.567)"
+            get_ui_string(
+                "number_format_german"
+            )
         )
 
         self.english_numbers = QRadioButton(
-            "English (1,234,567)"
+            get_ui_string(
+                "number_format_english"
+            )
         )
 
         self.number_format_group = QButtonGroup(self)
@@ -116,12 +142,22 @@ class SettingsDialog(QDialog):
 # --------------------------------------------------
 
         layout.addWidget(
-            QLabel("<b>Display Language</b>")
+            QLabel(
+                f"<b>{get_ui_string('display_language')}</b>"
+            )
         )
 
-        self.language_en = QRadioButton("English")
-        self.language_de = QRadioButton("German")
-        self.language_fr = QRadioButton("French")
+        self.language_en = QRadioButton(
+            get_ui_string("english")
+        )
+
+        self.language_de = QRadioButton(
+            get_ui_string("german")
+        )
+
+        self.language_fr = QRadioButton(
+            get_ui_string("french")
+        )
 
         self.language_group = QButtonGroup(self)
 
@@ -138,7 +174,11 @@ class SettingsDialog(QDialog):
 # LOGS
 # --------------------------------------------------
 
-        logs_button = QPushButton("Open Log Folder")
+        logs_button = QPushButton(
+            get_ui_string(
+                "open_log_folder"
+            )
+        )
         logs_button.clicked.connect(
             self._open_log_folder
         )
@@ -216,8 +256,13 @@ class SettingsDialog(QDialog):
 
         button_row = QHBoxLayout()
 
-        save_button = QPushButton("Save")
-        cancel_button = QPushButton("Cancel")
+        save_button = QPushButton(
+            get_ui_string("save")
+        )
+
+        cancel_button = QPushButton(
+            get_ui_string("cancel")
+        )
 
         save_button.clicked.connect(
             self._save_settings

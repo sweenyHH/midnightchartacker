@@ -29,6 +29,7 @@ from app.storage.warband_task_progress_storage import (
     get_task_state,
     set_task_state,
 )
+from app.localization.ui_strings import get_ui_string
 
 from app.utils.logger import logger
 
@@ -59,16 +60,16 @@ class CharacterTable(QTableWidget):
         ]
 
         headers = [
-            "Character",
-            "Class",
-            "Item Level",
-            "Level",
-            "Specialization",
-            "Coffer Keys",
-            "R. Spark Dust",
-            "Raid",
-            "Mystic+",
-            "Delves",
+            get_ui_string("character"),
+            get_ui_string("class"),
+            get_ui_string("item_level"),
+            get_ui_string("level"),
+            get_ui_string("specialization"),
+            get_ui_string("coffer_keys"),
+            get_ui_string("radiant_spark_dust"),
+            get_ui_string("raid"),
+            get_ui_string("mythic_plus"),
+            get_ui_string("delves"),
         ]
 
         headers.extend(task_headers)
@@ -325,7 +326,11 @@ class CharacterTable(QTableWidget):
         menu = QMenu(self)
 
         delete_action = menu.addAction(
-            f"Delete {character.name}..."
+            get_ui_string(
+                "delete_character_menu"
+            ).format(
+                name=character.name
+            )
         )
 
         action = menu.exec(

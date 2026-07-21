@@ -14,7 +14,7 @@ from app.storage.warband_task_storage import (
     add_task,
     delete_task,
 )
-
+from app.localization.ui_strings import get_ui_string
 from app.utils.logger import logger
 
 class WarbandTaskDialog(QDialog):
@@ -22,7 +22,11 @@ class WarbandTaskDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.setWindowTitle("Warband Tasks")
+        self.setWindowTitle(
+            get_ui_string(
+                "warband_tasks"
+            )
+        )
         self.resize(450, 400)
 
         layout = QVBoxLayout(self)
@@ -30,7 +34,11 @@ class WarbandTaskDialog(QDialog):
 # --------------------------------------------------
 # TITLE
 # --------------------------------------------------
-        title = QLabel("Warband Tasks")
+        title = QLabel(
+            get_ui_string(
+                "warband_tasks"
+            )
+        )
         title.setObjectName("warbandTaskTitle")
 
         layout.addWidget(title)
@@ -49,9 +57,15 @@ class WarbandTaskDialog(QDialog):
         input_layout = QHBoxLayout()
 
         self.task_input = QLineEdit()
-        self.task_input.setPlaceholderText("New task name...")
+        self.task_input.setPlaceholderText(
+            get_ui_string(
+                "new_task_name"
+            )
+        )
 
-        add_btn = QPushButton("Add")
+        add_btn = QPushButton(
+            get_ui_string("add")
+        )
         add_btn.clicked.connect(self.add_task)
 
         input_layout.addWidget(self.task_input)
@@ -64,10 +78,16 @@ class WarbandTaskDialog(QDialog):
 # --------------------------------------------------
         button_layout = QHBoxLayout()
 
-        delete_btn = QPushButton("Delete Selected")
+        delete_btn = QPushButton(
+            get_ui_string(
+                "delete_selected"
+            )
+        )
         delete_btn.clicked.connect(self.delete_selected)
 
-        close_btn = QPushButton("Close")
+        close_btn = QPushButton(
+            get_ui_string("close")
+        )
         close_btn.clicked.connect(self.accept)
 
         button_layout.addWidget(delete_btn)
@@ -122,8 +142,14 @@ class WarbandTaskDialog(QDialog):
 
             QMessageBox.warning(
                 self,
-                "Task Exists",
-                f'"{task_name}" already exists.'
+                get_ui_string(
+                    "task_exists"
+                ),
+                get_ui_string(
+                    "task_already_exists"
+                ).format(
+                    name=task_name
+                ),
             )
             return
 
@@ -154,8 +180,14 @@ class WarbandTaskDialog(QDialog):
 
         result = QMessageBox.question(
             self,
-            "Delete Task",
-            f'Delete "{task_name}"?',
+            get_ui_string(
+                "delete_task"
+            ),
+            get_ui_string(
+                "delete_task_confirmation"
+            ).format(
+                name=task_name
+            ),
             QMessageBox.Yes | QMessageBox.No,
             QMessageBox.No,
         )

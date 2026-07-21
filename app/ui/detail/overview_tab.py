@@ -21,6 +21,7 @@ from app.services.display_language import get_display_language
 from app.ui.detail.utils import format_gold
 from app.utils.number_formatter import format_number
 from app.storage.vault_storage import load_user_vault
+from app.localization.ui_strings import get_ui_string
 
 
 class OverviewTab(QWidget):
@@ -54,9 +55,7 @@ class OverviewTab(QWidget):
             self.mplus_tile
         )
 
-        self.mplus_tile_title = QLabel(
-            "Mythic+"
-        )
+        self.mplus_tile_title = QLabel()
 
         self.mythic_score_label = QLabel()
 
@@ -87,21 +86,11 @@ class OverviewTab(QWidget):
 
         self.vault_grid = QGridLayout()
 
-        self.vault_tile_title = QLabel(
-            "Vault"
-        )
+        self.vault_tile_title = QLabel()
 
-        self.vault_delves_name = QLabel(
-            "Delves"
-        )
-
-        self.vault_raid_name = QLabel(
-            "Raid"
-        )
-
-        self.vault_mplus_name = QLabel(
-            "M+"
-        )
+        self.vault_delves_name = QLabel()
+        self.vault_raid_name = QLabel()
+        self.vault_mplus_name = QLabel()
 
         self.vault_delves_value = QLabel()
         self.vault_raid_value = QLabel()
@@ -167,7 +156,7 @@ class OverviewTab(QWidget):
 
         self.pve_tiles_row = QHBoxLayout()
 
-        self.pve_title = QLabel("<h3>PvE</h3>")
+        self.pve_title = QLabel()
 
 
         self.pve_tiles_row.addWidget(
@@ -191,7 +180,10 @@ class OverviewTab(QWidget):
         self.pvp_card = QFrame()
         self.pvp_card.setFrameShape(QFrame.Box)
         self.pvp_layout = QVBoxLayout(self.pvp_card)
-        self.pvp_title = QLabel("<h3>PvP</h3>")
+
+        self.pvp_title = QLabel()
+
+
         self.honor_level_label = QLabel()
         self.honor_progress_label = QLabel()
         self.pvp_layout.addWidget(self.pvp_title)
@@ -203,8 +195,8 @@ class OverviewTab(QWidget):
         self.resources_layout = QVBoxLayout(self.resources_card)
 
         self.resources_grid = QGridLayout()
-
-        self.resources_title = QLabel("<h3>Character Resources</h3>")
+        
+        self.resources_title = QLabel()
 
         self.pve_title.setAlignment(Qt.AlignLeft | Qt.AlignTop)
         self.pvp_title.setAlignment(Qt.AlignLeft | Qt.AlignTop)
@@ -345,6 +337,18 @@ class OverviewTab(QWidget):
             f"<b>({getattr(character, 'specialization', '-')})</b>"
         )
 
+        self.vault_delves_name.setText(
+            get_ui_string("delves")
+        )
+
+        self.vault_raid_name.setText(
+            get_ui_string("raid")
+        )
+
+        self.vault_mplus_name.setText(
+            get_ui_string("mythic_plus")
+        )
+
         if class_name in CLASS_COLORS:
 
             adjusted = adjust_class_color(
@@ -384,7 +388,7 @@ class OverviewTab(QWidget):
 
 
         self.honor_level_label.setText(
-            f"Honor Level: "
+            f"{get_ui_string('honor_level')}: "
             f"{getattr(character, 'honor_level', '-')}"
         )
 
@@ -394,7 +398,7 @@ class OverviewTab(QWidget):
         ):
 
             self.honor_progress_label.setText(
-                f"Honor Progress: "
+                f"{get_ui_string('honor_progress')}: "
                 f"{character.honor_progress}"
                 f"/"
                 f"{character.honor_progress_max}"
@@ -403,7 +407,7 @@ class OverviewTab(QWidget):
         else:
 
             self.honor_progress_label.setText(
-                "Honor Progress: -"
+                f"{get_ui_string('honor_progress')}: -"
             )
 
         def find_currency(currency_key):
@@ -418,6 +422,25 @@ class OverviewTab(QWidget):
             )
 
         language = get_display_language()
+        self.pve_title.setText(
+            f"<h3>{get_ui_string('pve')}</h3>"
+        )
+
+        self.pvp_title.setText(
+            f"<h3>{get_ui_string('pvp')}</h3>"
+        )
+
+        self.resources_title.setText(
+            f"<h3>{get_ui_string('character_resources')}</h3>"
+        )
+
+        self.mplus_tile_title.setText(
+            get_ui_string("mythic_plus")
+        )
+
+        self.vault_tile_title.setText(
+            get_ui_string("vault")
+        )
 
         for definition in get_overview_currencies():
 

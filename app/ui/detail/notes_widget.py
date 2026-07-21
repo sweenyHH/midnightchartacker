@@ -8,6 +8,7 @@ from app.storage.user_data_storage import (
     load_section,
     save_section,
 )
+from app.localization.ui_strings import get_ui_string
 
 
 
@@ -21,14 +22,22 @@ class NotesWidget(QWidget):
 # spacing
         self.layout.setSpacing(8)
 
-        self.layout.addWidget(QLabel("<b>Notes</b>"))
+        self.layout.addWidget(
+            QLabel(
+                f"<b>{get_ui_string('notes')}</b>"
+            )
+        )
 
         self.textbox = QTextEdit()
 
 # disable rich text
         self.textbox.setAcceptRichText(False)
 
-        self.textbox.setPlaceholderText("Enter notes (max 512 characters)...")
+        self.textbox.setPlaceholderText(
+            get_ui_string(
+                "notes_placeholder"
+            )
+        )
 
         self.layout.addWidget(self.textbox)
 

@@ -7,6 +7,7 @@ from PySide6.QtGui import QColor
 from .utils import get_layout
 
 from app.ui.colors import ITEM_QUALITY_COLORS
+from app.localization.ui_strings import get_ui_string
 
 
 class StatsTab(QWidget):
@@ -43,7 +44,12 @@ class StatsTab(QWidget):
         attr_table = QTableWidget()
         attr_table.verticalHeader().setVisible(False)
         attr_table.setColumnCount(2)
-        attr_table.setHorizontalHeaderLabels(["Attribute", "Value"])
+        attr_table.setHorizontalHeaderLabels(
+            [
+                get_ui_string("attribute"),
+                get_ui_string("value"),
+            ]
+        )
 
 
         attrs = getattr(character, "attributes", {})
@@ -80,7 +86,11 @@ class StatsTab(QWidget):
         attr_container = QWidget()
         attr_container.setLayout(attr_box)
         attr_container.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
-        attr_box.addWidget(QLabel("<b>Primary Attributes</b>"))
+        attr_box.addWidget(
+            QLabel(
+                f"<b>{get_ui_string('primary_attributes')}</b>"
+            )
+        )
         attr_box.addWidget(attr_table)
 
 # -------------------------------
@@ -89,7 +99,13 @@ class StatsTab(QWidget):
         combat_table = QTableWidget()
         combat_table.verticalHeader().setVisible(False)
         combat_table.setColumnCount(3)
-        combat_table.setHorizontalHeaderLabels(["Stat", "Rating", "%"])
+        combat_table.setHorizontalHeaderLabels(
+            [
+                get_ui_string("stat"),
+                get_ui_string("rating"),
+                "%",
+            ]
+        )
 
 
         combat = getattr(character, "combat_ratings", {})
@@ -129,7 +145,11 @@ class StatsTab(QWidget):
         combat_container = QWidget()
         combat_container.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         combat_container.setLayout(combat_box)
-        combat_box.addWidget(QLabel("<b>Combat Ratings</b>"))
+        combat_box.addWidget(
+            QLabel(
+                f"<b>{get_ui_string('combat_ratings')}</b>"
+            )
+        )
         combat_box.addWidget(combat_table)
 
         left_layout.addWidget(attr_container)
@@ -142,17 +162,21 @@ class StatsTab(QWidget):
         equipment_widget = QWidget()
         equipment_layout = QVBoxLayout(equipment_widget)
 
-        equipment_layout.addWidget(QLabel("<b>Equipment</b>"))
+        equipment_layout.addWidget(
+            QLabel(
+                f"<b>{get_ui_string('equipment')}</b>"
+            )
+        )
 
         table = QTableWidget()
         table.verticalHeader().setVisible(False)
         table.setColumnCount(5)
         table.setHorizontalHeaderLabels([
-            "Slot",
-            "Name",
-            "Item Level",
-            "Type",
-            "Enchanted"
+            get_ui_string("slot"),
+            get_ui_string("name"),
+            get_ui_string("item_level"),
+            get_ui_string("type"),
+            get_ui_string("enchanted"),
         ])
 
         equipment = getattr(character, "equipment", [])
@@ -202,7 +226,11 @@ class StatsTab(QWidget):
             table.setItem(row, 3, QTableWidgetItem(item_type))
 
 # Enchanted
-            enchanted = "Yes" if item.enchanted else "No"
+            enchanted = (
+                get_ui_string("yes")
+                if item.enchanted
+                else get_ui_string("no")
+            )
             ench_item = QTableWidgetItem(enchanted)
             ench_item.setTextAlignment(Qt.AlignCenter)
 

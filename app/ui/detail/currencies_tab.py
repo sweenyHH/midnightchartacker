@@ -9,6 +9,7 @@ from .utils import get_layout
 from app.game_data.currency_catalog import get_currency_display_name
 
 from app.services.display_language import get_display_language
+from app.localization.ui_strings import get_ui_string
 
 
 # --------------------------------------------------
@@ -35,6 +36,30 @@ GROUP_ORDER = [
     "Other"
 ]
 
+def get_group_display_name(
+    group_name,
+):
+
+    mapping = {
+        "Player vs. Player": get_ui_string(
+            "player_vs_player"
+        ),
+        "Miscellaneous": get_ui_string(
+            "miscellaneous"
+        ),
+        "Other": get_ui_string(
+            "other"
+        ),
+        "Season 1": get_ui_string(
+            "season_1"
+        ),
+    }
+
+    return mapping.get(
+        group_name,
+        group_name,
+    )
+
 
 # --------------------------------------------------
 # GROUP WIDGET (collapsible section)
@@ -53,7 +78,13 @@ class CurrencyGroupWidget(QWidget):
         self.layout.setContentsMargins(0, 0, 0, 0)
 
 # HEADER
-        self.header = QPushButton(f"▶ {group_name}")
+        display_name = get_group_display_name(
+            group_name
+        )
+
+        self.header = QPushButton(
+            f"▶ {display_name}"
+        )
         self.header.setCheckable(True)
         self.header.clicked.connect(self.toggle)
 
@@ -75,7 +106,13 @@ class CurrencyGroupWidget(QWidget):
         table = self.table
 
         table.setColumnCount(3)
-        table.setHorizontalHeaderLabels(["Name", "Amount", "Max"])
+        table.setHorizontalHeaderLabels(
+            [
+                get_ui_string("name"),
+                get_ui_string("amount"),
+                get_ui_string("max"),
+            ]
+        )
         table.setRowCount(len(self.currencies))
 
         table.verticalHeader().setVisible(False)
@@ -144,7 +181,10 @@ class CurrencyGroupWidget(QWidget):
         self.table.setVisible(self.is_expanded)
 
         arrow = "▼" if self.is_expanded else "▶"
-        self.header.setText(f"{arrow} {self.group_name}")
+        self.header.setText(
+            f"{arrow} "
+            f"{get_group_display_name(self.group_name)}"
+        )
 
     def expand(self):
         if not self.is_expanded:
@@ -191,7 +231,7 @@ class CurrenciesTab(QWidget):
             ordered = [g for g in GROUP_ORDER if g in grouped]
             remaining = sorted(g for g in grouped if g not in GROUP_ORDER)
             return ordered + remaining
-
+            
         ordered_groups = sort_groups(grouped)
 
 # SPLIT
@@ -208,8 +248,16 @@ class CurrenciesTab(QWidget):
         btn_layout.setContentsMargins(0, 0, 0, 0)
     
 
-        expand_btn = QPushButton("Expand All")
-        collapse_btn = QPushButton("Collapse All")
+        expand_btn = QPushButton(
+            get_ui_string(
+                "expand_all"
+            )
+        )
+        collapse_btn = QPushButton(
+            get_ui_string(
+                "collapse_all"
+            )
+        )
 
         expand_btn.clicked.connect(self.expand_all)
         collapse_btn.clicked.connect(self.collapse_all)

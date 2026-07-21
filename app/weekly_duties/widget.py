@@ -14,6 +14,7 @@ from app.storage.weekly_duties_storage import (
     load_state,
     save_state,
 )
+from app.localization.ui_strings import get_ui_string
 
 import os
 
@@ -24,7 +25,9 @@ class WeeklyDutiesWidget(QWidget):
         super().__init__()
 
         self.layout = QVBoxLayout(self)
-        self.layout.addWidget(QLabel("<b>Weekly Duties</b>"))
+        self.layout.addWidget(
+            QLabel("<b>Weekly Duties</b>")
+        )
 
         self.rows_config = ROWS_CONFIG
 
@@ -35,7 +38,11 @@ class WeeklyDutiesWidget(QWidget):
         self.layout.addLayout(self.grid)
         self.layout.addStretch()
 
-        self.clear_btn = QPushButton("Clear All")
+        self.clear_btn = QPushButton(
+            get_ui_string(
+                "clear_all"
+            )
+        )
         self.clear_btn.clicked.connect(self.clear_all)
         self.layout.addWidget(self.clear_btn)
 

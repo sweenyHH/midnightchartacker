@@ -15,6 +15,7 @@ from app.ui.detail.utils import format_gold
 from app.utils.number_formatter import format_number
 from app.services.display_language import get_display_language
 from app.game_data.reputation_catalog import get_reputation_display_name
+from app.localization.ui_strings import get_ui_string
 
 
 from app.game_data.currency_catalog import (
@@ -41,18 +42,34 @@ class TopPanel(QWidget):
 # --------------------------------------------------
         button_row = QHBoxLayout()
 
-        self.paste_btn = QPushButton("Paste Character Data")
+        self.paste_btn = QPushButton(
+            get_ui_string(
+                "paste_character_data"
+            )
+        )
         self.paste_btn.clicked.connect(paste_cb)
 
-        self.warband_btn = QPushButton("Warband Tasks")
+        self.warband_btn = QPushButton(
+            get_ui_string(
+                "warband_tasks"
+            )
+        )
         self.warband_btn.clicked.connect(warband_cb)
 
-        self.settings_btn = QPushButton("Settings")
+        self.settings_btn = QPushButton(
+            get_ui_string(
+                "settings"
+            )
+        )
         self.settings_btn.clicked.connect(
             self.open_settings
         )
 
-        self.back_btn = QPushButton("Back")
+        self.back_btn = QPushButton(
+            get_ui_string(
+                "back"
+            )
+        )
         self.back_btn.clicked.connect(back_cb)
         self.back_btn.hide()
 
@@ -115,7 +132,11 @@ class TopPanel(QWidget):
 
         if not reputation_list:
             self.rep_layout.addWidget(
-                QLabel("No reputation data available")
+                QLabel(
+                    get_ui_string(
+                        "no_reputation_data_available"
+                    )
+                )
             )
             return
 
@@ -161,7 +182,9 @@ class TopPanel(QWidget):
         renown_layout = QVBoxLayout(renown_widget)
         renown_layout.setAlignment(Qt.AlignTop)
 
-        renown_title = QLabel("<b>Renown</b>")
+        renown_title = QLabel(
+            f"<b>{get_ui_string('renown')}</b>"
+        )
         renown_title.setAlignment(Qt.AlignCenter)
 
         renown_layout.addWidget(renown_title)
@@ -228,7 +251,7 @@ class TopPanel(QWidget):
         currency_layout.setAlignment(Qt.AlignTop)
 
         currency_title = QLabel(
-            "<b>Warband Resources</b>"
+            f"<b>{get_ui_string('warband_resources')}</b>"
         )
 
         currency_title.setAlignment(

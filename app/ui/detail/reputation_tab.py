@@ -9,6 +9,7 @@ from PySide6.QtCore import Qt
 
 from app.game_data.reputation_catalog import get_reputation_display_name
 from app.services.display_language import get_display_language
+from app.localization.ui_strings import get_ui_string
 
 
 class ReputationTab(QWidget):
@@ -23,7 +24,11 @@ class ReputationTab(QWidget):
 # SEARCH FIELD
 # -------------------------------
         self.search = QLineEdit()
-        self.search.setPlaceholderText("Search reputations (min 3 letters)...")
+        self.search.setPlaceholderText(
+            get_ui_string(
+                "search_reputations"
+            )
+        )
         self.search.textChanged.connect(self.apply_filter)
 
         self.layout.addWidget(self.search)
@@ -35,9 +40,9 @@ class ReputationTab(QWidget):
 
         self.table.setColumnCount(3)
         self.table.setHorizontalHeaderLabels([
-            "Faction",
-            "Level",
-            "Progress"
+            get_ui_string("faction"),
+            get_ui_string("level"),
+            get_ui_string("progress"),
         ])
 
         self.table.setSortingEnabled(True)
@@ -131,7 +136,10 @@ class ReputationTab(QWidget):
 # LEVEL (CENTER)
 # -------------------------------
             if rep.rep_type == "renown":
-                level_text = f"Renown {rep.level}"
+                level_text = (
+                    f"{get_ui_string('renown_prefix')} "
+                    f"{rep.level}"
+                )
             else:
                 level_text = str(rep.level) if rep.level else "-"
 
