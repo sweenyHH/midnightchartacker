@@ -1,0 +1,6 @@
+id;key;english_name;german_name;french_name;overview
+1;arena_2v2;2v2;2v2;2c2;TRUE
+2;arena_3v3;3v3;3v3;3c3;TRUE
+3;rated_battleground;Rated Battleground;Schlachtfeld;CDB coté;TRUE
+4;solo_shuffle;Solo Shuffle;Solo Shuffle;Mélange solo;TRUE
+7;battleground_blitz;Battleground Blitz;Blitz;Blitz;TRUE

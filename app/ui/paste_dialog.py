@@ -38,6 +38,8 @@ class PasteDialog(QDialog):
     def __init__(self):
         super().__init__()
 
+        self.setObjectName("pasteDialog")
+
         self.target_folder = str(
             get_import_dir()
         )
@@ -51,14 +53,12 @@ class PasteDialog(QDialog):
 
         layout = QVBoxLayout()
 
-        label = QLabel(
-            get_ui_string(
-                "paste_character_export_here"
-            )
-        )
-        layout.addWidget(label)
+        self.description_label = QLabel(get_ui_string("paste_character_export_here"))
+        self.description_label.setObjectName("pasteDialogLabel")
+        layout.addWidget(self.description_label)
 
         self.text_edit = QTextEdit()
+        self.text_edit.setObjectName("pasteDialogEditor")
         self.text_edit.setPlaceholderText(
             get_ui_string(
                 "paste_wow_export_here"
@@ -72,14 +72,12 @@ class PasteDialog(QDialog):
 # -------------------------------
         button_layout = QHBoxLayout()
 
-        save_button = QPushButton(
-            get_ui_string("save")
-        )
+        save_button = QPushButton(get_ui_string("save"))
+        save_button.setObjectName("pasteDialogSaveButton")
         save_button.clicked.connect(self.save_text)
 
-        cancel_button = QPushButton(
-            get_ui_string("cancel")
-        )
+        cancel_button = QPushButton(get_ui_string("cancel"))
+        cancel_button.setObjectName("pasteDialogCancelButton")
         cancel_button.clicked.connect(self.close)
 
         button_layout.addWidget(save_button)

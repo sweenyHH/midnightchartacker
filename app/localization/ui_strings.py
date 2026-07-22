@@ -566,6 +566,41 @@ UI_STRINGS = {
         "fr": "Saison 1",
     },
 
+    "raid_progress": {
+        "en": "Raid Progress",
+        "de": "Raidfortschritt",
+        "fr": "Progression de raid",
+    },
+
+    "instance": {
+        "en": "Instance",
+        "de": "Instanz",
+        "fr": "Instance",
+    },
+
+    "lfr": {
+        "en": "LFR",
+        "de": "LFR",
+        "fr": "LFR",
+    },
+
+    "normal": {
+        "en": "Normal",
+        "de": "Normal",
+        "fr": "Normal",
+    },
+
+    "heroic": {
+        "en": "Heroic",
+        "de": "Heroisch",
+        "fr": "Héroïque",
+    },
+
+    "mythic": {
+        "en": "Mythic",
+        "de": "Mythisch",
+        "fr": "Mythique",
+    },
 
 
 

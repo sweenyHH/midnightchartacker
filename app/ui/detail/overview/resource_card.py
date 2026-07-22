@@ -4,7 +4,7 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QGridLayout,
 )
-
+from PySide6.QtCore import Qt
 from app.game_data.currency_catalog import (
     get_overview_currencies,
     get_currency_display_name,
@@ -46,6 +46,18 @@ class ResourceCard(QFrame):
         )
 
         layout = QVBoxLayout(self)
+
+        layout.setContentsMargins(
+            8, 8, 8, 8
+        )
+
+        layout.setSpacing(
+            4
+        )
+
+        layout.setAlignment(
+            Qt.AlignTop
+        )
 
         self.resources_title = QLabel()
 

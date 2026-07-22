@@ -22,6 +22,8 @@ class WarbandTaskDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
 
+        self.setObjectName("warbandTaskDialog")
+
         self.setWindowTitle(
             get_ui_string(
                 "warband_tasks"
@@ -57,15 +59,15 @@ class WarbandTaskDialog(QDialog):
         input_layout = QHBoxLayout()
 
         self.task_input = QLineEdit()
+        self.task_input.setObjectName("warbandTaskInput")
         self.task_input.setPlaceholderText(
             get_ui_string(
                 "new_task_name"
             )
         )
 
-        add_btn = QPushButton(
-            get_ui_string("add")
-        )
+        add_btn = QPushButton(get_ui_string("add"))
+        add_btn.setObjectName("warbandTaskAddButton")
         add_btn.clicked.connect(self.add_task)
 
         input_layout.addWidget(self.task_input)
@@ -78,16 +80,12 @@ class WarbandTaskDialog(QDialog):
 # --------------------------------------------------
         button_layout = QHBoxLayout()
 
-        delete_btn = QPushButton(
-            get_ui_string(
-                "delete_selected"
-            )
-        )
+        delete_btn = QPushButton(get_ui_string("delete_selected"))
+        delete_btn.setObjectName("warbandTaskDeleteButton")
         delete_btn.clicked.connect(self.delete_selected)
 
-        close_btn = QPushButton(
-            get_ui_string("close")
-        )
+        close_btn = QPushButton(get_ui_string("close"))
+        close_btn.setObjectName("warbandTaskCloseButton")
         close_btn.clicked.connect(self.accept)
 
         button_layout.addWidget(delete_btn)

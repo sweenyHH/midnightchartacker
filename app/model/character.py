@@ -56,6 +56,8 @@ class Character:
         self.currencies = []
         self.reputations = []
         self.equipment = []
+        self.lockouts = []
+        self.pvp_brackets = []
 
         # Vault progress
         self.vault = {
@@ -70,3 +72,13 @@ class Character:
     def add_equipment(self, item):
         self.equipment.append(item)
 
+    def add_lockout(self, lockout):
+        self.lockouts.append(lockout)
+
+    def add_pvp_bracket(
+        self,
+        bracket,
+    ):
+        self.pvp_brackets.append(
+            bracket
+        )

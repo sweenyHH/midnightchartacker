@@ -3,6 +3,10 @@ from app.parser.currency_parser import parse_currency, parse_gold, parse_item, C
 from app.parser.reputation_parser import parse_reputation
 from app.parser.section_parser import handle_section
 from app.parser.equipment_parser import parse_equipment
+from app.parser.lockout_parser import parse_instance_lockout, parse_boss_lockout
+from app.parser.pvp_parser import parse_pvp_bracket
+
+
 
 from pathlib import Path
 
@@ -40,7 +44,10 @@ def parse_txt(file_path):
     current_section = None
     current_currency_group = None
     in_reputation_section = False
-    in_equipment_section = False  
+    in_equipment_section = False
+    in_lockout_section = False
+
+    current_lockout = None 
 
     reputations = []
 
@@ -84,6 +91,20 @@ def parse_txt(file_path):
 # -------------------------------
         if line == "Reputations:":
             in_reputation_section = True
+            continue
+
+# -------------------------------
+# Lockout SECTION
+# -------------------------------
+
+        if line == "Lockouts:":
+            in_lockout_section = True
+            current_lockout = None
+            continue
+
+        if (in_lockout_section and line == "Progress:"):
+            in_lockout_section = False
+            current_lockout = None
             continue
 
 # -------------------------------
@@ -158,6 +179,42 @@ def parse_txt(file_path):
             continue
 
 # -------------------------------
+# LOCKOUTS
+# -------------------------------
+
+        if in_lockout_section:
+
+            instance = parse_instance_lockout(
+                line
+            )
+
+            if instance:
+
+                character.add_lockout(
+                    instance
+                )
+
+                current_lockout = instance
+
+                continue
+
+            boss = parse_boss_lockout(
+                line
+            )
+
+            if (
+                boss
+                and current_lockout
+            ):
+
+                current_lockout.add_boss(
+                    boss
+                )
+
+                continue
+
+
+# -------------------------------
 # REPUTATIONS
 # -------------------------------
         if in_reputation_section:
@@ -177,6 +234,24 @@ def parse_txt(file_path):
                 pass
 
             continue
+
+# -------------------------------
+# PVP BRACKETS
+# -------------------------------
+
+        if current_section == "pvp":
+
+            bracket = parse_pvp_bracket(
+                line
+            )
+
+            if bracket:
+
+                character.add_pvp_bracket(
+                    bracket
+                )
+
+                continue
 
 # -------------------------------
 # SECTION DATA
@@ -199,4 +274,5 @@ def parse_txt(file_path):
                 setattr(character, FIELD_MAPPING[k.strip()], value)
 
     character.reputations = reputations
+
     return character

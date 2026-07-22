@@ -27,7 +27,13 @@ class CharacterCard(QFrame):
 
         self.name_label = QLabel()
 
-        self.info_label = QLabel()
+        self.realm_label = QLabel()
+
+        self.class_label = QLabel()
+
+        self.spec_label = QLabel()
+
+        self.level_label = QLabel()
 
         self.ilvl_label = QLabel()
 
@@ -36,12 +42,28 @@ class CharacterCard(QFrame):
         )
 
         layout.addWidget(
-            self.info_label
+            self.realm_label
+        )
+
+        layout.addSpacing(8)
+
+        layout.addWidget(
+            self.class_label
+        )
+
+        layout.addWidget(
+            self.spec_label
+        )
+
+        layout.addSpacing(8)
+
+        layout.addWidget(
+            self.level_label
         )
 
         layout.addWidget(
             self.ilvl_label
-        )
+        )        
 
     def set_character(
         self,
@@ -54,15 +76,47 @@ class CharacterCard(QFrame):
             "-"
         )
 
-        self.name_label.setText(
-            f"<h2>{character.name}</h2>"
+        full_name = getattr(
+            character,
+            "name",
+            "-"
         )
 
-        self.info_label.setText(
-            f"<b>Level {getattr(character, 'level', '-')}</b> "
+        name_parts = full_name.split(
+            "-",
+            1
+        )
+
+        character_name = (
+            name_parts[0]
+        )
+
+        realm_name = (
+            name_parts[1]
+            if len(name_parts) > 1
+            else "-"
+        )
+
+        self.name_label.setText(
+            f"<h2>{character_name}</h2>"
+        )
+
+        self.realm_label.setText(
+            f"<b>{realm_name}</b>"
+        )
+
+        self.class_label.setText(
             f"<b>{getattr(character, 'race', '-')}</b> "
-            f"<b>{class_name}</b> "
-            f"<b>({getattr(character, 'specialization', '-')})</b>"
+            f"<b>{class_name}</b>"
+        )
+
+        self.spec_label.setText(
+            f"<b>{getattr(character, 'specialization', '-')}</b>"
+        )
+
+        self.level_label.setText(
+            f"<b>Level:</b> "
+            f"{getattr(character, 'level', '-')}"
         )
 
         if class_name in CLASS_COLORS:
@@ -71,13 +125,21 @@ class CharacterCard(QFrame):
                 CLASS_COLORS[class_name]
             )
 
-            self.info_label.setStyleSheet(
+            self.class_label.setStyleSheet(
+                f"color: {adjusted};"
+            )
+
+            self.spec_label.setStyleSheet(
                 f"color: {adjusted};"
             )
 
         else:
 
-            self.info_label.setStyleSheet(
+            self.class_label.setStyleSheet(
+                ""
+            )
+
+            self.spec_label.setStyleSheet(
                 ""
             )
 

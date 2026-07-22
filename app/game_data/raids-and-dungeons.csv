@@ -1,0 +1,67 @@
+﻿id;key;english_name;german_name;french_name;content_type;featured
+2159;onyxias_lair;Onyxia's Lair;Onyxias Hort;Repaire d’Onyxia;raid;FALSE
+2677;blackwing_lair;Blackwing Lair;Pechschwingenhort;Repaire de l’Aile noire;raid;FALSE
+2717;molten_core;Molten Core;Der Geschmolzene Kern;Cœur du Magma;raid;FALSE
+3428;temple_of_ahnqiraj;Temple of Ahn'Qiraj;Ahn'Qiraj;Ahn’Qiraj;raid;FALSE
+3429;ruins_of_ahnqiraj;Ruins of Ahn'Qiraj;Die Ruinen von Ahn'Qiraj;Ruines d’Ahn’Qiraj;raid;FALSE
+3456;naxxramas;Naxxramas;Naxxramas;Naxxramas;raid;FALSE
+3457;karazhan;Karazhan;Karazhan;Karazhan;raid;FALSE
+3606;hyjal_summit;Hyjal Summit;Hyjalgipfel;Sommet d’Hyjal;raid;FALSE
+3607;serpentshrine_cavern;Serpentshrine Cavern;Höhle des Schlangenschreins;Caverne du sanctuaire du Serpent;raid;FALSE
+3836;magtheridons_lair;Magtheridon's Lair;Magtheridons Kammer;Le repaire de Magtheridon;raid;FALSE
+3845;the_eye;The Eye;Festung der Stürme;Donjon de la Tempête;raid;FALSE
+3923;gruuls_lair;Gruul's Lair;Gruuls Unterschlupf;Repaire de Gruul;raid;FALSE
+3959;black_temple;Black Temple;Der Schwarze Tempel;Temple noir;raid;FALSE
+4075;sunwell_plateau;Sunwell Plateau;Sonnenbrunnenplateau;Plateau du Puits de soleil;raid;FALSE
+4273;ulduar;Ulduar;Ulduar;Ulduar;raid;FALSE
+4493;the_obsidian_sanctum;The Obsidian Sanctum;Das Obsidiansanktum;Le sanctum Obsidien;raid;FALSE
+4500;the_eye_of_eternity;The Eye of Eternity;Das Auge der Ewigkeit;L’Œil de l’éternité;raid;FALSE
+4603;vault_of_archavon;Vault of Archavon;Archavons Kammer;Caveau d’Archavon;raid;FALSE
+4722;trial_of_the_crusader;Trial of the Crusader;Prüfung des Kreuzfahrers;L’épreuve du croisé;raid;FALSE
+4812;icecrown_citadel;Icecrown Citadel;Die Eiskronenzitadelle;Citadelle de la Couronne de glace;raid;FALSE
+4987;the_ruby_sanctum;The Ruby Sanctum;Das Rubinsanktum;Le sanctum Rubis;raid;FALSE
+5094;blackwing_descent;Blackwing Descent;Pechschwingenabstieg;Descente de l’Aile noire;raid;FALSE
+5334;the_bastion_of_twilight;The Bastion of Twilight;Die Bastion des Zwielichts;Le bastion du Crépuscule;raid;FALSE
+5600;baradin_hold;Baradin Hold;Baradinfestung;Bastion de Baradin;raid;FALSE
+5638;throne_of_the_four_winds;Throne of the Four Winds;Thron der Vier Winde;Trône des quatre vents;raid;FALSE
+5723;firelands;Firelands;Die Feuerlande;Terres de Feu;raid;FALSE
+5892;dragon_soul;Dragon Soul;Drachenseele;L’Âme des dragons;raid;FALSE
+6067;terrace_of_endless_spring;Terrace of Endless Spring;Terrasse des Endlosen Frühlings;Terrasse Printanière;raid;FALSE
+6125;mogushan_vaults;Mogu'shan Vaults;Mogu'shangewölbe;Caveaux Mogu’shan;raid;FALSE
+6297;heart_of_fear;Heart of Fear;Das Herz der Angst;Cœur de la peur;raid;FALSE
+6622;throne_of_thunder;Throne of Thunder;Der Thron des Donners;Trône du tonnerre;raid;FALSE
+6738;siege_of_orgrimmar;Siege of Orgrimmar;Schlacht um Orgrimmar;Siège d’Orgrimmar;raid;FALSE
+6967;blackrock_foundry;Blackrock Foundry;Schwarzfelsgießerei;Fonderie des Rochenoires;raid;FALSE
+6996;highmaul;Highmaul;Hochfels;Cognefort;raid;FALSE
+7545;hellfire_citadel;Hellfire Citadel;Höllenfeuerzitadelle;Citadelle des Flammes infernales;raid;FALSE
+8025;the_nighthold;The Nighthold;Die Nachtfestung;Palais Sacrenuit;raid;FALSE
+8026;the_emerald_nightmare;The Emerald Nightmare;Der Smaragdgrüne Alptraum;Le Cauchemar d’émeraude;raid;FALSE
+8348;shaldorei_terrace;Shal'dorei Terrace;Die Terrasse der Shal'dorei;Terrasse Shal’dorei;raid;FALSE
+8440;trial_of_valor;Trial of Valor;Die Prüfung der Tapferkeit;Le Jugement des Valeureux;raid;FALSE
+8524;tomb_of_sargeras;Tomb of Sargeras;Das Grabmal des Sargeras;Tombe de Sargeras;raid;FALSE
+8638;antorus_the_burning_throne;Antorus the Burning Throne;Antorus der Brennende Thron;Antorus le Trône ardent;raid;FALSE
+9389;uldir;Uldir;Uldir;Uldir;raid;FALSE
+10057;crucible_of_storms;Crucible of Storms;Der Tiegel der Stürme;Creuset des Tempêtes;raid;FALSE
+10076;battle_of_dazaralor;Battle of Dazar'alor;Die Schlacht von Dazar'alor;Bataille de Dazar’alor;raid;FALSE
+10425;the_eternal_palace;The Eternal Palace;Der Ewige Palast;Palais Éternel;raid;FALSE
+10448;darkest_depths;Darkest Depths;Die Tiefschwarzen Tiefen;Profondeurs Obscures;raid;FALSE
+10522;nyalotha_the_waking_city;Ny'alotha the Waking City;Ny'alotha die Erwachte Stadt;Ny’alotha la cité en éveil;raid;FALSE
+10582;caverns_of_time;Caverns of Time;Die Höhlen der Zeit;Grottes du Temps;raid;FALSE
+13224;castle_nathria;Castle Nathria;Schloss Nathria;Château Nathria;raid;FALSE
+13561;sanctum_of_domination;Sanctum of Domination;Sanktum der Herrschaft;Sanctum de Domination;raid;FALSE
+13742;sepulcher_of_the_first_ones;Sepulcher of the First Ones;Mausoleum der Ersten;Sépulcre des Fondateurs;raid;FALSE
+14030;vault_of_the_incarnates;Vault of the Incarnates;Gewölbe der Inkarnationen;Caveau des Incarnations;raid;FALSE
+14617;the_seat_of_the_aspects;The Seat of the Aspects;Der Sitz der Aspekte;Siège des Aspects;raid;FALSE
+14643;amirdrassil_the_dreams_hope;Amirdrassil the Dream's Hope;Amirdrassil Hoffnung des Traums;Amirdrassil l’Espoir du Rêve;raid;FALSE
+14663;aberrus_the_shadowed_crucible;Aberrus the Shadowed Crucible;Aberrus Schmelztiegel der Schatten;Aberrus le creuset de l’Ombre;raid;FALSE
+14980;nerub_ar_palace;Nerub-ar Palace;Palast der Nerub'ar;Palais des Nérub’ar;raid;FALSE
+15522;liberation_of_undermine;Liberation of Undermine;Befreiung von Lorenhall;Libération de Terremine;raid;FALSE
+15913;blackrock_depths;Blackrock Depths;Schwarzfelstiefen;Les profondeurs de Rochenoire;raid;FALSE
+16178;manaforge_omega;Manaforge Omega;Die Manaschmiede Omega;Manaforge Oméga;raid;FALSE
+16279;sporefall;Sporefall;Sporenfall;Chute-des-Spores;raid;TRUE
+16340;the_voidspire;The Voidspire;Die Leerenspitze;La flèche du Vide;raid;TRUE
+16342;isle_of_queldanas;Isle of Quel'Danas;Insel von Quel'Danas;Île de Quel’Danas;raid;TRUE
+16531;the_dreamrift;The Dreamrift;Der Traumriss;La faille du Rêve;raid;TRUE
+16551;vault_of_the_incarnates_v2;Vault of the Incarnates (V2);Gewölbe der Inkarnationen (V2);Caveau des Incarnations (V2);raid;FALSE
+16571;wastes_of_karesh;Wastes of K'aresh;Die Ödnis von K'aresh;Déserts de K’aresh;raid;FALSE
+16572;the_glassed_expanse;The Glassed Expanse;Die Verglaste Weite;L’étendue Vitrifiée;raid;FALSE

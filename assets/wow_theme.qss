@@ -437,3 +437,46 @@ QRadioButton::indicator:checked {
 QRadioButton::indicator:checked:hover {
     background-color: #e6c65a;
 }
+
+/* =====================
+   OVERVIEW CARDS
+===================== */
+
+QFrame#overviewCard {
+    background-color: #161616;
+    border: 1px solid #6f5a2f;
+    padding: 6px;
+}
+
+QFrame#overviewTile {
+    background-color: #141414;
+    border: 1px solid #6f5a2f;
+    padding: 4px;
+}
+
+/* =====================
+   RAID PROGRESS
+===================== */
+
+QTableWidget#raidProgressTable {
+    background-color: #141414;
+    border: none;
+    gridline-color: #3a2f1c;
+}
+
+QTableWidget#raidProgressTable::item {
+    padding: 4px;
+}
+
+QTableWidget#raidProgressTable QHeaderView::section {
+    background-color: #202020;
+    border: 1px solid #5c4b2a;
+    padding: 4px;
+}
+
+QLabel#overviewSectionTitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffd100;
+    padding-bottom: 4px;
+}

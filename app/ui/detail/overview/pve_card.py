@@ -5,13 +5,12 @@ from PySide6.QtWidgets import (
     QHBoxLayout,
     QGridLayout,
 )
-
+from PySide6.QtCore import Qt
 from app.ui.blizzard_color_codes import get_mplus_color
-
 from app.storage.vault_storage import load_user_vault
-
 from app.localization.ui_strings import get_ui_string
-
+from app.ui.detail.overview.raid_progress_widget import RaidProgressWidget
+from app.ui.detail.overview.overview_constants import OVERVIEW_TILE_WIDTH, OVERVIEW_TILE_HEIGHT
 
 class PveCard(QFrame):
 
@@ -37,11 +36,17 @@ class PveCard(QFrame):
         self.mplus_tile = QFrame()
         self.mplus_tile.setObjectName("overviewTile")
         self.mplus_tile.setFrameShape(QFrame.Box)
+        self.mplus_tile.setFixedSize(OVERVIEW_TILE_WIDTH, OVERVIEW_TILE_HEIGHT)
 
         mplus_layout = QVBoxLayout(self.mplus_tile)
+        mplus_layout.setContentsMargins(8, 8, 8, 8)
+        mplus_layout.setSpacing(4)
+
 
         self.mplus_tile_title = QLabel()
         self.mythic_score_label = QLabel()
+        self.mythic_score_label.setAlignment(Qt.AlignCenter)
+
         self.mythic_score_label.setStyleSheet(
             """
             font-size: 28px;
@@ -50,7 +55,9 @@ class PveCard(QFrame):
         )
 
         mplus_layout.addWidget(self.mplus_tile_title)
+        mplus_layout.addStretch()
         mplus_layout.addWidget(self.mythic_score_label)
+        mplus_layout.addStretch()
 
         tiles_row.addWidget(self.mplus_tile, 1)
 
@@ -59,14 +66,27 @@ class PveCard(QFrame):
         self.vault_tile = QFrame()
         self.vault_tile.setObjectName("overviewTile")
         self.vault_tile.setFrameShape(QFrame.Box)
+        self.vault_tile.setFixedSize(OVERVIEW_TILE_WIDTH, OVERVIEW_TILE_HEIGHT)
 
         vault_layout = QVBoxLayout(self.vault_tile)
+        vault_layout.setContentsMargins(
+            8, 8, 8, 8
+        )
+        vault_layout.setSpacing(
+            4
+        )
 
         self.vault_tile_title = QLabel()
 
-        vault_layout.addWidget(self.vault_tile_title)
+        vault_layout.addWidget(
+            self.vault_tile_title
+        )
+
+        vault_layout.addStretch()
+
         vault_grid = QGridLayout()
         vault_layout.addLayout(vault_grid)
+        #vault_layout.addStretch()
 
         self.vault_delves_name = QLabel()
         self.vault_raid_name = QLabel()
@@ -86,7 +106,11 @@ class PveCard(QFrame):
         vault_grid.setColumnStretch(0, 1)
         vault_grid.setColumnStretch(1, 0)
 
+        self.raid_progress_widget = (RaidProgressWidget())
+
         tiles_row.addWidget(self.vault_tile, 1)
+        tiles_row.addWidget(self.raid_progress_widget, 4)
+
 
     def set_character(self, character):
 
@@ -98,6 +122,15 @@ class PveCard(QFrame):
 
         self.vault_raid_name.setText(get_ui_string("raid"))
         self.vault_mplus_name.setText(get_ui_string("mythic_plus"))
+
+        self.mplus_tile_title.setText(
+            f"<b>{get_ui_string('mythic_plus')}</b>"
+        )
+
+        self.vault_tile_title.setText(
+            f"<b>{get_ui_string('vault')}</b>"
+        )
+
 
         score = getattr(
             character,
@@ -116,6 +149,7 @@ class PveCard(QFrame):
         )
 
         vault = load_user_vault(character)
+
 
         def dots(slots):
 
@@ -137,3 +171,4 @@ class PveCard(QFrame):
         self.vault_delves_value.setText(dots(vault["row3"]))
         self.vault_raid_value.setText(dots(vault["row1"]))
         self.vault_mplus_value.setText(dots(vault["row2"]))
+        self.raid_progress_widget.set_character(character)

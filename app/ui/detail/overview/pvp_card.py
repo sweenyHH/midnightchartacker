@@ -2,11 +2,15 @@ from PySide6.QtWidgets import (
     QFrame,
     QLabel,
     QVBoxLayout,
+    QHBoxLayout,
 )
 
-from app.localization.ui_strings import (
-    get_ui_string,
-)
+from app.localization.ui_strings import get_ui_string
+from app.ui.detail.overview.pvp_rating_widget import PvpRatingWidget
+from app.ui.detail.overview.pvp_helper import build_pvp_overview
+from app.game_data.pvp_bracket_catalog import get_overview_pvp_brackets, get_pvp_bracket_display_name
+
+from app.services.display_language import get_display_language
 
 
 class PvpCard(QFrame):
@@ -46,6 +50,36 @@ class PvpCard(QFrame):
             self.honor_progress_label
         )
 
+        layout.addSpacing(
+            8
+        )
+
+        self.rating_row = (
+            QHBoxLayout()
+        )
+
+        layout.addLayout(
+            self.rating_row
+        )
+
+        self.pvp_widgets = {}
+
+        for definition in (get_overview_pvp_brackets()):
+
+            widget = (
+                PvpRatingWidget(
+                    definition.key
+                )
+            )
+
+            self.pvp_widgets[
+                definition.key
+            ] = widget
+
+            self.rating_row.addWidget(
+                widget
+            )
+
     def set_character(
         self,
         character,
@@ -80,4 +114,34 @@ class PvpCard(QFrame):
                 f"{get_ui_string('honor_progress')}: -"
             )
 
+        language = (get_display_language())
+
+        for key, widget in (self.pvp_widgets.items()):
+
+            widget.set_title(
+                get_pvp_bracket_display_name(
+                    key,
+                    language,
+                )
+            )
+
+
+
+        rows = build_pvp_overview(
+            character
+        )
+
+        for row in rows:
+
+            widget = (
+                self.pvp_widgets.get(
+                    row["key"]
+                )
+            )
+
+            if widget:
+
+                widget.set_rating(
+                    row["rating"]
+                )
   
