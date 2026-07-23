@@ -127,7 +127,27 @@ class CurrenciesTab(QWidget):
 
             currencies = grouped.get(group_name, [])
 
-            self.group_widgets[group_name].set_currencies(currencies)
+            self.group_widgets[group_name].set_currencies(
+                currencies
+            )
+
+        #
+        # Default expansion state
+        #
+
+        self.collapse_all()
+
+        for group_name in (
+            "Midnight",
+            "Season 1",
+        ):
+
+            widget = self.group_widgets.get(
+                group_name
+            )
+
+            if widget:
+                widget.expand()
 
     def expand_all(self):
 

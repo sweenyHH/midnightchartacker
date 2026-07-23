@@ -44,15 +44,23 @@ class PveCard(QFrame):
 
 
         self.mplus_tile_title = QLabel()
+        self.mplus_tile_title.setObjectName(
+            "overviewTileHeader"
+        )
         self.mythic_score_label = QLabel()
+        self.mythic_score_label.setObjectName(
+            "overviewTileValue"
+        )
         self.mythic_score_label.setAlignment(Qt.AlignCenter)
 
         self.mythic_score_label.setStyleSheet(
             """
+            background: transparent;
             font-size: 28px;
             font-weight: bold;
             """
         )
+
 
         mplus_layout.addWidget(self.mplus_tile_title)
         mplus_layout.addStretch()
@@ -77,6 +85,9 @@ class PveCard(QFrame):
         )
 
         self.vault_tile_title = QLabel()
+        self.vault_tile_title.setObjectName(
+            "overviewTileHeader"
+        )
 
         vault_layout.addWidget(
             self.vault_tile_title
@@ -89,12 +100,34 @@ class PveCard(QFrame):
         #vault_layout.addStretch()
 
         self.vault_delves_name = QLabel()
+        self.vault_delves_name.setObjectName(
+            "overviewTileRowLabel"
+        )
+
         self.vault_raid_name = QLabel()
+        self.vault_raid_name.setObjectName(
+            "overviewTileRowLabel"
+        )
+
         self.vault_mplus_name = QLabel()
+        self.vault_mplus_name.setObjectName(
+            "overviewTileRowLabel"
+        )
 
         self.vault_delves_value = QLabel()
+        self.vault_delves_value.setObjectName(
+            "overviewTileValue"
+        )
+
         self.vault_raid_value = QLabel()
+        self.vault_raid_value.setObjectName(
+            "overviewTileValue"
+        )
+
         self.vault_mplus_value = QLabel()
+        self.vault_mplus_value.setObjectName(
+            "overviewTileValue"
+        )
 
         vault_grid.addWidget(self.vault_delves_name, 0, 0)
         vault_grid.addWidget(self.vault_delves_value, 0, 1)
@@ -142,6 +175,7 @@ class PveCard(QFrame):
 
         self.mythic_score_label.setStyleSheet(
             f"""
+            background: transparent;
             color: {get_mplus_color(score)};
             font-size: 28px;
             font-weight: bold;

@@ -79,6 +79,14 @@ class SettingsDialog(QDialog):
             get_ui_string("modern")
         )
 
+        self.cherry_blossom_radio = QRadioButton(
+            get_ui_string("cherry_blossom")
+        )
+
+        self.daddy_gamer_radio = QRadioButton(
+            get_ui_string("daddy_gamer")
+        )
+
         self.theme_group = QButtonGroup(self)
 
         self.theme_group.addButton(
@@ -99,12 +107,37 @@ class SettingsDialog(QDialog):
         self.theme_group.addButton(
             self.modern_radio
         )
+
+        self.theme_group.addButton(
+            self.cherry_blossom_radio
+        )
+
+        self.cherry_blossom_radio.setObjectName(
+            "settingsRadioButton"
+        )
+
+        self.theme_group.addButton(
+            self.daddy_gamer_radio
+        )
+
+        self.daddy_gamer_radio.setObjectName(
+            "settingsRadioButton"
+        )
+
+
         self.modern_radio.setObjectName("settingsRadioButton")
 
         layout.addWidget(self.dark_radio)
         layout.addWidget(self.light_radio)
         layout.addWidget(self.wow_radio)
         layout.addWidget(self.modern_radio)
+        layout.addWidget(
+            self.cherry_blossom_radio
+        )
+
+        layout.addWidget(
+            self.daddy_gamer_radio
+        )
 
 
 # --------------------------------------------------
@@ -233,6 +266,12 @@ class SettingsDialog(QDialog):
 
         elif current_theme == "modern":
             self.modern_radio.setChecked(True)
+
+        elif current_theme == "cherry_blossom":
+            self.cherry_blossom_radio.setChecked(True)
+
+        elif current_theme == "daddy_gamer":
+            self.daddy_gamer_radio.setChecked(True)
 
 # --------------------------------------------------
 # LOAD NUMBER FORMAT
@@ -392,8 +431,14 @@ class SettingsDialog(QDialog):
         elif self.wow_radio.isChecked():
             theme = "wow"
 
-        else:
+        elif self.modern_radio.isChecked():
             theme = "modern"
+
+        elif self.cherry_blossom_radio.isChecked():
+            theme = "cherry_blossom"
+
+        else:
+            theme = "daddy_gamer"
 
         save_setting(
             "theme",

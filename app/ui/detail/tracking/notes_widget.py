@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QTextEdit
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QTextEdit, QFrame
 from PySide6.QtCore import QTimer
 import os
 
@@ -12,19 +12,25 @@ from app.localization.ui_strings import get_ui_string
 
 
 
-class NotesWidget(QWidget):
+class NotesWidget(QFrame):
 
     def __init__(self):
         super().__init__()
 
-        self.setObjectName("notesWidget")
+        self.setObjectName(
+            "overviewCard"
+        )
+
+        self.setFrameShape(
+            QFrame.Box
+        )
         self.layout = QVBoxLayout(self)
 
 # spacing
         self.layout.setSpacing(8)
         
         self.title_label = QLabel(f"<b>{get_ui_string('notes')}</b>")
-        self.title_label.setObjectName("notesTitle")
+        self.title_label.setObjectName("overviewSectionTitle")
         self.layout.addWidget(self.title_label)
         self.textbox = QTextEdit()
         self.textbox.setObjectName("notesEditor")

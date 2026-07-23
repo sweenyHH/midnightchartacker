@@ -14,7 +14,7 @@ from app.ui.settings_dialog import SettingsDialog
 from app.ui.detail.utils import format_gold
 from app.utils.number_formatter import format_number
 from app.services.display_language import get_display_language
-from app.game_data.reputation_catalog import get_reputation_display_name
+from app.game_data.reputation_catalog import get_reputation_display_name, get_reputation_by_key
 from app.localization.ui_strings import get_ui_string
 
 
@@ -149,8 +149,14 @@ class TopPanel(QWidget):
 
 # Split
         renown = [
-            r for r in reputation_list
-            if r.rep_type == "renown"
+            r
+            for r in reputation_list
+            if (
+                (entry := get_reputation_by_key(
+                    r.reputation_key
+                ))
+                and entry.featured
+            )
         ]
 
         language = get_display_language()
@@ -163,13 +169,12 @@ class TopPanel(QWidget):
         )
 
 
-        def chunk(lst, size=3):
-            return [
-                lst[i:i + size]
-                for i in range(0, len(lst), size)
-            ]
+        mid = (len(renown) + 1) // 2
 
-        renown_chunks = chunk(renown)
+        renown_chunks = [
+            renown[:mid],
+            renown[mid:],
+        ]
 
         main_row = QHBoxLayout()
 
@@ -181,7 +186,7 @@ class TopPanel(QWidget):
         renown_widget.setObjectName("topPanelCard")
         
         renown_widget.setFrameShape(
-            QFrame.Box
+            QFrame.NoFrame
         )
 
         renown_layout = QVBoxLayout(renown_widget)
@@ -195,7 +200,38 @@ class TopPanel(QWidget):
 
         renown_layout.addWidget(renown_title)
 
+        renown_data_area = QFrame()
+        renown_data_area.setObjectName(
+            "topPanelDataArea"
+        )
+
+        renown_data_layout = QVBoxLayout(
+            renown_data_area
+        )
+
+        renown_grid_widget = QFrame()
+        renown_grid_widget.setObjectName(
+            "topPanelDataGrid"
+        )
+
+        renown_grid_layout = QVBoxLayout(
+            renown_grid_widget
+        )
+
         renown_grid = QGridLayout()
+
+        renown_grid_layout.addLayout(
+            renown_grid
+        )
+
+        renown_data_layout.addWidget(
+            renown_grid_widget
+        )
+
+        renown_layout.addWidget(
+            renown_data_area
+        )
+
 
         def add_group(grid, group, col_offset):
 
@@ -233,10 +269,6 @@ class TopPanel(QWidget):
                 i * 2
             )
 
-        renown_layout.addLayout(
-            renown_grid
-        )
-
 
 # -------------------------------
 # WARBAND RESOURCES BLOCK
@@ -246,7 +278,7 @@ class TopPanel(QWidget):
         currency_widget.setObjectName("topPanelCard")
 
         currency_widget.setFrameShape(
-            QFrame.Box
+            QFrame.NoFrame
         )
 
         currency_layout = QVBoxLayout(
@@ -267,7 +299,37 @@ class TopPanel(QWidget):
             currency_title
         )
 
+        currency_data_area = QFrame()
+        currency_data_area.setObjectName(
+            "topPanelDataArea"
+        )
+
+        currency_data_layout = QVBoxLayout(
+            currency_data_area
+        )
+
+        currency_grid_widget = QFrame()
+        currency_grid_widget.setObjectName(
+            "topPanelDataGrid"
+        )
+
+        currency_grid_layout = QVBoxLayout(
+            currency_grid_widget
+        )
+
         currency_grid = QGridLayout()
+
+        currency_grid_layout.addLayout(
+            currency_grid
+        )
+
+        currency_data_layout.addWidget(
+            currency_grid_widget
+        )
+
+        currency_layout.addWidget(
+            currency_data_area
+        )
 
         CURRENCY_COLUMNS = [
             [
@@ -329,9 +391,6 @@ class TopPanel(QWidget):
                     col_offset + 1
                 )
 
-        currency_layout.addLayout(
-            currency_grid
-        )
         
 # -------------------------------
 # FINAL LAYOUT

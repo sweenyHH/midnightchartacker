@@ -6,6 +6,7 @@ from PySide6.QtWidgets import (
     QTableWidgetItem,
     QHeaderView,
     QSizePolicy,
+    QFrame,
 )
 
 from app.localization.ui_strings import get_ui_string
@@ -13,7 +14,7 @@ from app.services.display_language import get_display_language
 from app.game_data.attribute_catalog import get_attribute_display_name
 
 
-class AttributesWidget(QWidget):
+class AttributesWidget(QFrame):
 
     def _set_table_height(self, table, extra_padding=8):
         row_count = table.rowCount()
@@ -27,8 +28,9 @@ class AttributesWidget(QWidget):
         super().__init__()
         
         self.setObjectName("statsSection")
-
         layout = QVBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
+
 
         self.title_label = QLabel(f"<b>{get_ui_string('primary_attributes')}</b>")
         self.title_label.setObjectName("statsSectionTitle")
@@ -52,6 +54,7 @@ class AttributesWidget(QWidget):
         layout.addWidget(
             self.attr_table
         )
+        layout.addStretch()
 
     def set_character(
         self,

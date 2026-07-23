@@ -353,6 +353,8 @@ QLabel#vaultBox {
 QLabel#warbandTaskTitle {
     font-size: 18px;
     font-weight: bold;
+    color: #ffd100;
+    padding-bottom: 6px;
 }
 
 QListWidget#warbandTaskList {
@@ -479,4 +481,81 @@ QLabel#overviewSectionTitle {
     font-weight: bold;
     color: #ffd100;
     padding-bottom: 4px;
+}
+
+/* =====================
+   STATS
+===================== */
+
+QLabel#statsSectionTitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffd100;
+    padding-bottom: 4px;
+}
+
+/* =====================
+   Paste Dialog
+===================== */
+
+QLabel#pasteDialogLabel {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffd100;
+    padding-bottom: 6px;
+}
+
+
+/* =====================
+   SETTINGS
+===================== */
+
+QLabel#settingsSectionTitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffd100;
+    padding-top: 4px;
+    padding-bottom: 2px;
+}
+
+/* =====================
+   TOP PANEL
+===================== */
+
+QFrame#topPanelCard {
+    background-color: #151515;
+
+    border: 1px solid #8c6b2f;
+    border-radius: 6px;
+
+    padding: 8px;
+}
+
+QFrame#topPanelDataArea {
+    background-color: #0d0d0d;
+
+    border: 1px solid #6e5427;
+    border-radius: 4px;
+
+    padding: 6px;
+}
+
+QFrame#topPanelDataGrid {
+    background-color: transparent;
+}
+
+QLabel#topPanelSectionTitle {
+    color: #ffd100;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    background-color: transparent;
+}
+
+
+QFrame#vaultProgressWidget {
+    background-color: #161616;
+    border: 1px solid #6f5a2f;
+    padding: 6px;
 }

@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QLabel,
-    QGridLayout, QLineEdit, QPushButton
+    QGridLayout, QLineEdit, QPushButton, QFrame
 )
 from PySide6.QtCore import Qt, QTimer
 import os
@@ -18,19 +18,23 @@ from app.localization.ui_strings import (
 
 
 
-class VaultProgressWidget(QWidget):
+class VaultProgressWidget(QFrame):
 
     def __init__(self):
         super().__init__()
-        
+
+      
         self.setObjectName("vaultProgressWidget")
         self.layout = QVBoxLayout(self)
+        self.layout.setSpacing(12)
         self.title_label = QLabel(f"<b>{get_ui_string('vault_progress')}</b>")
-        self.title_label.setObjectName("vaultProgressTitle")
+        self.title_label.setObjectName("overviewSectionTitle")
         self.layout.addWidget(self.title_label)
+        self.layout.addSpacing(8)
 
         self.grid = QGridLayout()
         self.layout.addLayout(self.grid)
+        self.layout.addStretch()
 
         self.fields = {}  # (row, col) → QLineEdit
 
@@ -42,6 +46,10 @@ class VaultProgressWidget(QWidget):
 
         for row in range(3):
             label = QLabel(row_labels[row])
+
+            label.setObjectName(
+                "vaultProgressRowLabel"
+            )
             self.grid.addWidget(label, row, 0)
 
             for col in range(3):
@@ -57,7 +65,8 @@ class VaultProgressWidget(QWidget):
                 self.grid.addWidget(field, row, col + 1)
                 self.fields[(row, col)] = field
 
-        self.grid.setColumnStretch(0, 1)
+        self.grid.setColumnStretch(0, 2)
+        self.grid.setColumnStretch(4, 1)
 
 # Clear button
         self.clear_btn = QPushButton(get_ui_string("clear_all"))

@@ -113,9 +113,9 @@ UI_STRINGS = {
     },
 
     "light": {
-        "en": "Light",
-        "de": "Hell",
-        "fr": "Clair",
+        "en": "Girly Power",
+        "de": "Girly Power",
+        "fr": "Girly Power",
     },
 
     "wow": {
@@ -129,6 +129,18 @@ UI_STRINGS = {
         "de": "Modern",
         "fr": "Moderne",
     },
+
+    "daddy_gamer": {
+        "en": "Daddy Gamer",
+        "de": "Daddy Gamer",
+        "fr": "Daddy Gamer",
+    },    
+
+        "cherry_blossom": {
+        "en": "Cherry Blossom",
+        "de": "Cherry Blossom",
+        "fr": "Cherry Blossom",
+    },    
 
     "number_format": {
         "en": "Number Format",

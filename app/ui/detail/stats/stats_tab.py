@@ -24,24 +24,58 @@ class StatsTab(QWidget):
         self.container = QWidget()
         self.main_layout = QHBoxLayout(self.container)
 
+        self.main_layout.setContentsMargins(
+            0,
+            0,
+            0,
+            0
+        )
+
 # LEFT SIDE
 
         self.left_widget = QWidget()
         self.left_layout = QVBoxLayout(self.left_widget)
         self.left_widget.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Minimum)
-        self.left_layout.addWidget(self.attributes_widget)
-        self.left_layout.addWidget(self.combat_ratings_widget)
+
+        self.left_layout.addWidget(
+            self.attributes_widget,
+            1
+        )
+
+        self.left_layout.addWidget(
+            self.combat_ratings_widget,
+            1
+        )
+
         self.left_layout.setAlignment(Qt.AlignTop)
 
 # MAIN LAYOUT
 
-        self.main_layout.addWidget(self.left_widget)
-        self.main_layout.addWidget(self.equipment_widget)
+        self.main_layout.addWidget(
+            self.left_widget,
+            1
+        )
+
+        self.main_layout.addWidget(
+            self.equipment_widget,
+            3
+        )
         self.main_layout.setStretch(0, 1)
         self.main_layout.setStretch(1, 3)
 
         layout = get_layout(self)
-        layout.addWidget(self.container)
+        layout.setContentsMargins(
+            0,
+            0,
+            0,
+            0
+        )
+
+        layout.setSpacing(0)
+        layout.addWidget(
+            self.container,
+            1
+        )
 
 
     def set_character(self, character):

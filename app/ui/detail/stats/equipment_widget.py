@@ -5,6 +5,7 @@ from PySide6.QtWidgets import (
     QTableWidget,
     QTableWidgetItem,
     QHeaderView,
+    QFrame,
 )
 
 from PySide6.QtCore import Qt
@@ -16,9 +17,9 @@ from app.services.display_language import get_display_language
 from app.game_data.equipment_slot_catalog import get_equipment_slot_display_name
 
 
-class EquipmentWidget(QWidget):
+class EquipmentWidget(QFrame):
 
-    def _set_table_height(self, table, extra_padding=8):
+    def _set_table_height(self, table, extra_padding=0):
 
         row_count = table.rowCount()
         header_height = (table.horizontalHeader().height())
@@ -51,7 +52,10 @@ class EquipmentWidget(QWidget):
             ]
         )
 
-        layout.addWidget(self.table)
+        layout.addWidget(
+            self.table,
+            1
+        )
 
     def set_character(self, character):
 
@@ -157,5 +161,5 @@ class EquipmentWidget(QWidget):
         header.setSectionResizeMode(3, QHeaderView.ResizeToContents)
         header.setSectionResizeMode(4, QHeaderView.ResizeToContents)
 
-        self.table.verticalHeader().setDefaultSectionSize(30)
-        self._set_table_height(self.table)
+        self.table.verticalHeader().setDefaultSectionSize(28)
+        # self._set_table_height(self.table)

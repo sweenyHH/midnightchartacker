@@ -36,12 +36,19 @@ class TrackingTab(QWidget):
         self.right_column = QVBoxLayout(self.right_column_widget)
 
         self.left_column.addWidget(
-            self.notes_widget
+            self.notes_widget,
+            5
+        )
+
+        self.left_column.addSpacing(
+            12
         )
 
         self.left_column.addWidget(
-            self.vault_widget
+            self.vault_widget,
+            4
         )
+
 
         self.right_column.addWidget(
             self.duties_widget

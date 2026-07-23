@@ -69,10 +69,23 @@ class ResourceCard(QFrame):
             self.resources_title
         )
 
+        self.data_area = QFrame()
+        self.data_area.setObjectName(
+            "overviewDataArea"
+        )
+
+        data_layout = QVBoxLayout(
+            self.data_area
+        )
+
         self.resources_grid = QGridLayout()
 
-        layout.addLayout(
+        data_layout.addLayout(
             self.resources_grid
+        )
+
+        layout.addWidget(
+            self.data_area
         )
 
         self.resource_rows = {}

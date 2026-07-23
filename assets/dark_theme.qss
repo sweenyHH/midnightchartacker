@@ -110,6 +110,36 @@ QFrame#topPanelFrame QLabel {
     background-color: transparent;
 }
 
+QFrame#topPanelCard {
+    background-color: #2b2b2b;
+
+    border: 1px solid #444;
+    border-radius: 6px;
+
+    padding: 8px;
+}
+
+QFrame#topPanelDataArea {
+    background-color: #1e1e1e;
+
+    border: 1px solid #444;
+    border-radius: 4px;
+
+    padding: 6px;
+}
+
+QFrame#topPanelDataGrid {
+    background-color: transparent;
+}
+
+QLabel#topPanelSectionTitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+
+    background-color: transparent;
+}
+
 
 /* =====================
    TEXT / CONTENT BLOCKS
@@ -365,6 +395,8 @@ QLabel#vaultBox {
 QLabel#warbandTaskTitle {
     font-size: 18px;
     font-weight: bold;
+    color: #ffffff;
+    padding-bottom: 6px;
 }
 
 QListWidget#warbandTaskList {
@@ -372,12 +404,22 @@ QListWidget#warbandTaskList {
 }
 
 /* =====================
-   Settings
+   SETTINGS
 ===================== */
 
 QLabel#settingsTitle {
     font-size: 18px;
     font-weight: bold;
+    color: #ffffff;
+    padding-bottom: 6px;
+}
+
+QLabel#settingsSectionTitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    padding-top: 4px;
+    padding-bottom: 2px;
 }
 
 
@@ -454,4 +496,78 @@ QRadioButton::indicator:checked {
 /* checked hover */
 QRadioButton::indicator:checked:hover {
     background-color: #4a7ec5;
+}
+
+/* =====================
+   OVERVIEW CARDS
+===================== */
+
+QFrame#overviewCard {
+    background-color: #252525;
+    border: 1px solid #555;
+    padding: 6px;
+}
+QFrame#overviewTile {
+    backgrou*d-color: #1e1e1e;
+    border: 1px solid #555;
+    padding: 4px;
+}
+
+/* =====================
+   RAID PROGRESS
+===================== */
+
+QTableWidget#raidProgressTable {
+    background-color: #1e1e1e;
+    border: none;
+    gridline-color: #444;
+}
+
+QTableWidget#raidProgressTable::item {
+    padding: 4px;
+}
+
+QTableWidget#raidProgressTable QHeaderView::section {
+    background-color: #2b2b2b;
+    border: 1px solid #444;
+    padding: 4px;
+}
+
+/* =====================
+   OVERVIEW TITLES
+===================== */
+
+QLabel#overviewSectionTitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    padding-bottom: 4px;
+}
+
+/* =====================
+   STATS
+===================== */
+
+QLabel#statsSectionTitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    padding-bottom: 4px;
+}
+
+/* =====================
+   PASTE DIALOG
+===================== */
+
+QLabel#pasteDialogLabel {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    padding-bottom: 6px;
+}
+
+QFrame#vaultProgressWidget {
+    background-color: #252525;
+    border: 1px solid #555;
+    padding: 6px;
 }

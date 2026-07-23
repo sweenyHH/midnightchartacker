@@ -6,6 +6,7 @@ from PySide6.QtWidgets import (
     QTableWidgetItem,
     QHeaderView,
     QSizePolicy,
+    QFrame,
 )
 
 from app.localization.ui_strings import get_ui_string
@@ -13,7 +14,7 @@ from app.services.display_language import get_display_language
 from app.game_data.combat_rating_catalog import get_combat_rating_display_name
 
 
-class CombatRatingsWidget(QWidget):
+class CombatRatingsWidget(QFrame):
 
     def _set_table_height(self, table, extra_padding=8):
         
@@ -27,8 +28,8 @@ class CombatRatingsWidget(QWidget):
         super().__init__()
 
         self.setObjectName("statsSection")
-
         layout = QVBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
 
         self.title_label = QLabel(f"<b>{get_ui_string('combat_ratings')}</b>")
         self.title_label.setObjectName("statsSectionTitle")
@@ -47,6 +48,7 @@ class CombatRatingsWidget(QWidget):
         )
 
         layout.addWidget(self.combat_table)
+        layout.addStretch()
 
     def set_character(self, character):
 

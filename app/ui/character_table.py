@@ -7,6 +7,7 @@ from PySide6.QtWidgets import (
     QWidget,
     QHBoxLayout,
 )
+from PySide6.QtWidgets import QHeaderView
 
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QColor
@@ -75,9 +76,22 @@ class CharacterTable(QTableWidget):
 
         headers.extend(task_headers)
 
+        # Win98 filler column
+        headers.append("")
+
 
         self.setColumnCount(len(headers))
         self.setHorizontalHeaderLabels(headers)
+
+        last_col = len(headers) - 1
+
+        header_item = self.horizontalHeaderItem(last_col)
+
+        if header_item:
+            header_item.setData(
+                Qt.UserRole,
+                "filler"
+            )
 
         
         for task_index, task_name in enumerate(tasks):
@@ -296,6 +310,17 @@ class CharacterTable(QTableWidget):
             self.setItem(row, 6, spark_item)
 
         self.resizeColumnsToContents()
+
+        last_col = self.columnCount() - 1
+
+        from PySide6.QtWidgets import QHeaderView
+
+        self.horizontalHeader().setStretchLastSection(False)
+
+        self.horizontalHeader().setSectionResizeMode(
+            last_col,
+            QHeaderView.Stretch
+        )
         self.setSortingEnabled(True)
 
 # Sort by Item Level descending

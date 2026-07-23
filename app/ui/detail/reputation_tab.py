@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QLineEdit, QTableWidget, QTableWidgetItem, QHeaderView
+    QWidget, QVBoxLayout, QLineEdit, QTableWidget, QTableWidgetItem, QHeaderView, QFrame
 )
 
 from PySide6.QtGui import QBrush, QColor
@@ -21,6 +21,13 @@ class ReputationTab(QWidget):
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
 
+        self.card = QFrame()
+        self.card.setObjectName("statsSection")
+
+        self.card_layout = QVBoxLayout(self.card)
+
+        self.layout.addWidget(self.card)
+
 # -------------------------------
 # SEARCH FIELD
 # -------------------------------
@@ -33,7 +40,7 @@ class ReputationTab(QWidget):
         )
         self.search.textChanged.connect(self.apply_filter)
 
-        self.layout.addWidget(self.search)
+        self.card_layout.addWidget(self.search)
 
 # -------------------------------
 # TABLE
@@ -57,7 +64,7 @@ class ReputationTab(QWidget):
         header.setSectionResizeMode(1, QHeaderView.ResizeToContents)  # Level
         header.setSectionResizeMode(2, QHeaderView.Stretch)           # Progress 
 
-        self.layout.addWidget(self.table)
+        self.card_layout.addWidget(self.table)
 
         self.reputations = []
 

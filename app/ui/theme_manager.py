@@ -5,9 +5,11 @@ class ThemeManager:
 
     THEMES = {
         "dark": "assets/dark_theme.qss",
-        "wow": "assets/wow_theme.qss",
-        "modern": "assets/modern_theme.qss",
         "light": "assets/light_theme.qss",
+        "modern": "assets/modern_theme.qss",
+        "wow": "assets/wow_theme.qss",
+        "cherry_blossom": "assets/girly_theme.qss",
+        "daddy_gamer": "assets/daddy_gamer_theme.qss",
     }
 
     current_theme = "dark"

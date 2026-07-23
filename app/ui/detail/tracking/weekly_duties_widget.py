@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QLabel,
-    QGridLayout, QCheckBox, QPushButton
+    QGridLayout, QCheckBox, QPushButton, QFrame
 )
 from PySide6.QtCore import Qt, QTimer
 from app.ui.colors import STATUS_COLORS
@@ -15,14 +15,30 @@ from app.localization.ui_strings import get_ui_string
 import os
 
 
-class WeeklyDutiesWidget(QWidget):
+class WeeklyDutiesWidget(QFrame):
 
     def __init__(self):
         super().__init__()
 
+        self.setObjectName(
+            "overviewCard"
+        )
+
+        self.setFrameShape(
+            QFrame.Box
+        )
+
         self.layout = QVBoxLayout(self)
+        self.title_label = QLabel(
+            "<b>Weekly Duties</b>"
+        )
+
+        self.title_label.setObjectName(
+            "overviewSectionTitle"
+        )
+
         self.layout.addWidget(
-            QLabel("<b>Weekly Duties</b>")
+            self.title_label
         )
 
         self.rows_config = ROWS_CONFIG
@@ -48,22 +64,22 @@ class WeeklyDutiesWidget(QWidget):
         self._build_grid()
 
 # Style checkboxes (green when checked)
-        self.setStyleSheet(f"""
-        QCheckBox::indicator {{
-            width: 14px;
-            height: 14px;
-        }}
-
-        QCheckBox::indicator:checked {{
-            background-color: {STATUS_COLORS['success']};
-            border: 1px solid {STATUS_COLORS['success']};
-        }}
-
-        QCheckBox::indicator:unchecked {{
-            border: 1px solid #888;
-            background: transparent;
-        }}
-        """)
+#        self.setStyleSheet(f"""
+#        QCheckBox::indicator {{
+#            width: 14px;
+#            height: 14px;
+#        }}
+#
+#        QCheckBox::indicator:checked {{
+#            background-color: {STATUS_COLORS['success']};
+#            border: 1px solid {STATUS_COLORS['success']};
+#        }}
+#
+#        QCheckBox::indicator:unchecked {{
+#            border: 1px solid #888;
+#            background: transparent;
+#        }}
+#        """)
 
 
     def _build_grid(self):
@@ -86,6 +102,10 @@ class WeeklyDutiesWidget(QWidget):
             if name == "__SPACER__":
 
                 spacer = QLabel("")
+
+                spacer.setObjectName(
+                    "weeklyDutiesSpacer"
+                )
 
                 spacer.setFixedHeight(12)
 
@@ -144,21 +164,22 @@ class WeeklyDutiesWidget(QWidget):
                         self._update_row_visuals
                     )
 
+                    cb.setMaximumWidth(20)
+
                     self.grid.addWidget(
                         cb,
                         current_row,
-                        col + 1,
+                        col + 2,
+                        alignment=Qt.AlignCenter
                     )
 
-                    boxes.append(cb)
+                    boxes.append(
+                        cb
+                    )
 
                 else:
 
-                    self.grid.addWidget(
-                        QLabel(""),
-                        current_row,
-                        col + 1,
-                    )
+                    continue
 
             self.checkboxes.append(
                 (
@@ -169,10 +190,37 @@ class WeeklyDutiesWidget(QWidget):
 
             current_row += 1
 
+        #
+        # Column layout
+        #
+        # 0 = duty label
+        # 1 = spacer column
+        # 2..n = checkbox columns
+        #
+
         self.grid.setColumnStretch(
             0,
+            0,
+        )
+
+        self.grid.setColumnMinimumWidth(
             1,
-        )        
+            16,
+        )
+
+        for col in range(
+            2,
+            max_boxes + 2,
+        ):
+            self.grid.setColumnStretch(
+                col,
+                0,
+            )
+
+        self.grid.setColumnStretch(
+            max_boxes + 2,
+            1,
+        )          
 
 # --------------------------------------------------
     def _save(self):

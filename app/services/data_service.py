@@ -111,9 +111,6 @@ class DataService:
                 if character:
                     updated_characters.append(character)
 
-            except Exception as e:
-                print(f"[DataService] Error processing {file}: {e}")
-
             except Exception:
 
                 logger.exception(

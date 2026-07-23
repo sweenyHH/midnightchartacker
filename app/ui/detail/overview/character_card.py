@@ -25,6 +25,15 @@ class CharacterCard(QFrame):
 
         layout = QVBoxLayout(self)
 
+        self.data_area = QFrame()
+        self.data_area.setObjectName(
+            "overviewDataArea"
+        )
+
+        data_layout = QVBoxLayout(
+            self.data_area
+        )
+
         self.name_label = QLabel()
 
         self.realm_label = QLabel()
@@ -37,33 +46,37 @@ class CharacterCard(QFrame):
 
         self.ilvl_label = QLabel()
 
-        layout.addWidget(
+        data_layout.addWidget(
             self.name_label
         )
 
-        layout.addWidget(
+        data_layout.addWidget(
             self.realm_label
         )
 
-        layout.addSpacing(8)
+        data_layout.addSpacing(8)
 
-        layout.addWidget(
+        data_layout.addWidget(
             self.class_label
         )
 
-        layout.addWidget(
+        data_layout.addWidget(
             self.spec_label
         )
 
-        layout.addSpacing(8)
+        data_layout.addSpacing(8)
 
-        layout.addWidget(
+        data_layout.addWidget(
             self.level_label
         )
 
-        layout.addWidget(
+        data_layout.addWidget(
             self.ilvl_label
-        )        
+        )
+
+        layout.addWidget(
+            self.data_area
+        )     
 
     def set_character(
         self,

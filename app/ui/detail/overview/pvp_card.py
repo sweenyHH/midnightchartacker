@@ -34,9 +34,17 @@ class PvpCard(QFrame):
             "overviewSectionTitle"
         )
 
+        layout.addSpacing(8)
+
         self.honor_level_label = QLabel()
+        self.honor_level_label.setObjectName(
+            "overviewDataLabel"
+        )
 
         self.honor_progress_label = QLabel()
+        self.honor_progress_label.setObjectName(
+            "overviewDataLabel"
+        )
 
         layout.addWidget(
             self.pvp_title

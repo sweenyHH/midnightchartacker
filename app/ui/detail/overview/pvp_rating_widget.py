@@ -33,14 +33,21 @@ class PvpRatingWidget(QFrame):
             QFrame.Box
         )
 
-        self.setFixedSize(
-            OVERVIEW_TILE_WIDTH,
-            OVERVIEW_TILE_HEIGHT,
-        )     
+        self.setMinimumWidth(
+            OVERVIEW_TILE_WIDTH
+        )
+
+        self.setMinimumHeight(
+            120
+        )  
 
         layout = QVBoxLayout(self)
 
         self.title_label = QLabel()
+
+        self.title_label.setObjectName(
+            "overviewTileHeader"
+        )
 
         self.set_title(
             bracket_name
@@ -50,12 +57,17 @@ class PvpRatingWidget(QFrame):
             "-"
         )
 
+        self.rating_label.setObjectName(
+            "overviewTileValue"
+        )
+
         self.rating_label.setAlignment(
             Qt.AlignCenter
         )
 
         self.rating_label.setStyleSheet(
             """
+            background: transparent;
             font-size: 24px;
             font-weight: bold;
             """
@@ -75,7 +87,7 @@ class PvpRatingWidget(QFrame):
 
     def set_title(self, title):
         self.title_label.setText(
-            f"<b>{title}</b>"
+            title
         )
 
 
